@@ -5,7 +5,7 @@ const HeroSection = () => {
   // JSON-like data defined in the same file
   const content = {
     aboutUs: "About us",
-    heading: "About Hirapanna",
+    heading: "About Sri Laxmi Alankar",
     subheading: "Learn More about company",
     description:
       "The Indian rupee is the official currency in the Republic of India. The rupee is subdivided into 100 paise, though as of 2023, coins of denomination of 1 rupee are the lowest value in.",

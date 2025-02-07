@@ -84,7 +84,7 @@ const Footer = () => {
         <div className="bg-gray-100 py-4">
           <div className="container mx-auto sm:justify-center items-center px-5 flex flex-wrap items-center justify-between">
             <p className="text-gray-500 text-sm text-center md:text-left">
-              © 2023 Hirapanna Jewellery Company Limited. All rights reserved.
+              © 2023 Sri Laxmi Alankar Jewellery Company Limited. All rights reserved.
             </p>
             <div className="flex items-center justify-center space-x-4 mt-4 ml-8 md:mt-0">
               <img
