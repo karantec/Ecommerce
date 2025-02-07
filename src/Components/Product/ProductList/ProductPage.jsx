@@ -1,5 +1,5 @@
 import HeroComponent from "./HeroComponent"
-import ProductCatalog from "./ProductCard"
+
 import ProductGrid from "./ProductGrid"
 
 const ProductPage = () => {
@@ -7,7 +7,7 @@ const ProductPage = () => {
     <div>
          <HeroComponent/>   
          <ProductGrid/>
-         <ProductCatalog/>
+        
     </div>
   )
 }

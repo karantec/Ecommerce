@@ -1,4 +1,5 @@
 import React from "react";
+import { FaInstagram, FaFacebook, FaYoutube, FaTwitter, FaPinterest } from "react-icons/fa";
 
 const ContactSection = () => {
   return (
@@ -48,21 +49,20 @@ const ContactSection = () => {
               Follow Us On Social Media
             </h3>
             <div className="flex space-x-4 mt-2">
-              {/* Replace icons with actual links */}
-              <a href="#" className="text-gray-600 hover:text-orange-600">
-                <i className="fab fa-instagram"></i> {/* Instagram */}
+              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-orange-600">
+                <FaInstagram size={24} />
               </a>
-              <a href="#" className="text-gray-600 hover:text-orange-600">
-                <i className="fab fa-facebook"></i> {/* Facebook */}
+              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-orange-600">
+                <FaFacebook size={24} />
               </a>
-              <a href="#" className="text-gray-600 hover:text-orange-600">
-                <i className="fab fa-youtube"></i> {/* YouTube */}
+              <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-orange-600">
+                <FaYoutube size={24} />
               </a>
-              <a href="#" className="text-gray-600 hover:text-orange-600">
-                <i className="fab fa-twitter"></i> {/* Twitter */}
+              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-orange-600">
+                <FaTwitter size={24} />
               </a>
-              <a href="#" className="text-gray-600 hover:text-orange-600">
-                <i className="fab fa-pinterest"></i> {/* Pinterest */}
+              <a href="https://pinterest.com" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-orange-600">
+                <FaPinterest size={24} />
               </a>
             </div>
           </div>

@@ -1,22 +1,24 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { FaInstagram } from 'react-icons/fa';
+import axios from 'axios';
 
 const InstagramGallery = () => {
-  // Actual image data with URLs to jewelry images
-  const galleryImages = [
-    { id: 1, aspect: 'aspect-[3/4]', imgSrc: 'https://www.dazzlesjewellery.in/cdn/shop/files/IMG_9798_0af72cbf-a031-4900-8c47-96cfa781b91d.jpg?v=1720172694' },
-    { id: 2, aspect: 'aspect-square', imgSrc: 'https://www.dazzlesjewellery.in/cdn/shop/files/IMG_9798_0af72cbf-a031-4900-8c47-96cfa781b91d.jpg?v=1720172694' },
-    { id: 3, aspect: 'aspect-[3/4]', imgSrc: 'https://www.dazzlesjewellery.in/cdn/shop/files/IMG_9798_0af72cbf-a031-4900-8c47-96cfa781b91d.jpg?v=1720172694' },
-    { id: 4, aspect: 'aspect-[3/4]', imgSrc: 'p1.png' },
-    { id: 5, aspect: 'aspect-square', imgSrc: 'p2.png' },
-    { id: 6, aspect: 'aspect-[3/4]', imgSrc: 'p3.png' },
-    { id: 7, aspect: 'aspect-[3/4]', imgSrc: 'p1.png' },
-    { id: 8, aspect: 'aspect-square', imgSrc: 'https://www.dazzlesjewellery.in/cdn/shop/files/IMG_9798_0af72cbf-a031-4900-8c47-96cfa781b91d.jpg?v=1720172694' },
-    { id: 9, aspect: 'aspect-[3/4]', imgSrc: 'https://www.dazzlesjewellery.in/cdn/shop/files/IMG_9798_0af72cbf-a031-4900-8c47-96cfa781b91d.jpg?v=1720172694' },
-    { id: 10, aspect: 'aspect-[3/4]', imgSrc: 'https://www.dazzlesjewellery.in/cdn/shop/files/IMG_9798_0af72cbf-a031-4900-8c47-96cfa781b91d.jpg?v=1720172694' },
-    { id: 11, aspect: 'aspect-square', imgSrc: 'https://www.dazzlesjewellery.in/cdn/shop/files/IMG_9798_0af72cbf-a031-4900-8c47-96cfa781b91d.jpg?v=1720172694' },
-    { id: 12, aspect: 'aspect-[3/4]', imgSrc: 'https://www.dazzlesjewellery.in/cdn/shop/files/IMG_9798_0af72cbf-a031-4900-8c47-96cfa781b91d.jpg?v=1720172694' },
-  ];
+  const [galleryImages, setGalleryImages] = useState([]);
+
+  useEffect(() => {
+    const fetchImages = async () => {
+      try {
+        const response = await axios.get('https://jewelleryapp.onrender.com/home/get');
+        if (response.data && response.data.editorialImages) {
+          setGalleryImages(response.data.editorialImages);
+        }
+      } catch (error) {
+        console.error('Error fetching images:', error);
+      }
+    };
+
+    fetchImages();
+  }, []);
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-12">
@@ -36,16 +38,15 @@ const InstagramGallery = () => {
 
       {/* Gallery Grid */}
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-4">
-        {galleryImages.map((image) => (
+        {galleryImages.map((imgSrc, index) => (
           <div
-            key={image.id}
-            className={`${image.aspect} group relative overflow-hidden`}
-            
+            key={index}
+            className="aspect-square group relative overflow-hidden"
           >
             {/* Image */}
             <img
-              src={image.imgSrc}
-              alt={`Jewelry image ${image.id}`}
+              src={imgSrc}
+              alt={`Elegant jewelry piece ${index + 1}`}
               className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
             />
             
@@ -62,7 +63,9 @@ const InstagramGallery = () => {
       {/* Instagram Button */}
       <div className="text-center mt-12">
         <a
-          href="#"
+          href="https://www.instagram.com/yourprofile" // Replace with actual Instagram profile URL
+          target="_blank"
+          rel="noopener noreferrer"
           className="inline-flex items-center gap-2 px-6 py-3 bg-orange-500 text-white rounded-full hover:bg-orange-600 transition-colors duration-300"
         >
           <FaInstagram size={20} />

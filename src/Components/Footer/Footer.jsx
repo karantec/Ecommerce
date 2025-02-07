@@ -9,7 +9,7 @@ const Footer = () => {
         <div className="container px-5 py-24 mx-auto flex flex-wrap items-center justify-between">
           <div className="w-full md:w-1/2 text-center md:text-left">
             <img
-              src="preview.png"
+              src="logo2.png"
               alt="Hirapanna Jewellers"
               className="w-44 h-18 mx-auto md:mx-0"
             />
@@ -18,24 +18,20 @@ const Footer = () => {
             </p>
           </div>
 
-          <div className="w-full md:w-1/2 mt-10 md:mt-0 text-center md:text-left flex  flex-row  justify-between">
+          <div className="w-full md:w-1/2 mt-10 md:mt-0 text-center md:text-left flex flex-row justify-between">
             <div className="w-full md:w-1/4 px-4">
-              <h2 className="title-font text-md  uppercase font-bold text-[#000000] text-sm mb-3">
-                COSTUME 
+              <h2 className="title-font text-md uppercase font-bold text-[#000000] text-sm mb-3">
+                COSTUME
               </h2>
               <nav className="list-none mb-10">
                 <li className="mb-3">
-                  <a className="text-gray-600 text-center hover:text-gray-800">Our Blogs</a>
+                  <a href="/blogs" className="text-gray-600 hover:text-gray-800">Our Blogs</a>
                 </li>
                 <li className="mb-3">
-                  <a className="text-gray-600 text-center hover:text-gray-800">
-                    Track Your Order
-                  </a>
+                  <a href="/track-order" className="text-gray-600 hover:text-gray-800">Track Your Order</a>
                 </li>
                 <li className="mb-3">
-                  <a className="text-gray-600 text-center hover:text-gray-800">
-                    Shipping & Return
-                  </a>
+                  <a href="/shipping-return" className="text-gray-600 hover:text-gray-800">Shipping & Return</a>
                 </li>
               </nav>
             </div>
@@ -45,23 +41,17 @@ const Footer = () => {
                 About Us
               </h2>
               <nav className="list-none mb-10">
-              <li className="mb-3">
-                  <a className="text-gray-600 text-center hover:text-gray-800">FAQ</a>
+                <li className="mb-3">
+                  <a href="/faq" className="text-gray-600 hover:text-gray-800">FAQ</a>
                 </li>
                 <li className="mb-3">
-                  <a className="text-gray-600 text-center hover:text-gray-800">
-                    Our Products
-                  </a>
+                  <a href="/products" className="text-gray-600 hover:text-gray-800">Our Products</a>
                 </li>
                 <li className="mb-3">
-                  <a className="text-gray-600 text-center hover:text-gray-800">
-                    Terms & Conditions
-                  </a>
+                  <a href="/terms" className="text-gray-600 hover:text-gray-800">Terms & Conditions</a>
                 </li>
                 <li className="mb-3">
-                  <a className="text-gray-600 text-center hover:text-gray-800">
-                    Privacy Policy
-                  </a>
+                  <a href="/privacy-policy" className="text-gray-600 hover:text-gray-800">Privacy Policy</a>
                 </li>
               </nav>
             </div>
@@ -71,21 +61,20 @@ const Footer = () => {
                 CATALOG
               </h2>
               <nav className="list-none mb-10">
-              <li className="mb-3">
-                  <a className="text-gray-600 hover:text-gray-800">Earnings</a>
-                </li>
-                
                 <li className="mb-3">
-                  <a className="text-gray-600 hover:text-gray-800">Pendent</a>
+                  <a href="/earrings" className="text-gray-600 hover:text-gray-800">Earrings</a>
                 </li>
                 <li className="mb-3">
-                  <a className="text-gray-600 hover:text-gray-800">Rings</a>
+                  <a href="/pendant" className="text-gray-600 hover:text-gray-800">Pendant</a>
                 </li>
                 <li className="mb-3">
-                  <a className="text-gray-600 hover:text-gray-800">Chain</a>
+                  <a href="/rings" className="text-gray-600 hover:text-gray-800">Rings</a>
                 </li>
                 <li className="mb-3">
-                  <a className="text-gray-600 hover:text-gray-800">Bangals</a>
+                  <a href="/chain" className="text-gray-600 hover:text-gray-800">Chain</a>
+                </li>
+                <li className="mb-3">
+                  <a href="/bangles" className="text-gray-600 hover:text-gray-800">Bangles</a>
                 </li>
               </nav>
             </div>
