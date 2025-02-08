@@ -13,8 +13,11 @@ const Footer = () => {
               alt="Hirapanna Jewellers"
               className="w-44 h-18 mx-auto md:mx-0"
             />
-            <p className="mb-20 text-2xl font-bold text-gray-500">
-              Lorem Ipsum is simply dummy <br /> text of the printing.
+            <p className="mb-20 text-2xl  font-garmond text-black">
+            Shri Laxmi Alankar is more than a jewelry store—it is a
+destination for those who cherish the art of fine jewelry. We
+take immense pride in presenting a collection that blends the
+beauty of age-old craftsmanship with contemporary trends.
             </p>
           </div>
 

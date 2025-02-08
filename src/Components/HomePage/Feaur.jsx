@@ -96,16 +96,7 @@ const FeatureProducts = () => {
               alt="New Collection"
               className="w-full h-full object-cover opacity-50"
             />
-            <div className="absolute inset-0 flex flex-col justify-between p-6">
-              <div>
-                <p className="text-white text-lg tracking-wide">NEW COLLECTION</p>
-                <h3 className="text-4xl font-serif italic text-white">Jewelry</h3>
-              </div>
-              <div className="text-white text-sm">
-                <p className="mb-1">With Love</p>
-                <p>www.hirapanna.com</p>
-              </div>
-            </div>
+           
           </div>
         </div>
 
@@ -125,8 +116,8 @@ const FeatureProducts = () => {
                   <h3 className="font-brown text-uppercase">{product.name}</h3>
                   <div className="flex items-center justify-center gap-1 mt-1">
                     <span className="text-[25px] ">₹{product.discountedPrice.toLocaleString()}</span>
-                    <span className="text-[20px] text-gray-400 line-through">₹{product.price.toLocaleString()}</span>
-                    <span className="text-[20px] text-red-500">{product.discount}</span>
+                    <span className="text-[15px] text-gray-400 line-through">₹{product.price.toLocaleString()}</span>
+                    <span className="text-[15px] text-red-500">{product.discount}</span>
                   </div>
                 </div>
               </div>
