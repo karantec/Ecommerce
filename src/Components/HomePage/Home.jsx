@@ -28,7 +28,7 @@ const Home = () => {
       <FeatureProducts/>
       <DiamondRingHero/>
      <ProductSelling/>
-     <JewelryShowcases/>
+     {/* <JewelryShowcases/> */}
      <BlogSection/>
       <InstagramGallery/>
       <Features/>

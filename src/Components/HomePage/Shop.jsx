@@ -73,7 +73,7 @@ const CategoryShowcase = () => {
               sm:top-4 sm:left-4 sm:transform-none 
               backdrop-blur-sm bg-white/30 border border-gray-300 
               px-3 py-2 sm:px-4 sm:py-3 
-              rounded-lg shadow-md w-auto max-w-xs"
+              rounded-lg shadow-md w-auto max-w-32"
               >
                 {category.labels.map((label, labelIndex) => (
                   <div
