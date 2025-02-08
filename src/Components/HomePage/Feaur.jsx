@@ -125,8 +125,8 @@ const FeatureProducts = () => {
                   <h3 className="font-brown text-uppercase">{product.name}</h3>
                   <div className="flex items-center justify-center gap-1 mt-1">
                     <span className="text-[25px] ">₹{product.discountedPrice.toLocaleString()}</span>
-                    <span className="text-[25px] text-gray-400 line-through">₹{product.price.toLocaleString()}</span>
-                    <span className="text-[25px] text-red-500">{product.discount}</span>
+                    <span className="text-[20px] text-gray-400 line-through">₹{product.price.toLocaleString()}</span>
+                    <span className="text-[20px] text-red-500">{product.discount}</span>
                   </div>
                 </div>
               </div>

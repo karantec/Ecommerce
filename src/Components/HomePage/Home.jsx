@@ -14,6 +14,7 @@ import FeaturesSection from "./Lower"
 
 import CategoryShowcase from "./Shop"
 import BlogSection from "./BlogSection"
+import JewelryShowcases from "./Jewell"
 
 
 const Home = () => {
@@ -27,6 +28,7 @@ const Home = () => {
       <FeatureProducts/>
       <DiamondRingHero/>
      <ProductSelling/>
+     <JewelryShowcases/>
      <BlogSection/>
       <InstagramGallery/>
       <Features/>

@@ -114,7 +114,7 @@ const JewelryShowcase = () => {
             <div className="mt-2 mb-4 text-center">
               <h3 className="text-sm font-medium">{product.name}</h3>
               <div className="flex items-center justify-center gap-2 mt-1">
-                <span className="text-lg font-bold">₹{product.price.toLocaleString()}</span>
+                <span className="text-md font-bold">₹{product.price.toLocaleString()}</span>
                 <span className="text-sm text-gray-500 line-through">
                   ₹{product.originalPrice.toLocaleString()}
                 </span>

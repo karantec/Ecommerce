@@ -17,7 +17,7 @@ const JewelryGrid = () => {
               background: 'linear-gradient(225deg, rgba(255,255,255,0) 0%, #FFFFFF 100%)'
             }}
           />
-          <div className="absolute inset-0 flex pt-52 mt-40 flex-col items-center justify-center text-center">
+          <div className="absolute inset-0 flex pt-52 mt-36 flex-col items-center justify-center text-center">
             <p className="text-2xl font-garamond">NEW ARRIVAL</p>
             <p className="text-[79.33px] font-bold text-[#6E3000]">10%</p>
             <p className="text-lg font-garamond">OFF</p>
