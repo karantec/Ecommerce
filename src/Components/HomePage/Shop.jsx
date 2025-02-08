@@ -6,10 +6,10 @@ const CategoryShowcase = () => {
     {
       name: "Chains",
       image: "Category/1.png",
-      labels: [
-        { text: "Gold", icon: "★", color: "text-yellow-500" },
-        { text: "Platinum", icon: "✦", color: "text-blue-400" },
-      ],
+      // labels: [
+      //   { text: "Gold", icon: "★", color: "text-yellow-500" },
+      //   { text: "Platinum", icon: "✦", color: "text-blue-400" },
+      // ],
     },
     { name: "Earrings", image: "Category/2.png" },
     { name: "Neckwears", image: "Category/3.png" },
