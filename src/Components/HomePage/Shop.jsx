@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const CategoryShowcase = () => {
   const categories = [
@@ -24,7 +25,7 @@ const CategoryShowcase = () => {
         {/* Icon and Line */}
         <div className="flex items-center justify-center space-x-4 mb-2">
           <div className="w-16 h-px bg-gray-300"></div>
-          <img
+           <img
             src="Category/icon.png"
             alt="Diamond Icon"
             className="w-6 h-6 inline-block"
@@ -52,18 +53,20 @@ const CategoryShowcase = () => {
             className="relative group cursor-pointer overflow-hidden"
           >
             {/* Image */}
-            <img
+            
+             <img
               src={category.image}
               alt={category.name}
               className="w-full h-70 object-cover transition-transform duration-300 group-hover:scale-105"
             />
+          
 
             {/* Gradient Overlay */}
             <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/50" />
 
             {/* Category Name */}
             <div className="absolute bottom-4 left-4 text-white">
-              <h3 className="text-xl font-garamond">{category.name}</h3>
+              <Link to="/productlist"><h3 className="text-xl font-garamond">{category.name}</h3></Link>
             </div>
 
             {/* Labels (only for Chains) */}

@@ -15,9 +15,7 @@ const Footer = () => {
             />
             <p className="mb-20 text-2xl  font-garmond text-black">
             Shri Laxmi Alankar is more than a jewelry store—it is a
-destination for those who cherish the art of fine jewelry. We
-take immense pride in presenting a collection that blends the
-beauty of age-old craftsmanship with contemporary trends.
+destination for those who cherish the art of fine jewelry.
             </p>
           </div>
 
