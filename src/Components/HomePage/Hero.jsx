@@ -54,7 +54,7 @@ const HeroSection = () => {
       <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-transparent"></div>
 
       {/* Content */}
-      <div className="relative z-10 text-center max-w-4xl mx-auto px-4 sm:px-6 md:px-8">
+      <div className="relative z-10 text-center max-w-4xl mx-auto px-4 mt-96 sm:px-6 md:px-8">
         <h1 className="text-3xl sm:text-5xl md:text-6xl font-garamond uppercase text-[#6E3000] leading-tight">
           UNIQUE AND AUTHENTIC VINTAGE <br />
           <span>DESIGNER JEWELLERY</span>
