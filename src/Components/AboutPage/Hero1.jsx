@@ -2,13 +2,13 @@ import React from "react";
 import { FaPlay } from "react-icons/fa";
 
 const HeroSection = () => {
-  // JSON-like data defined in the same file
+  // Updated content
   const content = {
     aboutUs: "About us",
-    heading: "About Sri Laxmi Alankar",
-    subheading: "Learn More about company",
+    heading: "About Shri Laxmi Alankar",
+    subheading: "Brand Story",
     description:
-      "The Indian rupee is the official currency in the Republic of India. The rupee is subdivided into 100 paise, though as of 2023, coins of denomination of 1 rupee are the lowest value in.",
+      "Welcome to Shri Laxmi Alankar, where tradition meets elegance in the world of fine jewelry. Established in 1999, we have dedicated ourselves to crafting exquisite pieces that celebrate the rich heritage of Indian artistry while embracing contemporary design.",
     playNow: "Play Now",
   };
 

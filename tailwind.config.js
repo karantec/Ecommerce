@@ -5,6 +5,10 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        brown: ["'Brown'", "sans-serif"], 
+        garamond: ["'EB Garamond'", "serif"],
+      },
       colors: {
         brown: {
           900: '#5D4037',

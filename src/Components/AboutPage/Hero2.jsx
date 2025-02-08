@@ -2,15 +2,17 @@ import React from "react";
 import { FaPlay } from "react-icons/fa";
 
 const HeroSection1 = () => {
-  // Define content as an object within the file
+  // Updated content
   const content = {
-    heading: "History of Noorani Company",
+    heading: "History of Shri Laxmi Alankar",
     description: `
-      The Indian rupee is the official currency in the Republic of India. The rupee 
-      is The Indian rupee is the official currency in the Republic of India. The
-      rupee is The Indian rupee is the official currency in the Republic of India. 
-      The rupee is The Indian rupee is the official currency in the Republic of India. 
-      The rupee is The Indian rupee is the official currency in the Republic of India.
+      Since its establishment in ………, Shri Laxmi Alankar has stood as a shining beacon of
+      excellence in the jewelry industry, blending tradition, artistry, and innovation into every
+      creation. Founded in the heart of Muzaffarpur, a city rich in cultural heritage, our
+      journey began with a vision to provide exquisite and high-quality jewelry that
+      would celebrate the timeless beauty of Indian craftsmanship. Over the years, this
+      vision has evolved into a legacy of trust, artistry, and an unwavering commitment to
+      excellence.
     `,
     imageAlt: "hero",
     imageSrc: "About2.png",

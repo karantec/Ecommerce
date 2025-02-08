@@ -1,29 +1,33 @@
 
-import BestSellingProducts from "./BestSelling"
 
 import Features from "./Bottom"
 import ContactSection from "./Contact"
-import EverydayElegance from "./EveryDay"
+import DiamondRingHero from "./Diamond"
+import JewelryShowcase from "./EveryDay"
+
 import FeatureProducts from "./Feaur"
 import HeroSection from "./Hero"
 import InstagramGallery from "./Instagallery"
-
+import JewelryGrid from "./JewelleyGrid"
+import ProductSelling from "./ProductSelling"
 import FeaturesSection from "./Lower"
-import ShopByCategory from "./Shop"
+
+import CategoryShowcase from "./Shop"
+import BlogSection from "./BlogSection"
+
 
 const Home = () => {
   return (
     <div>
       <HeroSection/>
-      
       <FeaturesSection/>
-      <ShopByCategory/>
-      <EverydayElegance/>
+      <JewelryGrid/>
+      <CategoryShowcase/>
+      <JewelryShowcase/>
       <FeatureProducts/>
-      
-      <BestSellingProducts/>
-    
-     
+      <DiamondRingHero/>
+     <ProductSelling/>
+     <BlogSection/>
       <InstagramGallery/>
       <Features/>
       <ContactSection/>

@@ -42,7 +42,7 @@ const Navbar = () => {
       <div className="bg-[#E9F1ED] px-6 py-4 flex items-center justify-between">
         {/* Logo */}
         <Link to="/">
-          <img src="logo2.png" alt="Logo" className="h-20 w-36" />
+          <img src="Slalogo.png" alt="Logo" className="h-24 w-40" />
         </Link>
 
         {/* Mobile Menu Button */}

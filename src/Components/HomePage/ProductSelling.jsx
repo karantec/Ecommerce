@@ -1,6 +1,6 @@
 import React from 'react';
 
-const JewelryShowcase = () => {
+const ProductSelling = () => {
   const products = [
     {
       id: 1,
@@ -41,7 +41,7 @@ const JewelryShowcase = () => {
   ];
 
   return (
-    <div className="container mx-auto px-2">
+    <div className="container mx-auto px-2 py-20">
        <div className="text-center mb-8">
         {/* Icon and Line */}
         <div className="flex items-center justify-center space-x-4 mb-2">
@@ -53,14 +53,12 @@ const JewelryShowcase = () => {
 
         {/* Title */}
         <h2 className="text-4xl font-garamond bg-gradient-to-r from-[#E66E06] to-[#6E3000] text-transparent bg-clip-text">
-        Everyday Elegance
+        Best Selling Products
 </h2>
 
 
         {/* Subtitle */}
-        <p className="text-[#7A3601] uppercase tracking-wide text-sm mt-1">
-        DISCOVER ALL TRENDS
-        </p>
+        
       </div>
 
 
@@ -112,9 +110,9 @@ const JewelryShowcase = () => {
               </div>
             </div>
             <div className="mt-2 mb-4 text-center">
-              <h3 className="text-sm font-medium">{product.name}</h3>
+              <h3 className="text-sm font-medium uppercase text-[20px] font-Brown">{product.name}</h3>
               <div className="flex items-center justify-center gap-2 mt-1">
-                <span className="text-lg font-bold">₹{product.price.toLocaleString()}</span>
+                <span className="text-lg font-garamond">₹{product.price.toLocaleString()}</span>
                 <span className="text-sm text-gray-500 line-through">
                   ₹{product.originalPrice.toLocaleString()}
                 </span>
@@ -141,4 +139,4 @@ const JewelryShowcase = () => {
   );
 };
 
-export default JewelryShowcase;
+export default ProductSelling;

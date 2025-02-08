@@ -1,6 +1,6 @@
 import React from "react";
 
-const CategoryShowcase = () => {
+const BestSelling = () => {
   const categories = [
     { name: "Bracelets", image: "Category/6.png" },
     {
@@ -93,4 +93,4 @@ const CategoryShowcase = () => {
   );
 };
 
-export default CategoryShowcase;
+export default BestSelling;
