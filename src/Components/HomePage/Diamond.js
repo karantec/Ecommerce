@@ -11,14 +11,14 @@ const PremiumCollectionBanner = () => {
       />
 
       {/* Overlay Content */}
-      <div className="absolute inset-0 flex items-center justify-start px-6 md:px-12 lg:px-20">
-        <div className="text-white  p-4 md:p-6 rounded-lg">
-          <h2 className="text-base md:text-2xl lg:text-4xl font-serif leading-tight">
+      <div className="absolute inset-0 flex flex-col items-center md:items-start justify-center px-6 md:px-12 lg:px-20 text-center md:text-left">
+        <div className="text-white p-4 md:p-6 rounded-lg">
+          <h2 className="text-lg md:text-3xl lg:text-5xl font-serif leading-tight">
             FIND OUR PREMIUM RANGE
             <br />
             UNIQUE COLLECTION
           </h2>
-          <button className="mt-4 px-5 py-2 border border-white text-white text-xs md:text-sm lg:text-base hover:bg-white hover:text-black transition">
+          <button className="mt-4 px-6 py-3 border border-white text-white text-sm md:text-base lg:text-lg hover:bg-white hover:text-black transition">
             DISCOVER THE COLLECTION
           </button>
         </div>
