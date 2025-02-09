@@ -42,20 +42,24 @@ const Navbar = () => {
       <div className="bg-[#E9F1ED] px-6 py-4 flex items-center justify-between">
         {/* Logo */}
         <Link to="/">
-          <img src="Slalogo.png" alt="Logo" className="h-24 w-auto"/>
+          <img
+            src="logone.png"
+            alt="Logo"
+            className="h-20 sm:h-20 md:h-24 lg:h-28 w-auto max-w-none"
+          />
         </Link>
 
-        {/* Mobile Menu Button */}
+        {/* Mobile & Tablet Menu Button */}
         <button
-          className="md:hidden text-gray-700 text-2xl"
+          className="lg:hidden text-gray-700 text-2xl"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
         >
           {isMobileMenuOpen ? <FaTimes /> : <FaBars />}
         </button>
 
-        {/* Search Bar (hidden on mobile) */}
-        <div className="hidden md:flex justify-center w-full">
-          <div className="relative w-1/2">
+        {/* Search Bar (hidden on mobile and tablets) */}
+        <div className="hidden lg:flex justify-center w-full lg:w-1/3">
+          <div className="relative w-full">
             <FaSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
             <input
               type="text"
@@ -65,8 +69,8 @@ const Navbar = () => {
           </div>
         </div>
 
-        {/* Desktop Navigation */}
-        <div className="hidden md:flex items-center space-x-8">
+        {/* Desktop Navigation (hidden on mobile & tablet) */}
+        <div className="hidden lg:flex items-center space-x-6">
           {navLinks.map((link, index) => (
             <Link
               key={index}
@@ -81,8 +85,8 @@ const Navbar = () => {
           ))}
         </div>
 
-        {/* Icons */}
-        <div className="hidden md:flex space-x-6 items-center">
+        {/* Icons (hidden on mobile & tablet) */}
+        <div className="hidden lg:flex space-x-4 items-center">
           <Link to="/login" className="text-gray-700">
             <FaUser className="text-xl" />
           </Link>
@@ -107,9 +111,9 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* Mobile Menu */}
+      {/* Mobile & Tablet Menu */}
       {isMobileMenuOpen && (
-        <div className="md:hidden bg-[#E9F1ED] p-6 space-y-4">
+        <div className="lg:hidden bg-[#E9F1ED] p-6 space-y-4">
           {navLinks.map((link, index) => (
             <Link
               key={index}
