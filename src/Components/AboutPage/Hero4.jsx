@@ -12,7 +12,7 @@ const FeatureSection = () => {
       address: "Shri Laxmi Alankar, Main Road, Muzaffarpur, Bihar",
     },
     buttonText: "Contact Now",
-    imageSrc: "About4.png",
+    imageSrc: "https://i.ytimg.com/vi/fCB-Fb2aFL4/maxresdefault.jpg",
     imageAlt: "feature",
   };
 

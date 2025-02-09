@@ -10,10 +10,9 @@ const HeroSection1 = () => {
       excellence in the jewelry industry, blending tradition, artistry, and innovation into every
       creation. Founded in the heart of Muzaffarpur, a city rich in cultural heritage, our
       journey began with a vision to provide exquisite and high-quality jewelry that
-      would celebrate the timeless beauty of Indian craftsmanship. Over the years, this
-      vision has evolved into a legacy of trust, artistry, and an unwavering commitment to
-      excellence.
+      would celebrate the timeless beauty of Indian craftsmanship. 
     `,
+    Expanding :"As our reputation grew, so did our commitment to catering to diverse tastes and preferences. Over the years, Shri Laxmi Alankar expanded its offerings to include a wide range of jewelry, blending the timeless elegance of traditional designs with the sleek sophistication ofcontemporary styles. From intricately crafted gold and diamond pieces that honor India’scultural heritage to modern designs tailored to meet the dynamic tastes of the newgeneration, we ensure that every customer finds something that resonates with their uniquestyle",
     imageAlt: "hero",
     imageSrc: "About2.png",
   };
@@ -35,8 +34,16 @@ const HeroSection1 = () => {
           <h2 className="title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-900">
             {content.heading}
           </h2>
-          <p className="mb-8 leading-relaxed text-start">
+          <p className="mb-8 leading-relaxed font-brown text-black text-start">
             {content.description.split("\n").map((line, index) => (
+              <span key={index}>
+                {line.trim()}
+                <br />
+              </span>
+            ))}
+          </p>
+          <p className="mb-8 leading-relaxed font-brown text-black text-start">
+            {content.Expanding.split("\n").map((line, index) => (
               <span key={index}>
                 {line.trim()}
                 <br />

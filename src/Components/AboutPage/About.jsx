@@ -3,6 +3,8 @@ import HeroSection from "./Hero1";
 import HeroSection1 from "./Hero2";
 import TeamSection from "./Hero3";
 import FeatureSection from "./Hero4";
+import FeaturesSection from "./FeatureSection";
+import WhyChooseUs from "./WhyChooseus";
 
 const About = () => {
   return (
@@ -11,7 +13,8 @@ const About = () => {
       <div className="py-12 bg-white">
         <HeroSection />
       </div>
-
+      <FeaturesSection/>
+           <WhyChooseUs/>
       {/* Hero Section 1 */}
       
         <HeroSection1 />

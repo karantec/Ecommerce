@@ -6,12 +6,12 @@ import { MdOutlineLocalShipping } from "react-icons/md";
 
 const TeamSection = () => {
   const teamMembers = [
-    { name: "Support Team", role: "UI Designer", desc: "Our skilled support team is dedicated to guiding you through every stage of your jewelry adventure. From design selection to post-purchase service, we ensure a seamless and enjoyable customer experience." },
-    { name: "Creative Products", role: "CTO", desc: "Explore a collection that combines modern styles with classic artistry. Our imaginative jewelry items are carefully crafted to enhance every event and celebrate your uniqueness." },
-    { name: "Easy Shipment", role: "Founder", desc: "Our simple shipment process ensures dependable and quick delivery. We guarantee safe and secure packaging to ensure your treasured jewelry arrives in pristine condition." },
-    { name: "Quality Assurance", role: "DevOps", desc: "Every piece of jewelry undergoes stringent quality checks to ensure it meets the highest standards of craftsmanship and durability, giving you unmatched perfection." },
-    { name: "Premium Material", role: "Software Engineer", desc: "Crafted with the finest materials, including certified gold, diamonds, and gemstones, our jewelry reflects luxury, elegance, and long-lasting value." },
-    { name: "Client Management", role: "UX Researcher", desc: "Our top goal is to establish enduring partnerships. Our individualized client management guarantees that we comprehend and accommodate your choices, providing a remarkable and customized encounter." },
+    { name: "Support Team", role: "UI Designer", desc: "Our skilled support team is dedicated to guiding youthrough every stage of your jewelry adventure. From designselection to post-purchase service, we ensure a seamlessand enjoyable customer experience." },
+    { name: "Creative Products", role: "CTO", desc: "Explore a collection that combines modern styles withclassic artistry. Our imaginative jewelry items are carefullycrafted to enhance every event and celebrate youruniqueness." },
+    { name: "Easy Shipment", role: "Founder", desc: "Our simple shipment process ensures dependable and quick delivery. We guarantee safe and secure packaging toensure your treasured jewelry arrives in pristine condition." },
+    { name: "Quality Assurance", role: "DevOps", desc: "Every piece of jewelry undergoes stringent quality checksto ensure it meets the highest standards of craftsmanship and durability, giving you unmatched perfection." },
+    { name: "Premium Material", role: "Software Engineer", desc: "Crafted with the finest materials, including certified gold,diamonds, and gemstones, our jewelry reflects luxury,elegance, and long-lasting value.." },
+    { name: "Client Management", role: "UX Researcher", desc: "Our top goal is to establish enduring partnerships. Ourindividualized client management guarantees that wecomprehend and accommodate your choices, providing aremarkable and customized encounter." },
   ];
 
   const roleToIcon = {
@@ -34,8 +34,8 @@ const TeamSection = () => {
                   {roleToIcon[member.role]} 
                 </div>
                 <div className="flex-grow">
-                  <h2 className="text-gray-900 font-medium title-font">{member.name}</h2>
-                  <p className="text-gray-500">{member.desc}</p>
+                  <h2 className="text-gray-900 font-bold uppercase font-garamond title-font">{member.name}</h2>
+                  <p className="text-black font-brown">{member.desc}</p>
                 </div>
               </div>
             </div>
