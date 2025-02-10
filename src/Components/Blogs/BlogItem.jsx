@@ -1,6 +1,13 @@
 import React from "react";
 import { BiBarChart } from "react-icons/bi";
-import { FaShare, FaFacebook, FaTwitter, FaPinterest, FaInstagram, FaYoutube } from "react-icons/fa";
+import {
+  FaShare,
+  FaFacebook,
+  FaTwitter,
+  FaPinterest,
+  FaInstagram,
+  FaYoutube,
+} from "react-icons/fa";
 import StyledSection from "./StyleSection";
 
 const Item = () => {
@@ -49,31 +56,58 @@ const Item = () => {
             <div className="space-y-6">
               {/* Feature 1 */}
               <div className="p-4 w-full">
-                <p className="leading-relaxed text-base text-black">
-                Structured gripped tape invisible moulded cups for sauppor firm hold strong powermesh front liner sport detail. Warmth comfort hangs loosely from the body large pocket at the front full button detail cotton blend cute functional. Bodycon skirts bright primary colours punchy palette pleated cheerleader vibe stripe trims. Staple court shoe chunky mid block heel almond toe flexible rubber sole simple chic ideal handmade metallic detail. Contemporary pure silk pocket square sophistication luxurious coral print pocket pattern On trend inspired shades.
+                <p className="leading-relaxed text-[20px] text-black">
+                  At{" "}
+                  <span className="font-brown font-bold ">
+                    Shri Laxmi Alankar,
+                  </span>{" "}
+                  we take pride in offering a stunning range of jewelry that
+                  caters to every occasion, taste, and style. Whether you're
+                  looking for an elegant everyday piece or a dazzling statement
+                  accessory, our collections are thoughtfully designed to bring
+                  timeless beauty and sophistication into your life.
                 </p>
-                <p className="leading-relaxed text-base mt-4 text-black">
-                Striking pewter studded epaulettes silver zips inner drawstring waist channel urban edge single-breasted jacket. Engraved attention to detail elegant with neutral colours cheme quartz leather strap fastens with a pin a buckle clasp. Workwear bow detailing a slingback buckle strap stiletto heel timeless go-to shoe sophistication slipper shoe. Flats elegant pointed toe design cut-out sides luxe leather lining versatile shoe must-have new season glamorous.
+                <p className="leading-relaxed text-[20px] mt-4 text-black">
+                  At{" "}
+                  <span className="font-brown font-bold ">
+                    Shri Laxmi Alankar,
+                  </span>{" "}
+                  we understand that purchasing jewelry is not just about
+                  beauty—it's also about trust. That’s why we uphold the highest
+                  standards of purity, authenticity, and certification to give
+                  you complete peace of mind with every purchase
                 </p>
               </div>
               <div className="flex items-center justify-center bg-gray-50 p-4 rounded-lg">
                 <div className="border-l-4 border-gray-300 pl-6">
-                  <span className="text-7xl text-gray-300 font-serif">&ldquo;</span>
+                  <span className="text-7xl text-gray-300 font-serif">
+                    &ldquo;
+                  </span>
                   <p className="text-4xl font-medium uppercase leading-tight tracking-wide text-black">
-                  Knicker lining concealed back zip fasten swing style high waisted double layer full pattern floral.
+                    Choosing the Right Jewelry for Your Wedding.
+                    <br />
+                    Your Trusted Destination for Timeless Jewelry
+                    <br />
+                    Best Jewelry Gift Ideas for Every Occasion
                   </p>
                 </div>
               </div>
-              <p className="leading-relaxed text-base text-black">
-              Foam padding in the insoles leather finest quality staple flat slip-on design pointed toe off-duty shoe. Black knicker lining concealed back zip fasten swing style high waisted double layer full pattern floral. Polished finish elegant court shoe work duty stretchy slingback strap mid kitten heel this ladylike design
+              <p className="leading-relaxed text-[20px] text-black">
+                At Shri Laxmi Alankar, we are honored to be a part of your most
+                precious moments. Whether you’re celebrating a wedding,
+                anniversary, birthday, or any milestone, we are here to provide
+                you with exquisite jewelry that lasts a lifetime
               </p>
-              <p className="leading-relaxed text-base text-black">
-              Foam padding in the insoles leather finest quality staple flat slip-on design pointed toe off-duty shoe. Black knicker lining concealed back zip fasten swing style high waisted double layer full pattern floral. Polished finish elegant court shoe work duty stretchy slingback strap mid kitten heel this ladylike design
+              <p className="leading-relaxed text-[20px] text-black">
+                Jewelry at Shri Laxmi Alankar isn’t just about beauty—it’s about
+                meaning. Every piece tells a story, whether it’s a wedding set
+                that symbolizes eternal love or a simple pendant that marks a
+                personal achievement
               </p>
             </div>
           </div>
         </section>
-        <StyledSection/>
+        <StyledSection />
       </main>
 
       {/* Right Sidebar - 30% */}
@@ -81,7 +115,9 @@ const Item = () => {
         <div className="sticky top-4 space-y-6">
           {/* Follow Us Section */}
           <div>
-            <h3 className="font-bold text-gray-900 mb-4 mt-6 uppercase text-center">Follow Us</h3>
+            <h3 className="font-bold text-gray-900 mb-4 mt-6 uppercase text-center">
+              Follow Us
+            </h3>
             <div className="flex text-gray-600 space-x-10 justify-center">
               <div className="flex flex-col items-center">
                 <FaFacebook className="w-6 h-6" />
@@ -108,14 +144,17 @@ const Item = () => {
 
           {/* Subscription Section */}
           <div className="bg-white p-4 rounded-lg shadow-sm">
-            <h4 className="text-sm font-medium text-gray-900 mb-2">Subscription</h4>
+            <h4 className="text-sm font-medium text-gray-900 mb-2">
+              Subscription
+            </h4>
             <p className="text-md text-black mb-4">
-              Subscribe to our newsletter and receive a selection of cool articles every week.
+              Subscribe to our newsletter and receive a selection of cool
+              articles every week.
             </p>
-            <input 
-              type="email" 
-              placeholder="Enter your email" 
-              className="w-full p-2 mb-4 border border-gray-300 rounded" 
+            <input
+              type="email"
+              placeholder="Enter your email"
+              className="w-full p-2 mb-4 border border-gray-300 rounded"
             />
             <button className="w-full bg-orange-500 text-white text-sm font-medium py-2 rounded">
               Subscribe
@@ -124,9 +163,9 @@ const Item = () => {
               <label className="flex items-start ">
                 <input type="checkbox" className="mt-1 border-gray-300" />
                 <span className="ml-2">
-                By checking this box, you  confirm that you have  read and are agreeing to our terms of use regarding
-                the storage of the data submitted through this  form.
-
+                  By checking this box, you confirm that you have read and are
+                  agreeing to our terms of use regarding the storage of the data
+                  submitted through this form.
                 </span>
               </label>
             </div>
@@ -136,13 +175,18 @@ const Item = () => {
           <div className="p-4">
             <h2 className="text-xl font-semibold mb-4">The Latest</h2>
             <div className="space-y-6">
-              <div className="relative p-4 bg-cover bg-center text-white rounded-md h-36 flex items-end" 
-                   style={{ backgroundImage: "url('back.png')" }}>
+              <div
+                className="relative p-4 bg-cover bg-center text-white rounded-md h-36 flex items-end"
+                style={{ backgroundImage: "url('https://content.jdmagicbox.com/comp/arrah/c9/9999p6182.6182.151201150650.g7c9/catalogue/sri-alankar-jewellers-arrah-12rqdrzq8l.jpg')" }}
+              >
                 <div className="absolute inset-0 bg-black opacity-40 rounded-md"></div>
                 <div className="relative z-10">
-                  <h3 className="font-semibold text-lg">
-                  10 Habits That Will Change Your Live for the Better If envy and jealousy are impacting your friendships
 
+                  <h3 className="font-semibold text-lg">
+                  BIS (Bureau of Indian Standards) Hallmarking is the official certification
+that verifies the purity and authenticity of gold jewelry in India. Every
+gold piece at Shri Laxmi Alankar is BIS-hallmarked, ensuring you
+receive nothing but genuine, high-quality gold.
                   </h3>
                   <div className="flex justify-center items-center text-sm mt-2">
                     <span>June 21, 2022</span>
@@ -156,8 +200,7 @@ const Item = () => {
               <div className="space-y-4">
                 <div>
                   <h3 className="font-semibold text-lg text-gray-900">
-                  10 Habits That Will Change Your Live for the Better If envy and jealousy are impacting your friendships
-
+                  Confirms government-approved purity standards
                   </h3>
                   <div className="text-sm justify-center  text-gray-600 mt-1">
                     <span>June 21, 2022</span>
@@ -167,8 +210,7 @@ const Item = () => {
                 </div>
                 <div>
                   <h3 className="font-semibold text-lg text-gray-900">
-                  10 Habits That Will Change Your Live for the Better If envy and jealousy are impacting your friendships
-
+                  Indicates the gold’s fineness (e.g., 22K, 18K, 14K).
                   </h3>
                   <div className="text-sm justify-center   text-gray-600 mt-1">
                     <span>June 21, 2022</span>
@@ -178,8 +220,8 @@ const Item = () => {
                 </div>
                 <div>
                   <h3 className="font-semibold text-lg text-gray-900">
-                  10 Habits That Will Change Your Live for the Better If envy and jealousy are impacting your friendships
-
+                  Shows where the gold
+                  was tested and certified
                   </h3>
                   <div className="text-sm items-center  text-gray-600 mt-1">
                     <span className="text-center">June 21, 2022</span>

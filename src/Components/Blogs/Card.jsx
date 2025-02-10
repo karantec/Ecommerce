@@ -5,47 +5,33 @@ const GallerySection = () => {
   // JSON data directly in the file
   const blogData = [
     {
-      "author": "Alice Whitten",
+      
       "date": "1 Jan 2023",
-      "title": "Bill Walsh leadership lessons",
-      "description": "Like to know the secrets of transforming a 2-14 team into a 3x Super Bowl winning Dynasty?",
-      "image": "card1.png"
+      "title": "24K Gold (99.9% Pure)",
+      "description": "Soft, primarily used for coins & bars, not suitable for jewelry.",
+      "image": "https://www.iconicjewelry.com/app/uploads/2023/05/9da86477-225c-4029-9cb0-4a846ba36cea.jpeg"
     },
     {
-      "author": "Demi WIlkinson ",
+      
       "date": "1 Jan 2023",
-      "title": "PM Mental Models",
-      "description": "Mental models are simple expressions of complex processes or relationships.",
-      "image": "imag22.png"
+      "title": "22K Gold (91.6% Pure)",
+      "description": "Ideal for traditional jewelry, strong yet malleable.",
+      "image": "https://sencowebfiles.s3.ap-south-1.amazonaws.com/products/f7MqkJuik2fnvpnYgRWYYWq7npiJMnJ2m1AeATuu.jpeg"
     },
     {
-      "author": "Candice Wu ",
+      
       "date": "1 Jan 2023",
-      "title": "What is Wireframing?",
-      "description": "Introduction to Wireframing and its Principles. Learn from the best in the industry.",
-      "image": "image 22.png"
+      "title": "18K Gold (75% Pure)",
+      "description": "A mix of gold & alloys, perfect for diamond and gemstone jewelry.",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQo_Wx33L1BZpz8Ce_4N3gDpJicp6nyaLFIrA&s"
     },
     {
-        "author": "Alice Whitten",
-        "date": "1 Jan 2023",
-        "title": "Bill Walsh leadership lessons",
-        "description": "Like to know the secrets of transforming a 2-14 team into a 3x Super Bowl winning Dynasty?",
-        "image": "image 23.png"
+       
+        "title": "14K Gold (58.5% Pure)",
+        "description": "Durable and affordable, commonly used for lightweight designs.?",
+        "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT00gGVwuUGLnlmXxcU0mNHdS7MHBvFSN_34Q&s"
       },
-      {
-        "author": "Demi WIlkinson ",
-        "date": "1 Jan 2023",
-        "title": "PM Mental Models",
-        "description": "Mental models are simple expressions of complex processes or relationships.",
-        "image": "image 24.png"
-      },
-      {
-        "author": "Candice Wu ",
-        "date": "1 Jan 2023",
-        "title": "What is Wireframing?",
-        "description": "Introduction to Wireframing and its Principles. Learn from the best in the industry.",
-        "image": "image 25.png"
-      },
+      
       
   ];
 
@@ -70,7 +56,7 @@ const GallerySection = () => {
                 <h2 className="text-lg text-gray-900 font-medium title-font">{blog.title}</h2>
                 <MdOutlineArrowOutward className="text-black text-xl" />
               </div>
-              <p className="leading-relaxed text-base">{blog.description}</p>
+              <p className="leading-relaxed font-brown text-[18px] font-bold">{blog.description}</p>
             </div>
           ))}
         </div>

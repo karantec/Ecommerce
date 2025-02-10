@@ -3,10 +3,10 @@ import React from "react";
 const FullWidthImageWithText = () => {
   // Content data defined in the same file
   const content = {
-    imageSrc: "Crousel.png",
+    imageSrc: "https://etimg.etb2bimg.com/photo/106418496.cms",
     imageAlt: "Full width image",
-    mainText: "5 Efficient Rules How to \nOrganize Your Working Place",
-    subText: "Relationship tips couples therapists are giving all the time",
+    mainText: "Preserve the Beauty of Your Precious Jewelry",
+    subText: "Your jewelry is more than just an accessory—it is a treasured investment and a reflection of your personal style. To maintain its brilliance and longevity,proper care and maintenance are essential.",
   };
 
   return (
