@@ -182,11 +182,9 @@ const Item = () => {
                 <div className="absolute inset-0 bg-black opacity-40 rounded-md"></div>
                 <div className="relative z-10">
 
-                  <h3 className="font-semibold text-lg">
+                  <h3 className="font-semibold text-lg mt-8">
                   BIS (Bureau of Indian Standards) Hallmarking is the official certification
-that verifies the purity and authenticity of gold jewelry in India. Every
-gold piece at Shri Laxmi Alankar is BIS-hallmarked, ensuring you
-receive nothing but genuine, high-quality gold.
+that verifies the purity and authenticity of gold jewelry in India. 
                   </h3>
                   <div className="flex justify-center items-center text-sm mt-2">
                     <span>June 21, 2022</span>
