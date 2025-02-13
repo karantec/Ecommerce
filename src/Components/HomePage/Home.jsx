@@ -17,6 +17,7 @@ import BlogSection from "./BlogSection"
 import JewelryShowcases from "./Jewell"
 import WhyChooseUs from "../AboutPage/WhyChooseus"
 import TestimonialsComponent from "./Testimonial"
+import GoldPrices from "./GoldPrices"
 
 
 const Home = () => {
@@ -24,7 +25,9 @@ const Home = () => {
     <div>
       <HeroSection/>
       <FeaturesSection/>
+      <GoldPrices/>
       <WhyChooseUs/>
+     
       <JewelryGrid/>
       <CategoryShowcase/>
       <JewelryShowcase/>
