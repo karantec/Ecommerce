@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { getBlogById } from "../../api/BlogService";
 import { BiBarChart } from "react-icons/bi";
 import {
   FaShare,
@@ -9,8 +11,41 @@ import {
   FaYoutube,
 } from "react-icons/fa";
 import StyledSection from "./StyleSection";
+import LoadingSpinner from "../Common/LoadingSpinner";
 
-const Item = () => {
+const Item = ({ blogs }) => {
+  const { id } = useParams();
+  const [currentBlog, setCurrentBlog] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchBlog = async () => {
+      try {
+        setLoading(true);
+        const data = await getBlogById(id);
+        setCurrentBlog(data);
+      } catch (error) {
+        setError(error.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    if (id) {
+      fetchBlog();
+    } else {
+      setCurrentBlog(blogs?.[0]);
+      setLoading(false);
+    }
+  }, [id, blogs]);
+
+  if (loading) return <LoadingSpinner />;
+  if (error)
+    return <div className="text-red-500 text-center py-8">{error}</div>;
+  if (!currentBlog)
+    return <div className="text-center py-8">Blog not found</div>;
+
   return (
     <div className="grid grid-cols-1 lg:grid-cols-10 min-h-screen gap-4">
       {/* Left Sidebar - 10% */}
@@ -54,29 +89,37 @@ const Item = () => {
         <section className="text-gray-600 body-font">
           <div className="container px-5 py-8 mx-auto">
             <div className="space-y-6">
-              {/* Feature 1 */}
+              <h1 className="text-3xl font-bold mb-4">{currentBlog.title}</h1>
+              <div className="flex items-center text-sm text-gray-500 mb-4">
+                <span>
+                  Published:{" "}
+                  {new Date(currentBlog.createdAt).toLocaleDateString()}
+                </span>
+                <span className="mx-2">•</span>
+                <span>
+                  Last updated:{" "}
+                  {new Date(currentBlog.updatedAt).toLocaleDateString()}
+                </span>
+              </div>
+              <img
+                src={currentBlog.image}
+                alt={currentBlog.title}
+                className="w-full h-64 object-cover rounded-lg mb-6"
+              />
               <div className="p-4 w-full">
                 <p className="leading-relaxed text-[20px] text-black">
-                  At{" "}
-                  <span className="font-brown font-bold ">
-                    Shri Laxmi Alankar,
-                  </span>{" "}
-                  we take pride in offering a stunning range of jewelry that
-                  caters to every occasion, taste, and style. Whether you're
-                  looking for an elegant everyday piece or a dazzling statement
-                  accessory, our collections are thoughtfully designed to bring
-                  timeless beauty and sophistication into your life.
+                  {currentBlog.content}
                 </p>
-                <p className="leading-relaxed text-[20px] mt-4 text-black">
-                  At{" "}
-                  <span className="font-brown font-bold ">
-                    Shri Laxmi Alankar,
-                  </span>{" "}
-                  we understand that purchasing jewelry is not just about
-                  beauty—it's also about trust. That’s why we uphold the highest
-                  standards of purity, authenticity, and certification to give
-                  you complete peace of mind with every purchase
-                </p>
+                <div className="mt-6 flex flex-wrap gap-2">
+                  {currentBlog.tags.map((tag, index) => (
+                    <span
+                      key={index}
+                      className="inline-block bg-orange-100 text-orange-800 px-3 py-1 rounded-full text-sm font-semibold"
+                    >
+                      #{tag}
+                    </span>
+                  ))}
+                </div>
               </div>
               <div className="flex items-center justify-center bg-gray-50 p-4 rounded-lg">
                 <div className="border-l-4 border-gray-300 pl-6">
@@ -177,14 +220,17 @@ const Item = () => {
             <div className="space-y-6">
               <div
                 className="relative p-4 bg-cover bg-center text-white rounded-md h-36 flex items-end"
-                style={{ backgroundImage: "url('https://content.jdmagicbox.com/comp/arrah/c9/9999p6182.6182.151201150650.g7c9/catalogue/sri-alankar-jewellers-arrah-12rqdrzq8l.jpg')" }}
+                style={{
+                  backgroundImage:
+                    "url('https://content.jdmagicbox.com/comp/arrah/c9/9999p6182.6182.151201150650.g7c9/catalogue/sri-alankar-jewellers-arrah-12rqdrzq8l.jpg')",
+                }}
               >
                 <div className="absolute inset-0 bg-black opacity-40 rounded-md"></div>
                 <div className="relative z-10">
-
                   <h3 className="font-semibold text-lg mt-8">
-                  BIS (Bureau of Indian Standards) Hallmarking is the official certification
-that verifies the purity and authenticity of gold jewelry in India. 
+                    BIS (Bureau of Indian Standards) Hallmarking is the official
+                    certification that verifies the purity and authenticity of
+                    gold jewelry in India.
                   </h3>
                   <div className="flex justify-center items-center text-sm mt-2">
                     <span>June 21, 2022</span>
@@ -198,7 +244,7 @@ that verifies the purity and authenticity of gold jewelry in India.
               <div className="space-y-4">
                 <div>
                   <h3 className="font-semibold text-lg text-gray-900">
-                  Confirms government-approved purity standards
+                    Confirms government-approved purity standards
                   </h3>
                   <div className="text-sm justify-center  text-gray-600 mt-1">
                     <span>June 21, 2022</span>
@@ -208,7 +254,7 @@ that verifies the purity and authenticity of gold jewelry in India.
                 </div>
                 <div>
                   <h3 className="font-semibold text-lg text-gray-900">
-                  Indicates the gold’s fineness (e.g., 22K, 18K, 14K).
+                    Indicates the gold’s fineness (e.g., 22K, 18K, 14K).
                   </h3>
                   <div className="text-sm justify-center   text-gray-600 mt-1">
                     <span>June 21, 2022</span>
@@ -218,8 +264,7 @@ that verifies the purity and authenticity of gold jewelry in India.
                 </div>
                 <div>
                   <h3 className="font-semibold text-lg text-gray-900">
-                  Shows where the gold
-                  was tested and certified
+                    Shows where the gold was tested and certified
                   </h3>
                   <div className="text-sm items-center  text-gray-600 mt-1">
                     <span className="text-center">June 21, 2022</span>

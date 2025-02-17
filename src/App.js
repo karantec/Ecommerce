@@ -15,6 +15,9 @@ import Login from "./Components/SignUp/Login";
 import ProductDetailComplete from "./Components/Product/ProductList/ProductDetail";
 import { useState } from "react";
 import { CartProvider } from "./CartContext";
+import BlogDetail from "./Components/Blogs/BlogDetail";
+import OrderHistory from "./Components/Order/OrderHistory";
+import OrderDetails from "./Components/Order/OrderDetails";
 
 function App() {
   const [cart, setCart] = useState([]);
@@ -43,6 +46,7 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Cont />} />
           <Route path="/blog" element={<Blog />} />
+          <Route path="/blog/:id" element={<BlogDetail />} />
           <Route path="/checkout" element={<SecureCheckout />} />
           <Route path="/confirm" element={<Final />} />
           <Route path="/productlist" element={<ProductPage />} />
@@ -52,6 +56,16 @@ function App() {
           />
           <Route path="/cart" element={<ShoppingCart cart={cart} setCart={setCart} />} />
           <Route path="*" element={<NotFound />} />
+          <Route path="/orders" element={
+            // <ProtectedRoute>
+            <OrderHistory />
+            // </ProtectedRoute>
+          } />
+          <Route path="/orders/:id" element={
+            // <ProtectedRoute>
+            <OrderDetails />
+            // </ProtectedRoute>
+          } />
         </Routes>
         <Footer />
       </div>

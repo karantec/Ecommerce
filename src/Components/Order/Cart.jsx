@@ -1,19 +1,18 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
+import { useCart } from "../../CartContext";
 
 const ShoppingCart = () => {
-  const [cart, setCart] = useState([
-    { id: 1, name: "DIAMOND CRYSTAL STUD", price: 3000, quantity: 2 },
-    { id: 2, name: "DIAMOND CRYSTAL STUD", price: 3000, quantity: 2 },
-    { id: 3, name: "DIAMOND CRYSTAL STUD", price: 3000, quantity: 2 },
-    { id: 4, name: "DIAMOND CRYSTAL STUD", price: 3000, quantity: 2 },
-  ]);
+  const { cart, setCart } = useCart();
 
   const handleQuantityChange = (id, increment) => {
     setCart((prevCart) =>
       prevCart.map((item) =>
         item.id === id
-          ? { ...item, quantity: Math.max(1, item.quantity + increment) }
+          ? {
+              ...item,
+              quantity: Math.max(1, item.quantity + increment),
+            }
           : item
       )
     );
@@ -24,14 +23,17 @@ const ShoppingCart = () => {
   };
 
   const getSubtotal = () => {
-    return cart.reduce((total, item) => total + item.price * item.quantity, 0);
+    return cart.reduce(
+      (total, item) => total + item.discountedPrice * item.quantity,
+      0
+    );
   };
 
   const calculateTotals = () => {
     const subtotal = getSubtotal();
     const tax = Math.round(subtotal * 0.1); // 10% tax
-    const shipping = 50; // Flat shipping rate
-    const discount = 75; // Fixed discount
+    const shipping = subtotal > 5000 ? 0 : 50; // Free shipping over ₹5000
+    const discount = 0; // You can implement coupon logic here
     const total = subtotal + tax + shipping - discount;
 
     return { subtotal, tax, shipping, discount, total };
@@ -39,13 +41,24 @@ const ShoppingCart = () => {
 
   const totals = calculateTotals();
 
+  if (cart.length === 0) {
+    return (
+      <div className="min-h-screen flex flex-col items-center justify-center p-4">
+        <h2 className="text-2xl font-bold mb-4">Your cart is empty</h2>
+        <Link to="/productlist">
+          <button className="bg-orange-500 text-white px-6 py-2 rounded">
+            Continue Shopping
+          </button>
+        </Link>
+      </div>
+    );
+  }
+
   return (
     <div className="bg-gray-100 min-h-screen px-4 py-6 space-y-6">
-      {/* Shopping Cart Section */}
       <div className="p-4 bg-white rounded-lg shadow w-full">
         <h1 className="text-xl font-bold mb-4">Shopping Cart</h1>
         <div className="overflow-x-auto">
-          {/* Shopping Cart Table */}
           <table className="w-full text-left border-collapse">
             <thead className="bg-orange-500 text-white">
               <tr>
@@ -61,13 +74,13 @@ const ShoppingCart = () => {
                 <tr key={item.id} className="border-b">
                   <td className="py-2 px-4 flex items-center">
                     <img
-                      src={`https://via.placeholder.com/50`}
+                      src={item.images?.[0] || `https://via.placeholder.com/50`}
                       alt={item.name}
-                      className="w-12 h-12 rounded mr-2"
+                      className="w-12 h-12 object-cover rounded mr-2"
                     />
                     <span className="truncate">{item.name}</span>
                   </td>
-                  <td className="py-2 px-4">₹{item.price}</td>
+                  <td className="py-2 px-4">₹{item.discountedPrice}</td>
                   <td className="py-2 px-4">
                     <div className="flex items-center">
                       <button
@@ -91,13 +104,15 @@ const ShoppingCart = () => {
                       </button>
                     </div>
                   </td>
-                  <td className="py-2 px-4">₹{item.price * item.quantity}</td>
+                  <td className="py-2 px-4">
+                    ₹{item.discountedPrice * item.quantity}
+                  </td>
                   <td className="py-2 px-4">
                     <button
                       onClick={() => handleRemoveItem(item.id)}
-                      className="text-red-500 hover:underline"
+                      className="text-red-500 hover:text-red-700"
                     >
-                      ❌
+                      Remove
                     </button>
                   </td>
                 </tr>
@@ -105,62 +120,40 @@ const ShoppingCart = () => {
             </tbody>
           </table>
         </div>
-        {/* Footer Buttons */}
-        <div className="flex flex-wrap justify-between items-center mt-4">
-          <div className="flex items-center space-x-2 mb-2 sm:mb-0">
-            <input
-              type="text"
-              placeholder="Coupon Code"
-              className="border rounded p-2 w-full sm:w-auto"
-            />
-            <button className="bg-orange-500 text-white px-4 py-2 rounded">
-              APPLY
-            </button>
+      </div>
+
+      <div className="flex flex-col sm:flex-row-reverse sm:justify-between gap-6">
+        <div className="p-4 bg-white rounded-lg shadow w-full sm:w-1/3">
+          <h2 className="text-lg font-bold bg-orange-500 text-white px-4 py-2 rounded-t">
+            Cart Total
+          </h2>
+          <div className="bg-gray-50 p-4">
+            <div className="flex justify-between py-2">
+              <span>Subtotal</span>
+              <span>₹{totals.subtotal}</span>
+            </div>
+            <div className="flex justify-between py-2">
+              <span>Tax (10%)</span>
+              <span>₹{totals.tax}</span>
+            </div>
+            <div className="flex justify-between py-2">
+              <span>Shipping</span>
+              <span>
+                {totals.shipping === 0 ? "Free" : `₹${totals.shipping}`}
+              </span>
+            </div>
+            <div className="border-t mt-4 pt-4 flex justify-between font-bold text-lg">
+              <span>Total</span>
+              <span>₹{totals.total}</span>
+            </div>
           </div>
-          <button className="bg-orange-500 text-white px-4 py-2 rounded w-full sm:w-auto">
-            UPDATE CART
-          </button>
+          <Link to="/checkout">
+            <button className="bg-orange-500 text-white px-4 py-2 w-full mt-4 rounded hover:bg-orange-600 transition-colors">
+              PROCEED TO CHECKOUT
+            </button>
+          </Link>
         </div>
       </div>
-
-      {/* Cart Total Section */}
-      <div className="flex flex-col sm:flex-row-reverse sm:justify-between bg-gray-100 min-h-screen p-4  sm:space-y-0 sm:space-x-6">
-  {/* Cart Total Section */}
-  <div className="p-4 bg-white rounded-lg shadow w-full sm:w-1/3">
-    <h2 className="text-lg font-bold bg-orange-500 text-white px-4 py-2 rounded-t">
-      Cart Total
-    </h2>
-    <div className="bg-gray-50 p-4">
-      <div className="flex justify-between py-2">
-        <span>Subtotal</span>
-        <span>₹{totals.subtotal}</span>
-      </div>
-      <div className="flex justify-between py-2">
-        <span>Tax (10%)</span>
-        <span>₹{totals.tax}</span>
-      </div>
-      <div className="flex justify-between py-2">
-        <span>Shipping</span>
-        <span>₹{totals.shipping}</span>
-      </div>
-      <div className="flex justify-between py-2 text-red-500">
-        <span>Discount</span>
-        <span>-₹{totals.discount}</span>
-      </div>
-      <div className="border-t mt-4 pt-4 flex justify-between font-bold text-lg">
-        <span>Total</span>
-        <span>₹{totals.total}</span>
-      </div>
-    </div>
-    <Link to='/checkout'><button className="bg-orange-500 text-white px-4 py-2 w-full mt-4 rounded">
-      PROCEED TO CHECKOUT
-    </button></Link>
-  </div>
-
-  {/* Shopping Cart Section */}
- 
-</div>
-
     </div>
   );
 };
