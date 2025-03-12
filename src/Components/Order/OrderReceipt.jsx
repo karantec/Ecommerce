@@ -1,75 +1,97 @@
-import React from 'react';
-
 function OrderReceipt() {
   return (
-    <div className="max-w-md w-full mx-auto bg-[#ca4837e6] text-white rounded-lg relative p-4 md:p-6 shadow-lg">
-      {/* Top Border */}
-      <div className="absolute -top-3 w-full h-2 bg-gray-300 rounded-t-lg"></div>
+    <div className="max-w-lg mx-auto p-4 md:p-6 bg-white">
+      {/* Ticket Wrapper */}
+      <div className="relative bg-[#5e2c0d] text-white overflow-hidden">
+        {/* Top bar */}
+        <div className="absolute top-0 left-0 right-0 h-4 bg-gray-200 rounded-t-full"></div>
 
-      {/* Order Summary Header */}
-      <h2 className="text-xl md:text-2xl font-semibold text-center mb-4">Order Summary</h2>
+        {/* Order Summary Title */}
+        <div className="pt-8 px-8">
+          <h2 className="text-5xl font-light mb-4">Order Summary</h2>
+          <div className="h-px w-full bg-white/30 mb-6"></div>
 
-      {/* Order Details */}
-      <div className="flex flex-col md:flex-row justify-between text-sm border-b border-gray-400 pb-4 mb-4">
-        <div className="mb-2 md:mb-0">
-          <span className="text-gray-300">Date</span>
-          <p className="font-medium">02 Oct 2023</p>
-        </div>
-        <div className="mb-2 md:mb-0">
-          <span className="text-gray-300">Order Number</span>
-          <p className="font-medium">0215-451512152</p>
-        </div>
-        <div>
-          <span className="text-gray-300">Payment Method</span>
-          <p className="font-medium">Cash</p>
-        </div>
-      </div>
-
-      {/* Item List */}
-      <div className="space-y-4 mb-4 text-sm">
-        <div className="flex justify-between">
-          <div>
-            <p>Size: 12</p>
-            <p>Qty: 01</p>
+          {/* Order Details */}
+          <div className="flex justify-between mb-6">
+            <div className="flex-1">
+              <p className="text-sm mb-2">Date</p>
+              <p className="font-medium">02 Oct 2023</p>
+            </div>
+            <div className="flex-1 border-x border-white/30 px-4">
+              <p className="text-sm mb-2">Order Number</p>
+              <p className="font-medium">0215-451512152</p>
+            </div>
+            <div className="flex-1 pl-4">
+              <p className="text-sm mb-2">Payment Method</p>
+              <p className="font-medium">Cash</p>
+            </div>
           </div>
-          <p>₹3,000</p>
         </div>
-        <div className="flex justify-between">
-          <div>
-            <p>Size: 12</p>
-            <p>Qty: 01</p>
+
+        {/* Ticket Perforation */}
+        <div className="relative py-4">
+          <div className="border-t border-dashed border-white/50"></div>
+          <div className="absolute -left-4 top-1/2 h-8 w-8 -translate-y-1/2 rounded-full bg-white"></div>
+          <div className="absolute -right-4 top-1/2 h-8 w-8 -translate-y-1/2 rounded-full bg-white"></div>
+        </div>
+
+        {/* Items List */}
+        <div className="px-8 py-4">
+          <div className="flex justify-between mb-8">
+            <div>
+              <p>Size : 12</p>
+              <p>Qty : 01</p>
+            </div>
+            <p className="font-medium">₹3,000</p>
           </div>
-          <p>₹3,000</p>
-        </div>
-      </div>
 
-      {/* Pricing Summary */}
-      <div className="text-sm border-t border-gray-400 pt-4 mb-4 space-y-2">
-        <div className="flex justify-between">
-          <p>Sub Total</p>
-          <p>₹3,000</p>
-        </div>
-        <div className="flex justify-between">
-          <p>Shipping</p>
-          <p>₹500</p>
-        </div>
-        <div className="flex justify-between">
-          <p>Tax</p>
-          <p>₹50</p>
-        </div>
-      </div>
+          <div className="flex justify-between mb-8">
+            <div>
+              <p>Size : 12</p>
+              <p>Qty : 01</p>
+            </div>
+            <p className="font-medium">₹3,000</p>
+          </div>
 
-      {/* Order Total */}
-      <div className="flex justify-between font-semibold text-lg">
-        <p>Order Total</p>
-        <p>₹3,550</p>
-      </div>
+          {/* Separator Line */}
+          <div className="h-px w-full bg-white/30 mb-4"></div>
 
-      {/* Bottom Border Design */}
-      <div className="absolute bottom-0 left-0 right-0 flex items-center justify-center h-4 bg-white">
-        <div className="h-full w-full bg-[#4b2e2a] flex items-center justify-between">
-          {Array.from({ length: 12 }).map((_, idx) => (
-            <div key={idx} className="w-4 h-4 bg-white rotate-45"></div>
+          {/* Pricing Summary */}
+          <div className="space-y-2 mb-4">
+            <div className="flex justify-between">
+              <p>Sub Total</p>
+              <p>₹3,000</p>
+            </div>
+            <div className="flex justify-between">
+              <p>Shipping</p>
+              <p>₹500</p>
+            </div>
+            <div className="flex justify-between">
+              <p>Tax</p>
+              <p>₹50</p>
+            </div>
+          </div>
+
+          {/* Separator Line */}
+          <div className="h-px w-full bg-white/30 my-4"></div>
+
+          {/* Order Total */}
+          <div className="flex justify-between mb-8">
+            <p className="text-lg font-medium">Order Total</p>
+            <p className="text-lg font-medium">₹3550</p>
+          </div>
+        </div>
+
+        {/* Triangle Pattern at Bottom */}
+        <div className="flex overflow-hidden">
+          {Array.from({ length: 20 }).map((_, i) => (
+            <div
+              key={i}
+              className="h-6 w-6 flex-shrink-0 bg-white"
+              style={{
+                clipPath: "polygon(50% 0%, 100% 100%, 0% 100%)",
+              }}
+            ></div>
           ))}
         </div>
       </div>
