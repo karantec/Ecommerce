@@ -2,7 +2,7 @@ function OrderReceipt() {
   return (
     <div className="max-w-lg mx-auto p-4 md:p-6 bg-white">
       {/* Ticket Wrapper */}
-      <div className="relative bg-[#5e2c0d] text-white overflow-hidden">
+      <div className="relative bg-[#5e2c0d] text-white overflow-hidden rounded-2xl">
         {/* Top bar */}
         <div className="absolute top-0 left-0 right-0 h-4 bg-gray-200 rounded-t-full"></div>
 
