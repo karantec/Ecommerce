@@ -12,7 +12,7 @@ import ProductSelling from "./ProductSelling"
 import FeaturesSection from "./Lower"
 import CategoryShowcase from "./Shop"
 import BlogSection from "./BlogSection"
-import WhyChooseUs from "../AboutPage/WhyChooseus"
+
 import TestimonialsComponent from "./Testimonial"
 import GoldPrices from "./GoldPrices"
 
@@ -23,7 +23,7 @@ const Home = () => {
       <HeroSection/>
       <FeaturesSection/>
       <GoldPrices/>
-      <WhyChooseUs/>
+     
      
       <JewelryGrid/>
       <CategoryShowcase/>
