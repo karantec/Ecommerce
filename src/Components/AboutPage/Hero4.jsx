@@ -44,19 +44,25 @@ const FeatureSection = () => {
             <div className="flex flex-wrap items-center space-x-4 lg:space-x-20 mt-5 mb-4">
               <div className="flex items-center space-x-2 mb-2 lg:mb-0">
                 <FaPhone className="text-black" size={20} />
-                <span className="text-black">{content.contactDetails.phone}</span>
+                <span className="text-black">
+                  {content.contactDetails.phone}
+                </span>
               </div>
               <div className="flex items-center space-x-2 mb-2 lg:mb-0">
                 <FaEnvelope className="text-black" size={20} />
-                <span className="text-black">{content.contactDetails.email}</span>
+                <span className="text-black">
+                  {content.contactDetails.email}
+                </span>
               </div>
             </div>
             <div className="flex items-center space-x-2 mt-5 mb-4">
               <FaMapMarkerAlt className="text-black" size={20} />
-              <span className="text-black">{content.contactDetails.address}</span>
+              <span className="text-black">
+                {content.contactDetails.address}
+              </span>
             </div>
             <div className="flex items-center mt-6 space-x-2">
-              <button className="text-white bg-orange-500 py-2 px-4 rounded hover:bg-orange-600 w-full lg:w-80">
+              <button className="text-white bg-orange-500 py-2 px-4  hover:bg-orange-600 w-full lg:w-80">
                 {content.buttonText}
               </button>
             </div>

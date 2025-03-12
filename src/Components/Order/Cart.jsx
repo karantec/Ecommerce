@@ -31,9 +31,9 @@ const ShoppingCart = () => {
 
   const calculateTotals = () => {
     const subtotal = getSubtotal();
-    const tax = Math.round(subtotal * 0.1); // 10% tax
+    const tax = Math.round(subtotal * 0.18); // GST 18%
     const shipping = subtotal > 5000 ? 0 : 50; // Free shipping over ₹5000
-    const discount = 0; // You can implement coupon logic here
+    const discount = 0; // Coupon logic can be added here
     const total = subtotal + tax + shipping - discount;
 
     return { subtotal, tax, shipping, discount, total };
@@ -43,11 +43,21 @@ const ShoppingCart = () => {
 
   if (cart.length === 0) {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center p-4">
-        <h2 className="text-2xl font-bold mb-4">Your cart is empty</h2>
+      <div className="min-h-full flex flex-col items-center justify-center p-6 text-center">
+        <img
+          src="https://cdn-icons-png.flaticon.com/512/2038/2038854.png"
+          alt="Empty Cart"
+          className="w-48 h-48 mb-6"
+        />
+        <h2 className="text-3xl font-bold mb-3 text-gray-800">
+          Your cart is empty!
+        </h2>
+        <p className="text-lg text-gray-600 mb-6">
+          Looks like you haven't added anything to your cart yet.
+        </p>
         <Link to="/productlist">
-          <button className="bg-orange-500 text-white px-6 py-2 rounded">
-            Continue Shopping
+          <button className="bg-orange-500 text-white px-8 py-3 text-lg font-semibold shadow-md hover:bg-orange-600 transition-all">
+            Start Shopping
           </button>
         </Link>
       </div>
@@ -55,100 +65,119 @@ const ShoppingCart = () => {
   }
 
   return (
-    <div className="bg-gray-100 min-h-screen px-4 py-6 space-y-6">
-      <div className="p-4 bg-white rounded-lg shadow w-full">
-        <h1 className="text-xl font-bold mb-4">Shopping Cart</h1>
+    <div className="bg-[#FAF7F2] min-h-screen px-4 sm:px-6 lg:px-10 py-10 space-y-10">
+      <div className="p-6 bg-white   shadow-md w-full">
+        <h1 className="text-2xl font-bold mb-6">Shopping Cart</h1>
+
+        {/* Cart Table */}
         <div className="overflow-x-auto">
           <table className="w-full text-left border-collapse">
-            <thead className="bg-orange-500 text-white">
+            <thead className="bg-[#784421] text-white">
               <tr>
-                <th className="py-2 px-4">Product</th>
-                <th className="py-2 px-4">Price</th>
-                <th className="py-2 px-4">Quantity</th>
-                <th className="py-2 px-4">Subtotal</th>
-                <th className="py-2 px-4"></th>
+                <th className="py-3 px-4">Product</th>
+                <th className="py-3 px-4">Price</th>
+                <th className="py-3 px-4">Quantity</th>
+                <th className="py-3 px-4">Subtotal</th>
               </tr>
             </thead>
             <tbody>
               {cart.map((item) => (
                 <tr key={item.id} className="border-b">
-                  <td className="py-2 px-4 flex items-center">
+                  <td className="py-3 px-4 flex items-center space-x-4">
                     <img
-                      src={item.images?.[0] || `https://via.placeholder.com/50`}
+                      src={item.images?.[0] || "https://via.placeholder.com/50"}
                       alt={item.name}
-                      className="w-12 h-12 object-cover rounded mr-2"
+                      className="w-16 h-16 object-cover"
                     />
-                    <span className="truncate">{item.name}</span>
+                    <span className="truncate font-semibold">{item.name}</span>
                   </td>
-                  <td className="py-2 px-4">₹{item.discountedPrice}</td>
-                  <td className="py-2 px-4">
-                    <div className="flex items-center">
+                  <td className="py-3 px-4">₹{item.discountedPrice}</td>
+                  <td className="py-3 px-4">
+                    <div className="flex items-center border w-fit">
                       <button
                         onClick={() => handleQuantityChange(item.id, -1)}
-                        className="px-2 py-1 border rounded-l bg-gray-200"
+                        className="px-3 py-1 bg-gray-200"
                         disabled={item.quantity === 1}
                       >
                         -
                       </button>
-                      <input
-                        type="text"
-                        value={item.quantity}
-                        readOnly
-                        className="w-12 text-center border-t border-b"
-                      />
+                      <span className="px-4 text-lg">{item.quantity}</span>
                       <button
                         onClick={() => handleQuantityChange(item.id, 1)}
-                        className="px-2 py-1 border rounded-r bg-gray-200"
+                        className="px-3 py-1 bg-gray-200"
                       >
                         +
                       </button>
                     </div>
                   </td>
-                  <td className="py-2 px-4">
+                  <td className="py-3 px-4">
                     ₹{item.discountedPrice * item.quantity}
-                  </td>
-                  <td className="py-2 px-4">
-                    <button
-                      onClick={() => handleRemoveItem(item.id)}
-                      className="text-red-500 hover:text-red-700"
-                    >
-                      Remove
-                    </button>
                   </td>
                 </tr>
               ))}
             </tbody>
           </table>
         </div>
+
+        {/* Coupon & Buttons */}
+        <div className="flex flex-col sm:flex-row justify-between items-center w-full mt-6 gap-4">
+          {/* Coupon Input & Apply Button */}
+          <div className="flex w-full sm:w-1/2 items-center">
+            <input
+              type="text"
+              placeholder="Coupon Code"
+              className="border border-gray-500 outline-none p-2 w-full"
+            />
+            <button className="bg-[#D87F30] text-white px-6 py-2 ml-2">
+              APPLY
+            </button>
+          </div>
+
+          {/* Continue Shopping Link */}
+          <Link
+            to="/productlist"
+            className="text-center text-black text-lg underline"
+          >
+            Continued Shopping
+          </Link>
+
+          {/* Update Cart Button */}
+          <button className="bg-[#D87F30] text-white px-6 py-2 w-full sm:w-auto">
+            UPDATE CART
+          </button>
+        </div>
       </div>
 
-      <div className="flex flex-col sm:flex-row-reverse sm:justify-between gap-6">
-        <div className="p-4 bg-white rounded-lg shadow w-full sm:w-1/3">
-          <h2 className="text-lg font-bold bg-orange-500 text-white px-4 py-2 rounded-t">
+      {/* Cart Total Section */}
+      <div className="flex flex-col lg:flex-row-reverse lg:justify-between gap-6">
+        <div className="p-6 bg-white   shadow-md w-full lg:w-1/3">
+          <h2 className="text-lg font-bold bg-[#784421] text-white px-4 py-3">
             Cart Total
           </h2>
-          <div className="bg-gray-50 p-4">
-            <div className="flex justify-between py-2">
+          <div className="bg-gray-50 p-6">
+            <div className="flex justify-between py-2 text-lg">
               <span>Subtotal</span>
               <span>₹{totals.subtotal}</span>
             </div>
-            <div className="flex justify-between py-2">
-              <span>Tax (10%)</span>
+            <div className="flex justify-between py-2 text-lg">
+              <span>GST (18%)</span>
               <span>₹{totals.tax}</span>
             </div>
-            <div className="flex justify-between py-2">
+            <div className="flex justify-between py-2 text-lg">
               <span>Shipping</span>
-              <span>
-                {totals.shipping === 0 ? "Free" : `₹${totals.shipping}`}
-              </span>
+              <span>₹{totals.shipping}</span>
             </div>
-            <div className="border-t mt-4 pt-4 flex justify-between font-bold text-lg">
+            <div className="flex justify-between py-2 text-lg text-green-600">
+              <span>Discount</span>
+              <span>₹{totals.discount}</span>
+            </div>
+            <div className="border-t mt-6 pt-4 flex justify-between font-bold text-xl">
               <span>Total</span>
               <span>₹{totals.total}</span>
             </div>
           </div>
           <Link to="/checkout">
-            <button className="bg-orange-500 text-white px-4 py-2 w-full mt-4 rounded hover:bg-orange-600 transition-colors">
+            <button className="bg-[#D87F30] text-white px-6 py-3 w-full mt-4   hover:bg-[#b56322] transition-colors">
               PROCEED TO CHECKOUT
             </button>
           </Link>

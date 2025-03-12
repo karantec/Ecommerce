@@ -1,43 +1,43 @@
-import React from 'react';
+import React from "react";
 
-function OrderConfirmation() {
+const OrderConfirmation = () => {
   return (
-    <div className="max-w-md w-full mx-auto p-4 md:p-6 bg-white ">
-      <h2 className="text-xl md:text-2xl font-semibold text-gray-800 mb-2 text-center md:text-left">
-        Thanks for your purchase
-      </h2>
-      <p className="text-gray-600 text-sm mb-6 text-center md:text-left">
-        Your order will be processed within 2 working days. We will notify you by email once your order has been shipped.
-      </p>
+    <div className="min-h-screen bg-[#FAF7F2] px-6 md:px-16 py-12 flex flex-col lg:flex-row justify-between items-start">
+      {/* Left Section - Billing Details */}
+      <div className="w-full lg:w-1/2 space-y-6">
+        <h2 className="text-3xl font-semibold text-gray-900">
+          Thanks for your purchase
+        </h2>
+        <p className="text-gray-700 text-lg">
+          Your order will be processed within 2 working days. We will notify you
+          by email once your order has been shipped.
+        </p>
 
-      <h3 className="text-lg md:text-xl font-semibold text-gray-800 mb-4 text-center md:text-left">
-        Billing Address
-      </h3>
-      
-      <div className="space-y-2 text-gray-700 text-sm">
-        <div className="flex flex-col md:flex-row">
-          <span className="w-24 font-medium">Name:</span>
-          <span>Jony</span>
+        <h3 className="text-2xl font-semibold text-gray-900">
+          Billing Address
+        </h3>
+        <div className="text-gray-800 space-y-2">
+          <p>
+            <span className="font-semibold">Name:</span> Jony
+          </p>
+          <p>
+            <span className="font-semibold">Address:</span> E-24, Uttam Nagar Om
+            Vihar, New Delhi - 110059
+          </p>
+          <p>
+            <span className="font-semibold">Phone:</span> 9999999999
+          </p>
+          <p>
+            <span className="font-semibold">Email:</span> itsmejony@gmail.com
+          </p>
         </div>
-        <div className="flex flex-col md:flex-row">
-          <span className="w-24 font-medium">Address:</span>
-          <span>E-24, Uttam Nagar Om Vihar<br />New Delhi - 110059</span>
-        </div>
-        <div className="flex flex-col md:flex-row">
-          <span className="w-24 font-medium">Phone:</span>
-          <span>9999999999</span>
-        </div>
-        <div className="flex flex-col md:flex-row">
-          <span className="w-24 font-medium">Email:</span>
-          <span>itsmejony@gmail.com</span>
-        </div>
+
+        <button className="bg-[#D87F30] text-white px-6 py-3 font-semibold rounded-md shadow-md hover:bg-[#b56322] transition-all">
+          Track Your Order
+        </button>
       </div>
-
-      <button className="mt-6 w-full bg-orange-500 text-white py-2 rounded hover:bg-orange-600 transition-colors">
-        Track Your Order
-      </button>
     </div>
   );
-}
+};
 
 export default OrderConfirmation;
