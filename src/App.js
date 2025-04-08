@@ -12,6 +12,8 @@ import NotFound from "./NotFound";
 import ProductPage from "./Components/Product/ProductList/ProductPage";
 import Signup from "./Components/SignUp/Signup";
 import Login from "./Components/SignUp/Login";
+import Profile from "./Components/Profile/Profile";
+import Wishlist from "./Components/Profile/Wishlist";
 import ProductDetailComplete from "./Components/Product/ProductList/ProductDetail";
 import { useState } from "react";
 import { CartProvider } from "./CartContext";
@@ -50,6 +52,8 @@ function App() {
           <Route path="/checkout" element={<SecureCheckout />} />
           <Route path="/confirm" element={<Final />} />
           <Route path="/productlist" element={<ProductPage />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/wishlist" element={<Wishlist />} />
           <Route
             path="/product/:productId"
             element={<ProductDetailComplete addToCart={addToCart} />}

@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { FaFacebookF, FaGoogle, FaLinkedinIn } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
+import { X } from "lucide-react";
+import { User } from "lucide-react";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -22,10 +24,10 @@ const Login = () => {
         body: JSON.stringify(formData),
       });
       const result = await response.json();
-      console.log(result);
+
       if (response.ok) {
         alert("Login successful!");
-        navigate("/"); // Redirect to /page
+        navigate("/");
       } else {
         alert(result.message || "Login failed.");
       }
@@ -36,55 +38,115 @@ const Login = () => {
   };
 
   return (
-    <section className="h-screen bg-gray-100">
-      <div className="container mx-auto flex h-full items-center justify-center px-4 md:px-8 lg:px-16">
-        <div className="w-full max-w-5xl flex flex-wrap shadow-lg bg-white rounded-lg overflow-hidden">
-          <div className="hidden w-full bg-blue-100 p-6 md:flex md:w-6/12 lg:p-8">
-            <img
-              src="https://manubhai.in/SocialMedia/post_artworks/DGBD00687.jpg"
-              alt="Sample illustration"
-              className="mx-auto h-auto max-w-full"
-            />
+    <section className="h-screen flex items-center justify-center bg-gray-100">
+      <div className="container mx-auto h-auto w-full max-w-5xl p-4 md:flex rounded-lg shadow-xl bg-white">
+        {/* Left Side - Image */}
+        <div className="w-full md:w-1/2 lg:rounded-tl-lg lg:rounded-bl-lg overflow-hidden flex items-center justify-center">
+          <img
+            src="https://manubhai.in/SocialMedia/post_artworks/DGBD00687.jpg"
+            alt="Jewellery"
+            className="h-full w-full object-cover"
+            style={{ borderRadius: "30px" }}
+          />
+        </div>
+
+        {/* Right Side - Form */}
+        <div className="w-full md:w-1/2 p-8">
+          {/* Header Icons */}
+          <div className="flex justify-between items-center mb-6">
+            <User className="text-gray-600" />
+            <X className="text-gray-600 cursor-pointer" />
           </div>
-          <div className="w-full p-6 sm:p-8 md:w-6/12 lg:p-10">
-            <h2 className="text-center text-2xl font-bold text-gray-700 sm:text-3xl">
-              Welcome Back
-            </h2>
-            <p className="mt-2 text-center text-gray-500">Sign in to access your account</p>
-            <form className="mt-6" onSubmit={handleSubmit}>
-              <div className="mb-4">
-                <label className="block text-sm font-medium text-gray-600">Email Address</label>
-                <input
-                  type="email"
-                  id="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  className="w-full rounded border-gray-300 px-4 py-2 text-sm"
-                  required
-                />
-              </div>
-              <div className="mb-6">
-                <label className="block text-sm font-medium text-gray-600">Password</label>
-                <input
-                  type="password"
-                  id="password"
-                  value={formData.password}
-                  onChange={handleChange}
-                  className="w-full rounded border-gray-300 px-4 py-2 text-sm"
-                  required
-                />
-              </div>
-              <button
-                type="submit"
-                className="w-full rounded bg-blue-600 px-4 py-2 text-white hover:bg-blue-700"
+
+          {/* Form */}
+          <form onSubmit={handleSubmit} className="space-y-6">
+            {/* Email */}
+            <div>
+              <label
+                htmlFor="email"
+                className="block text-sm font-medium text-gray-700"
               >
-                Sign In
+                Your e-mail
+              </label>
+              <input
+                type="email"
+                id="email"
+                value={formData.email}
+                onChange={handleChange}
+                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                placeholder="bestsite@gmail.com"
+              />
+            </div>
+
+            {/* Password */}
+            <div>
+              <label
+                htmlFor="password"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Password
+              </label>
+              <input
+                type="password"
+                id="password"
+                value={formData.password}
+                onChange={handleChange}
+                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                placeholder="********"
+              />
+            </div>
+
+            {/* Buttons */}
+            <div className="flex justify-between items-center gap-4">
+  <button
+    type="button"
+    className="px-6 py-2 rounded-full border-2 border-[#4C2A2A] text-[#4C2A2A] font-medium hover:bg-[#f5f5f5] transition-all"
+  >
+    Register
+  </button>
+  <button
+    type="submit"
+    className="px-6 py-2 rounded-full bg-[#4C2A2A] text-white font-medium hover:bg-[#3b1f1f] transition-all"
+  >
+    Log in
+  </button>
+</div>
+
+            {/* Recover Password */}
+            <div className="text-sm text-right mt-4">
+              <Link
+                to="/forgot-password"
+                className="text-gray-500 hover:text-gray-700"
+              >
+                Recover Password
+              </Link>
+            </div>
+
+            {/* Quick Login */}
+            <div className="pt-4 text-center">
+              <p className="text-sm text-gray-600">Quick Login:</p>
+              <div className="flex justify-center space-x-4 mt-2">
+                <FaFacebookF className="text-blue-700 cursor-pointer hover:scale-110" />
+                <FaGoogle className="text-red-600 cursor-pointer hover:scale-110" />
+                <FaLinkedinIn className="text-blue-500 cursor-pointer hover:scale-110" />
+              </div>
+            </div>
+
+            {/* Bottom Text */}
+            <div className="mt-8 text-center">
+              <p className="text-sm text-gray-500">
+                Click on <span className="text-red-500">♡</span> the icon next to the model name to save it to favorites.
+                Use favorite models as samples for creating items with your design.
+              </p>
+            </div>
+
+            {/* Continue Shopping Button */}
+            <div className="mt-4 text-center">
+              <button className="px-6 py-3 rounded-full border border-gray-300 text-gray-700 hover:bg-gray-100">
+                Continue Shopping
               </button>
-            </form>
-            <p className="mt-4 text-center text-sm text-gray-600">
-              Don't have an account? <Link to="/signup" className="text-blue-600 hover:underline">Register here</Link>
-            </p>
-          </div>
+            </div>
+          </form>
         </div>
       </div>
     </section>

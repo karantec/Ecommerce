@@ -87,7 +87,7 @@ const Navbar = () => {
 
         {/* Icons */}
         <div className="hidden lg:flex space-x-6 items-center">
-          <Link to="/login" className="text-gray-700">
+          <Link to="/profile" className="text-gray-700">
             <FaUser className="text-2xl" />
           </Link>
           <div className="relative">
