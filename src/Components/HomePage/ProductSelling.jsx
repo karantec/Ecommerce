@@ -111,13 +111,7 @@ const ProductSelling = () => {
             </div>
             <div className="mt-2 mb-4 text-center">
               <h3 className="text-sm font-medium uppercase text-[20px] font-Brown">{product.name}</h3>
-              <div className="flex items-center justify-center gap-2 mt-1">
-                <span className="text-lg font-garamond">₹{product.price.toLocaleString()}</span>
-                <span className="text-sm text-gray-500 line-through">
-                  ₹{product.originalPrice.toLocaleString()}
-                </span>
-                <span className="text-sm text-red-600">{product.discount}</span>
-              </div>
+              
             </div>
           </div>
         ))}

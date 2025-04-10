@@ -66,7 +66,7 @@ const JewelryShowcase = () => {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         {products.map((product) => (
-          <div key={product.id} className="relative group bg-gray-50">
+          <div key={product.id} className="relative group ">
             <div className="relative">
               {product.isNew && (
                 <span className="absolute top-2 left-2 bg-brown-600 text-white text-xs px-2 py-1 z-10">
@@ -113,13 +113,7 @@ const JewelryShowcase = () => {
             </div>
             <div className="mt-2 mb-4 text-center">
               <h3 className="text-sm font-medium">{product.name}</h3>
-              <div className="flex items-center justify-center gap-2 mt-1">
-                <span className="text-md font-bold">₹{product.price.toLocaleString()}</span>
-                <span className="text-sm text-gray-500 line-through">
-                  ₹{product.originalPrice.toLocaleString()}
-                </span>
-                <span className="text-sm text-red-600">{product.discount}</span>
-              </div>
+              
             </div>
           </div>
         ))}
