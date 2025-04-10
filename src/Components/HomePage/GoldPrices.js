@@ -47,7 +47,7 @@ const GoldPrices = () => {
     // Try to initialize socket if it doesn't exist
     try {
       console.log("Attempting to connect to WebSocket...");
-      socketRef.current = io('http://localhost:8000');
+      socketRef.current = io('https://jewelleryapp.onrender.com');
       
       socketRef.current.on('connect', () => {
         console.log("Socket connected successfully!");
