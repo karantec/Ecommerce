@@ -1,44 +1,65 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 
 const JewelryShowcase = () => {
-  const products = [
-    {
-      id: 1,
-      name: 'DIAMOND CRISTRIAL STUD',
-      image: 'Spicial/10.png',
-      price: 3000,
-      originalPrice: 5000,
-      discount: '50% OFF',
-      isNew: true
-    },
-    {
-      id: 2,
-      name: 'DIAMOND CRISTRIAL STUD',
-      image: 'Spicial/11.png',
-      price: 3000,
-      originalPrice: 5000,
-      discount: '50% OFF',
-      isNew: false
-    },
-    {
-      id: 3,
-      name: 'DIAMOND CRISTRIAL STUD',
-      image: 'Spicial/12.png',
-      price: 3000,
-      originalPrice: 5000,
-      discount: '50% OFF',
-      isNew: false
-    },
-    {
-      id: 4,
-      name: 'DIAMOND CRISTRIAL STUD',
-      image: 'Spicial/13.png',
-      price: 3000,
-      originalPrice: 5000,
-      discount: '50% OFF',
-      isNew: false
-    }
-  ];
+  // const products = [
+  //   {
+  //     id: 1,
+  //     name: 'DIAMOND CRISTRIAL STUD2',
+  //     image: 'Spicial/10.png',
+  //     price: 3000,
+  //     originalPrice: 5000,
+  //     discount: '50% OFF',
+  //     isNew: true
+  //   },
+  //   {
+  //     id: 2,
+  //     name: 'DIAMOND CRISTRIAL STUD',
+  //     image: 'Spicial/11.png',
+  //     price: 3000,
+  //     originalPrice: 5000,
+  //     discount: '50% OFF',
+  //     isNew: false
+  //   },
+  //   {
+  //     id: 3,
+  //     name: 'DIAMOND CRISTRIAL STUD',
+  //     image: 'Spicial/12.png',
+  //     price: 3000,
+  //     originalPrice: 5000,
+  //     discount: '50% OFF',
+  //     isNew: false
+  //   },
+  //   {
+  //     id: 4,
+  //     name: 'DIAMOND CRISTRIAL STUD',
+  //     image: 'Spicial/13.png',
+  //     price: 3000,
+  //     originalPrice: 5000,
+  //     discount: '50% OFF',
+  //     isNew: false
+  //   }
+  // ];
+
+        const [products, setProducts] = useState([]);
+      
+        const fetchCategories = async () => {
+          try {
+            const response = await fetch(
+              "https://jewelleryapp.onrender.com/gold"
+            );
+      
+            const data = await response.json();
+    
+            setProducts(data.products);
+          } catch (error) {
+            console.error(error);
+            setProducts([]);
+          }
+        };
+      
+        useEffect(() => {
+          fetchCategories();
+        }, []);
 
   return (
     <div className="container mx-auto px-2">
@@ -65,8 +86,9 @@ const JewelryShowcase = () => {
 
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-        {products.map((product) => (
-          <div key={product.id} className="relative group bg-gray-50">
+        {/* {products.map((product) => ( */}
+        {products.sort(() => 0.5 - Math.random()).slice(0, 6).map((product) => (
+          <div key={product._id} className="relative group bg-gray-50">
             <div className="relative">
               {product.isNew && (
                 <span className="absolute top-2 left-2 bg-brown-600 text-white text-xs px-2 py-1 z-10">
@@ -74,7 +96,7 @@ const JewelryShowcase = () => {
                 </span>
               )}
               <img
-                src={product.image}
+                src={product.images[0]}
                 alt={product.name}
                 className="w-full h-auto object-contain aspect-square"
               />
@@ -114,11 +136,11 @@ const JewelryShowcase = () => {
             <div className="mt-2 mb-4 text-center">
               <h3 className="text-sm font-medium">{product.name}</h3>
               <div className="flex items-center justify-center gap-2 mt-1">
-                <span className="text-md font-bold">₹{product.price.toLocaleString()}</span>
+                <span className="text-md font-bold">₹{product.priceDetails.goldPrice}</span>
                 <span className="text-sm text-gray-500 line-through">
-                  ₹{product.originalPrice.toLocaleString()}
+                  ₹{product.priceDetails.goldPrice}
                 </span>
-                <span className="text-sm text-red-600">{product.discount}</span>
+                <span className="text-sm text-red-600">{product?.discount || 0}</span>
               </div>
             </div>
           </div>
