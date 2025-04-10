@@ -51,7 +51,6 @@ const CategoryShowcase = () => {
 
       {/* Category Grid */}
       <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-4">
-        {console.log(categories)}
         {categories.map((category, index) => (
           <div
             key={index}
