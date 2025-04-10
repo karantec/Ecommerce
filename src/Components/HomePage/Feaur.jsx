@@ -113,7 +113,7 @@ const FeatureProducts = () => {
         <div className="lg:w-1/4">
           <div className="relative bg-black h-full">
             <img 
-              src="Feature/20.png" 
+              src="sla.jpg" 
               alt="New Collection"
               className="w-full h-full object-cover opacity-50"
             />
