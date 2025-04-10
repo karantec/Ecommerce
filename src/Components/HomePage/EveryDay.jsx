@@ -135,13 +135,13 @@ const JewelryShowcase = () => {
             </div>
             <div className="mt-2 mb-4 text-center">
               <h3 className="text-sm font-medium">{product.name}</h3>
-              <div className="flex items-center justify-center gap-2 mt-1">
+              {/* <div className="flex items-center justify-center gap-2 mt-1">
                 <span className="text-md font-bold">₹{product.priceDetails.goldPrice}</span>
                 <span className="text-sm text-gray-500 line-through">
                   ₹{product.priceDetails.goldPrice}
                 </span>
                 <span className="text-sm text-red-600">{product?.discount || 0}</span>
-              </div>
+              </div> */}
             </div>
           </div>
         ))}
