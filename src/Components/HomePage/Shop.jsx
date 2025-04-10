@@ -1,22 +1,26 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 const CategoryShowcase = () => {
-  const categories = [
-    { name: "Bracelets", image: "Category/6.png" },
-    {
-      name: "Chains",
-      image: "Category/1.png",
-      // labels: [
-      //   { text: "Gold", icon: "★", color: "text-yellow-500" },
-      //   { text: "Platinum", icon: "✦", color: "text-blue-400" },
-      // ],
-    },
-    { name: "Earrings", image: "Category/2.png" },
-    { name: "Neckwears", image: "Category/3.png" },
-    { name: "Pendants", image: "Category/4.png" },
-    { name: "Rings", image: "Category/5.png" },
-  ];
+  const [categories, setCategories] = useState([]);
+
+  const fetchCategories = async () => {
+    try {
+      const response = await fetch(
+        "https://jewelleryapp.onrender.com/category/getAllCategory"
+      );
+
+      const data = await response.json();
+      setCategories(data);
+    } catch (error) {
+      console.error(error);
+      setCategories([]);
+    }
+  };
+
+  useEffect(() => {
+    fetchCategories();
+  }, []);
 
   return (
     <div className="container mx-auto px-4 py-28">
@@ -25,7 +29,7 @@ const CategoryShowcase = () => {
         {/* Icon and Line */}
         <div className="flex items-center justify-center space-x-4 mb-2">
           <div className="w-16 h-px bg-gray-300"></div>
-           <img
+          <img
             src="Category/icon.png"
             alt="Diamond Icon"
             className="w-6 h-6 inline-block"
@@ -47,26 +51,28 @@ const CategoryShowcase = () => {
 
       {/* Category Grid */}
       <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-4">
+        {console.log(categories)}
         {categories.map((category, index) => (
           <div
             key={index}
             className="relative group cursor-pointer overflow-hidden"
           >
             {/* Image */}
-            
-             <img
+
+            <img
               src={category.image}
-              alt={category.name}
+              alt={category.title}
               className="w-full h-70 object-cover transition-transform duration-300 group-hover:scale-105"
             />
-          
 
             {/* Gradient Overlay */}
             <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/50" />
 
             {/* Category Name */}
             <div className="absolute bottom-4 left-4 text-white">
-              <Link to="/productlist"><h3 className="text-xl font-garamond">{category.name}</h3></Link>
+              <Link to="/productlist">
+                <h3 className="text-xl font-garamond">{category.title}</h3>
+              </Link>
             </div>
 
             {/* Labels (only for Chains) */}
