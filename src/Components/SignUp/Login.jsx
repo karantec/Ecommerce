@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { FaFacebookF, FaGoogle, FaLinkedinIn } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
-import { X } from "lucide-react";
-import { User } from "lucide-react";
+import { X, User } from "lucide-react";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -38,20 +37,19 @@ const Login = () => {
   };
 
   return (
-    <section className="h-screen flex items-center justify-center bg-gray-100">
-      <div className="container mx-auto h-auto w-full max-w-5xl p-4 md:flex rounded-lg shadow-xl bg-white">
+    <section className="min-h-screen  mt-5 flex items-center justify-center px-4">
+      <div className="w-full max-w-5xl bg-white rounded-xl shadow-lg overflow-hidden flex flex-col md:flex-row">
         {/* Left Side - Image */}
-        <div className="w-full md:w-1/2 lg:rounded-tl-lg lg:rounded-bl-lg overflow-hidden flex items-center justify-center">
+        <div className="md:w-1/2 w-full h-64 md:h-auto">
           <img
             src="https://manubhai.in/SocialMedia/post_artworks/DGBD00687.jpg"
             alt="Jewellery"
-            className="h-full w-full object-cover"
-            style={{ borderRadius: "30px" }}
+            className="w-full h-full object-cover md:rounded-l-xl"
           />
         </div>
 
         {/* Right Side - Form */}
-        <div className="w-full md:w-1/2 p-8">
+        <div className="md:w-1/2 w-full p-6 md:p-10">
           {/* Header Icons */}
           <div className="flex justify-between items-center mb-6">
             <User className="text-gray-600" />
@@ -62,10 +60,7 @@ const Login = () => {
           <form onSubmit={handleSubmit} className="space-y-6">
             {/* Email */}
             <div>
-              <label
-                htmlFor="email"
-                className="block text-sm font-medium text-gray-700"
-              >
+              <label htmlFor="email" className="block text-sm font-medium text-gray-700">
                 Your e-mail
               </label>
               <input
@@ -73,17 +68,14 @@ const Login = () => {
                 id="email"
                 value={formData.email}
                 onChange={handleChange}
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                 placeholder="bestsite@gmail.com"
               />
             </div>
 
             {/* Password */}
             <div>
-              <label
-                htmlFor="password"
-                className="block text-sm font-medium text-gray-700"
-              >
+              <label htmlFor="password" className="block text-sm font-medium text-gray-700">
                 Password
               </label>
               <input
@@ -91,26 +83,26 @@ const Login = () => {
                 id="password"
                 value={formData.password}
                 onChange={handleChange}
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                 placeholder="********"
               />
             </div>
 
             {/* Buttons */}
-            <div className="flex justify-between items-center gap-4">
-  <button
-    type="button"
-    className="px-6 py-2 rounded-full border-2 border-[#4C2A2A] text-[#4C2A2A] font-medium hover:bg-[#f5f5f5] transition-all"
-  >
-    Register
-  </button>
-  <button
-    type="submit"
-    className="px-6 py-2 rounded-full bg-[#4C2A2A] text-white font-medium hover:bg-[#3b1f1f] transition-all"
-  >
-    Log in
-  </button>
-</div>
+            <div className="flex flex-col sm:flex-row justify-between gap-4">
+              <button
+                type="button"
+                className="w-full sm:w-auto px-6 py-2 rounded-full border-2 border-[#4C2A2A] text-[#4C2A2A] font-medium hover:bg-[#f5f5f5] transition-all"
+              >
+                Register
+              </button>
+              <button
+                type="submit"
+                className="w-full sm:w-auto px-6 py-2 rounded-full bg-[#4C2A2A] text-white font-medium hover:bg-[#3b1f1f] transition-all"
+              >
+                Log in
+              </button>
+            </div>
 
             {/* Recover Password */}
             <div className="text-sm text-right mt-4">
@@ -142,7 +134,7 @@ const Login = () => {
 
             {/* Continue Shopping Button */}
             <div className="mt-4 text-center">
-              <button className="px-6 py-3 rounded-full border border-gray-300 text-gray-700 hover:bg-gray-100">
+              <button className="w-full sm:w-auto px-6 py-3 rounded-full border border-gray-300 text-gray-700 hover:bg-gray-100">
                 Continue Shopping
               </button>
             </div>

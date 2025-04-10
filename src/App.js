@@ -9,7 +9,7 @@ import ShoppingCart from "./Components/Order/Cart";
 import SecureCheckout from "./Components/Order/Summar";
 import Final from "./Components/Order/Final";
 import NotFound from "./NotFound";
-import ProductPage from "./Components/Product/ProductList/ProductPage";
+
 import Signup from "./Components/SignUp/Signup";
 import Login from "./Components/SignUp/Login";
 import Profile from "./Components/Profile/Profile";
@@ -20,6 +20,7 @@ import { CartProvider } from "./CartContext";
 import BlogDetail from "./Components/Blogs/BlogDetail";
 import OrderHistory from "./Components/Order/OrderHistory";
 import OrderDetails from "./Components/Order/OrderDetails";
+import ProductPage from "./Components/Product/ProductList/ProductPage";
 
 function App() {
   const [cart, setCart] = useState([]);
@@ -51,7 +52,7 @@ function App() {
           <Route path="/blog/:id" element={<BlogDetail />} />
           <Route path="/checkout" element={<SecureCheckout />} />
           <Route path="/confirm" element={<Final />} />
-          <Route path="/productlist" element={<ProductPage />} />
+          <Route path='/shop' element={<ProductPage/>}/>
           <Route path="/profile" element={<Profile />} />
           <Route path="/wishlist" element={<Wishlist />} />
           <Route

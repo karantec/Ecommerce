@@ -1,12 +1,11 @@
 import HeroComponent from "./HeroComponent"
-
-import ProductGrid from "./ProductGrid"
+import ViewProductsPage from "./ProductGrid"
 
 const ProductPage = () => {
   return (
     <div>
          <HeroComponent/>   
-         <ProductGrid/>
+         <ViewProductsPage/>
         
     </div>
   )

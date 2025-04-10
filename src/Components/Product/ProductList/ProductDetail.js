@@ -5,7 +5,7 @@ import { useCart } from "../../../CartContext";
 const ProductDetailComplete = () => {
   const { productId } = useParams();
   const navigate = useNavigate();
-  const { addToCart } = useCart(); // ✅ Using the context function
+  const { addToCart } = useCart();
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [selectedImage, setSelectedImage] = useState("");
@@ -20,7 +20,7 @@ const ProductDetailComplete = () => {
         }
         const data = await response.json();
         setProduct(data);
-        setSelectedImage(data.images?.[0] || "");
+        setSelectedImage(data.coverImage || data.images?.[0] || "");
       } catch (error) {
         console.error("Error fetching product details:", error);
       } finally {
@@ -31,79 +31,151 @@ const ProductDetailComplete = () => {
     fetchProduct();
   }, [productId]);
 
-  if (loading) return <p className="text-center text-gray-500">Loading product details...</p>;
-  if (!product) return <p className="text-center text-red-500">Product not found</p>;
-
   const handleAddToCart = () => {
-    const productToAdd = { ...product, quantity: 1 }; // Ensure quantity is set
+    const productToAdd = { ...product, quantity: 1 };
     addToCart(productToAdd);
     navigate("/cart");
   };
 
+  
+
+  if (loading) return (
+    <div className="flex justify-center items-center h-64">
+      <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-yellow-600"></div>
+    </div>
+  );
+  
+  if (!product) return (
+    <div className="text-center py-12">
+      <p className="text-xl text-red-500">Product not found</p>
+      <button 
+        onClick={() => navigate('/shop')}
+        className="mt-4 px-4 py-2 bg-yellow-500 text-white rounded hover:bg-yellow-600"
+      >
+        Return to Products
+      </button>
+    </div>
+  );
+
   return (
-    <div className="p-8 max-w-6xl mx-auto">
+    <div className="p-4 md:p-8 max-w-6xl mx-auto">
+      <button 
+        onClick={() => navigate('/shop')}
+        className="flex items-center text-gray-600 hover:text-yellow-600 mb-4"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+        </svg>
+        Back to Products
+      </button>
+
       <div className="flex flex-col md:flex-row gap-8">
         {/* Left: Product Images */}
-        <div className="w-full md:w-1/2 flex">
-          <div className="flex flex-col space-y-2">
-            {product.images?.map((img, index) => (
+        <div className="w-full md:w-1/2">
+          <div className="flex flex-col md:flex-row gap-4">
+            {/* Thumbnails */}
+            <div className="flex md:flex-col md:w-24 gap-2 order-2 md:order-1">
+              {product.images?.map((img, index) => (
+                <img
+                  key={index}
+                  src={img}
+                  alt={`${product.name || "Product"} thumbnail ${index + 1}`}
+                  className={`w-16 h-16 object-cover cursor-pointer border rounded ${
+                    selectedImage === img ? "border-orange-500" : "border-gray-300"
+                  }`}
+                  onClick={() => setSelectedImage(img)}
+                  onError={(e) => {
+                    e.target.src = "https://via.placeholder.com/150?text=No+Image";
+                  }}
+                />
+              ))}
+            </div>
+            
+            {/* Main Image */}
+            <div className="flex-1 order-1 md:order-2">
               <img
-                key={index}
-                src={img}
+                src={selectedImage || "https://via.placeholder.com/400x400?text=No+Image"}
                 alt={product.name || "Product"}
-                className={`w-16 h-16 object-cover cursor-pointer border ${
-                  selectedImage === img ? "border-orange-500" : "border-gray-300"
-                }`}
-                onClick={() => setSelectedImage(img)}
+                className="w-full h-[400px] object-cover rounded-lg"
+                onError={(e) => {
+                  e.target.src = "https://via.placeholder.com/400x400?text=No+Image";
+                }}
               />
-            ))}
-          </div>
-          <div className="flex-1">
-            <img
-              src={selectedImage}
-              alt={product.name || "Product"}
-              className="w-full h-[400px] object-cover rounded-lg"
-            />
+            </div>
           </div>
         </div>
 
         {/* Right: Product Info */}
         <div className="w-full md:w-1/2 space-y-4">
           <h1 className="text-3xl font-bold">{product.name || "Unnamed Product"}</h1>
-          <p className="text-xl text-gray-600">
-            ₹{product.discountedPrice}{" "}
-            <span className="line-through text-gray-400">₹{product.price}</span>{" "}
-            <span className="text-orange-500 font-semibold">
-              ({(((product.price - product.discountedPrice) / product.price) * 100).toFixed(0)}% OFF)
-            </span>
-          </p>
+          
+          {/* Price Information */}
+          <div className="text-xl text-gray-600">
+            {product.priceDetails?.totalPrice ? (
+              <>
+                <span className="text-2xl font-bold text-black">
+                  ₹{parseFloat(product.priceDetails.totalPrice).toLocaleString('en-IN')}
+                </span>
+                {product.priceDetails.pricePerGram && (
+                  <span className="text-sm text-orange-500 ml-2">
+                    (₹{product.priceDetails.pricePerGram}/g)
+                  </span>
+                )}
+              </>
+            ) : (
+              <>
+                <span className="text-2xl font-bold text-black">
+                  ₹{parseFloat(product.discountedPrice || product.price || 0).toLocaleString('en-IN')}
+                </span>
+                {product.price && product.discountedPrice && product.price > product.discountedPrice && (
+                  <>
+                    <span className="line-through text-gray-400 ml-2">₹{parseFloat(product.price).toLocaleString('en-IN')}</span>
+                    <span className="text-orange-500 font-semibold ml-2">
+                      ({(((product.price - product.discountedPrice) / product.price) * 100).toFixed(0)}% OFF)
+                    </span>
+                  </>
+                )}
+              </>
+            )}
+          </div>
+          
+          {/* Description */}
           <p className="text-gray-700">{product.description || "No description available."}</p>
 
           {/* Product Specifications */}
-          <div className="border rounded-lg p-4">
+          <div className="border rounded-lg p-4 bg-gray-50">
             <h2 className="text-lg font-semibold mb-2">Product Details</h2>
-            <div className="grid grid-cols-2 gap-2 text-sm">
+            <div className="grid grid-cols-2 gap-3 text-sm">
               <p><span className="font-semibold">Category:</span> {product.category || "N/A"}</p>
-              <p><span className="font-semibold">Weight:</span> {product.weight ? `${product.weight}g` : "N/A"}</p>
-              <p><span className="font-semibold">Karat:</span> {product.karat || "N/A"}</p>
+              <p><span className="font-semibold">Weight:</span> {product.netWeight ? `${product.netWeight}g` : "N/A"}</p>
+              <p><span className="font-semibold">Karat:</span> {product.carat || "N/A"}</p>
+              <p><span className="font-semibold">Metal:</span> {product.metal || "Gold"}</p>
               <p>
                 <span className="font-semibold">Availability:</span>{" "}
-                {product.isAvailable ? "In Stock" : "Out of Stock"}
+                <span className={product.isAvailable !== false ? "text-green-600" : "text-red-600"}>
+                  {product.isAvailable !== false ? "In Stock" : "Out of Stock"}
+                </span>
               </p>
+              {product.dimensions && (
+                <p><span className="font-semibold">Dimensions:</span> {product.dimensions}</p>
+              )}
             </div>
           </div>
 
           {/* Action Buttons */}
-          <div className="flex space-x-4">
+          <div className="flex flex-col sm:flex-row gap-3 pt-2">
             <button
               onClick={handleAddToCart}
-              className="w-1/2 bg-orange-500 text-white py-2 rounded-lg hover:bg-orange-600"
+              className="flex-1 bg-yellow-500 text-white px-4 py-3 rounded-lg hover:bg-yellow-600 transition-colors flex justify-center items-center"
+              disabled={product.isAvailable === false}
             >
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+              </svg>
               Add to Cart
             </button>
-            <button className="w-1/2 border border-orange-500 text-orange-500 py-2 rounded-lg hover:bg-orange-500 hover:text-white">
-              Buy Now
-            </button>
+          
+           
           </div>
         </div>
       </div>
