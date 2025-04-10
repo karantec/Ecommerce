@@ -27,7 +27,7 @@ const Login = () => {
 
       if (response.ok) {
         alert("Login successful!");
-        navigate("/");
+        navigate("/profile");
       } else {
         alert(result.message || "Login failed.");
       }
