@@ -13,7 +13,7 @@ const GoldPrices = () => {
   const fetchPrices = useCallback(async () => {
     try {
       console.log("Fetching prices via API...");
-      const response = await axios.get('http://localhost:8000/today-price/PriceRouting');
+      const response = await axios.get('https://jewelleryapp.onrender.com/today-price/PriceRouting');
       
       // Transform the data into a map for easier access
       const priceMap = {};

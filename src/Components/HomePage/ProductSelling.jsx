@@ -1,44 +1,66 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 
 const ProductSelling = () => {
-  const products = [
-    {
-      id: 1,
-      name: 'DIAMOND CRISTRIAL STUD',
-      image: 'Spicial/10.png',
-      price: 3000,
-      originalPrice: 5000,
-      discount: '50% OFF',
-      isNew: true
-    },
-    {
-      id: 2,
-      name: 'DIAMOND CRISTRIAL STUD',
-      image: 'Spicial/11.png',
-      price: 3000,
-      originalPrice: 5000,
-      discount: '50% OFF',
-      isNew: false
-    },
-    {
-      id: 3,
-      name: 'DIAMOND CRISTRIAL STUD',
-      image: 'Spicial/12.png',
-      price: 3000,
-      originalPrice: 5000,
-      discount: '50% OFF',
-      isNew: false
-    },
-    {
-      id: 4,
-      name: 'DIAMOND CRISTRIAL STUD',
-      image: 'Spicial/13.png',
-      price: 3000,
-      originalPrice: 5000,
-      discount: '50% OFF',
-      isNew: false
-    }
-  ];
+  // const products = [
+  //   {
+  //     id: 1,
+  //     name: 'DIAMOND CRISTRIAL STUD',
+  //     image: 'Spicial/10.png',
+  //     price: 3000,
+  //     originalPrice: 5000,
+  //     discount: '50% OFF',
+  //     isNew: true
+  //   },
+  //   {
+  //     id: 2,
+  //     name: 'DIAMOND CRISTRIAL STUD',
+  //     image: 'Spicial/11.png',
+  //     price: 3000,
+  //     originalPrice: 5000,
+  //     discount: '50% OFF',
+  //     isNew: false
+  //   },
+  //   {
+  //     id: 3,
+  //     name: 'DIAMOND CRISTRIAL STUD',
+  //     image: 'Spicial/12.png',
+  //     price: 3000,
+  //     originalPrice: 5000,
+  //     discount: '50% OFF',
+  //     isNew: false
+  //   },
+  //   {
+  //     id: 4,
+  //     name: 'DIAMOND CRISTRIAL STUD',
+  //     image: 'Spicial/13.png',
+  //     price: 3000,
+  //     originalPrice: 5000,
+  //     discount: '50% OFF',
+  //     isNew: false
+  //   }
+  // ];
+
+    const [products, setProducts] = useState([]);
+  
+    const fetchCategories = async () => {
+      try {
+        const response = await fetch(
+          "https://jewelleryapp.onrender.com/gold"
+        );
+  
+        const data = await response.json();
+
+        setProducts(data.products);
+      } catch (error) {
+        console.error(error);
+        setProducts([]);
+      }
+    };
+  
+    useEffect(() => {
+      fetchCategories();
+    }, []);
+  
 
   return (
     <div className="container mx-auto px-2 py-20">
@@ -63,7 +85,7 @@ const ProductSelling = () => {
 
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-        {products.map((product) => (
+        {products.slice(0, 10).map((product) => (
           <div key={product.id} className="relative group bg-gray-50">
             <div className="relative">
               {product.isNew && (
@@ -72,7 +94,7 @@ const ProductSelling = () => {
                 </span>
               )}
               <img
-                src={product.image}
+                src={product.images[0]}
                 alt={product.name}
                 className="w-full h-auto object-contain aspect-square"
               />
@@ -111,7 +133,13 @@ const ProductSelling = () => {
             </div>
             <div className="mt-2 mb-4 text-center">
               <h3 className="text-sm font-medium uppercase text-[20px] font-Brown">{product.name}</h3>
-              
+              {/* <div className="flex items-center justify-center gap-2 mt-1">
+                <span className="text-lg font-garamond">₹{product.priceDetails.goldPrice}</span>
+                <span className="text-sm text-gray-500 line-through">
+                  ₹{product.priceDetails.goldPrice}
+                </span>
+                <span className="text-sm text-red-600">{product.discount}</span>
+              </div> */}
             </div>
           </div>
         ))}

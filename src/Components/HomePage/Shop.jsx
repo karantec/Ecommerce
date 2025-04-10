@@ -10,18 +10,21 @@ import "swiper/css/pagination";
 const CategoryShowcase = () => {
   const [categories, setCategories] = useState([]);
 
-  useEffect(() => {
-    const fetchCategories = async () => {
-      try {
-        const response = await axios.get(
-          "https://jewelleryapp.onrender.com/category/getAllCategory"
-        );
-        setCategories(response.data);
-      } catch (error) {
-        console.error("Error fetching categories:", error);
-      }
-    };
+  const fetchCategories = async () => {
+    try {
+      const response = await fetch(
+        "https://jewelleryapp.onrender.com/category/getAllCategory"
+      );
 
+      const data = await response.json();
+      setCategories(data);
+    } catch (error) {
+      console.error(error);
+      setCategories([]);
+    }
+  };
+
+  useEffect(() => {
     fetchCategories();
   }, []);
 
