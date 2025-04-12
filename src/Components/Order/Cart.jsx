@@ -93,7 +93,7 @@ const ShoppingCart = () => {
                   </td>
                   <td className="py-3 px-4">₹{item.discountedPrice}</td>
                   <td className="py-3 px-4">
-                    <div className="flex items-center border w-fit">
+                    <div className="flex items-center border w-fit rounded-full overflow-hidden">
                       <button
                         onClick={() => handleQuantityChange(item.id, -1)}
                         className="px-3 py-1 bg-gray-200"

@@ -75,7 +75,7 @@ const JewelryShowcase = () => {
         {/* Title */}
         <h2 className="text-4xl font-garamond bg-gradient-to-r from-[#E66E06] to-[#6E3000] text-transparent bg-clip-text">
         Everyday Elegance
-</h2>
+        </h2>
 
 
         {/* Subtitle */}
