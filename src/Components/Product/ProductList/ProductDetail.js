@@ -108,8 +108,8 @@ const ProductDetailComplete = () => {
       </button>
       <div className="p-4 md:p-8 flex flex-col md:flex-row gap-8 ">
         {/* Left: Product Images */}
-        <div className="w-full md:w-1/2">
-          <div className="flex flex-col md:flex-row gap-4">
+        <div className="w-full md:w-1/2 ">
+          <div className="flex flex-col md:flex-row gap-4   ">
             {/* Thumbnails */}
             <div className="flex md:flex-col md:w-24 gap-2 order-2 md:order-1">
               {product.images?.map((img, index) => (
@@ -117,7 +117,7 @@ const ProductDetailComplete = () => {
                   key={index}
                   src={img}
                   alt={`${product.name || "Product"} thumbnail ${index + 1}`}
-                  className={`w-16 h-16 object-cover cursor-pointer border rounded ${
+                  className={`w-[4rem] h-[4rem] object-cover cursor-pointer border rounded ${
                     selectedImage === img
                       ? "border-orange-500"
                       : "border-gray-300"
@@ -132,14 +132,14 @@ const ProductDetailComplete = () => {
             </div>
 
             {/* Main Image */}
-            <div className="flex-1 order-1 md:order-2">
+            <div className="flex-1 order-1 md:order-2   py-5">
               <img
                 src={
                   selectedImage ||
                   "https://via.placeholder.com/400x400?text=No+Image"
                 }
                 alt={product.name || "Product"}
-                className="w-full h-[400px] object-cover rounded-lg"
+                className="w-[350px] h-[350px] object-cover "
                 onError={(e) => {
                   e.target.src =
                     "https://via.placeholder.com/400x400?text=No+Image";
@@ -273,9 +273,9 @@ const ProductDetailComplete = () => {
           </div>
         </div>
       </div>
-      <div className="border-t-2 p-4 md:p-8  border-black w-full">
-        <div>
-          <h2 className="font-normal text-2xl">Description</h2>
+      <div className="border-t-2 p-4 md:p-8  border-gray-200 w-full   ">
+        <div className="px-20 ">
+          <h2 className="font-normal text-2xl ">Description</h2>
           <p className="font-light text-lg ">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
@@ -290,8 +290,8 @@ const ProductDetailComplete = () => {
             pariatur.
           </p>
         </div>
-        <table className="border-2 border-grey-100   m-5">
-          <tbody>
+        <table className="border-2 border-grey100 mx-20 m-5 ">
+          <tbody className="">
             {descriptionData.map((item) => {
               return (
                 <tr className="border-2 w-[550px]">
@@ -307,7 +307,7 @@ const ProductDetailComplete = () => {
           </tbody>
         </table>
       </div>
-      <div className="border-t-2 p-4 md:p-8  border-black  w-full ">
+      <div className="border-t-2 p-4 md:p-8  border-gray-200  w-full ">
         {/* Icon and Line */}
         <div className="flex items-center justify-center space-x-4 mb-2">
           <div className="w-16 h-px bg-gray-300"></div>

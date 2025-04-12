@@ -7,14 +7,14 @@ function About() {
       {/* Hero Section */}
       <section className="flex flex-col md:flex-row items-center justify-between px-4 md:px-16 py-12 bg-white">
         <div className="w-full md:w-1/2 text-center md:text-left mb-8 md:mb-0">
-          <h1 className="text-3xl md:text-4xl font-serif tracking-wider text-[#2D1A22] mb-4">
+          <h1 className="text-5xl md:text-4xl font-serif tracking-wider text-[#2D1A22] mb-4">
             TIMELESS AND ORIGINAL RETRO JEWELRY PIECES
           </h1>
-          <p className="text-sm md:text-base tracking-wider text-[#2D1A22] mb-6">
+          <p className="text-3xl md:text-base tracking-wider text-[#2D1A22] mb-6">
             EXCLUSIVELY AT THE GEMS OF KOLKATA
           </p>
           <Link to="collections" className="">
-            <button className="bg-[#2D1A22] text-white text-sm md:text-sm px-6 py-2 rounded-full hover:bg-opacity-90 transition-all mb-10">
+            <button className="bg-[#2D1A22] text-white text-sm md:text-sm px-6 py-2 rounded-full hover:bg-opacity-90 transition-all mb-10 text-base">
               EXPLORE OUR EXQUISITE RANGE
             </button>
           </Link>
@@ -55,8 +55,8 @@ function About() {
               />
             </svg>
           </div>
-          <h3 className="text-sm font-bold mb-2">Global Shipping Solutions</h3>
-          <p className="text-xs text-gray-600">
+          <h3 className="text-xl font-bold mb-2">Global Shipping Solutions</h3>
+          <p className="text-lg text-gray-600">
             Nationwide shipping across India
           </p>
         </div>
@@ -78,8 +78,8 @@ function About() {
               />
             </svg>
           </div>
-          <h3 className="text-sm font-bold mb-2">Returns Accepted</h3>
-          <p className="text-xs text-gray-600">
+          <h3 className="text-xl font-bold mb-2">Returns Accepted</h3>
+          <p className="text-lg text-gray-600">
             Quick refunds with hassle-free return options
           </p>
         </div>
@@ -101,8 +101,8 @@ function About() {
               />
             </svg>
           </div>
-          <h3 className="text-sm font-bold mb-2">Safety and Security</h3>
-          <p className="text-xs text-gray-600">
+          <h3 className="text-xl font-bold mb-2">Safety and Security</h3>
+          <p className="text-lg text-gray-600">
             Reliable Services for Heavy Commercial and Industrial Needs
           </p>
         </div>
@@ -111,10 +111,10 @@ function About() {
       {/* Welcome Section */}
       <section className="flex flex-col md:flex-row items-center justify-between px-4 md:px-16 py-12 bg-white">
         <div className="w-full md:w-1/2 mb-8 md:mb-0">
-          <h2 className="text-2xl md:text-3xl font-serif text-[#2D1A22] mb-4">
+          <h2 className="text-5xl md:text-3xl font-serif text-[#2D1A22] mb-4">
             Welcome to SLA
           </h2>
-          <p className="text-sm text-gray-700 mb-4">
+          <p className="text-lg text-gray-700 mb-4">
             This is not just a jewellery store; it's a haven for those who
             appreciate the artistry of exquisite jewellery. We take great pride
             in offering a collection that harmoniously blends timeless
@@ -123,11 +123,11 @@ function About() {
             sophistication, authenticity, and outstanding quality. Dive into our
             newest collections and see how we can illuminate your life.
           </p>
-          <p className="text-sm text-gray-700 mb-6">
+          <p className="text-lg text-gray-700 mb-6">
             Discover our newest collections and see how we can bring a sparkle
             to your life.
           </p>
-          <button className="bg-[#2D1A22] text-white text-xs px-6 py-2 rounded-full hover:bg-opacity-90 transition-all">
+          <button className="bg-[#2D1A22] text-white text-base px-6 py-2 rounded-full hover:bg-opacity-90 transition-all">
             LEARN MORE ABOUT OUR EXQUISITE OFFERINGS
           </button>
         </div>
@@ -153,19 +153,19 @@ function About() {
         <div className="relative z-10 flex flex-col md:flex-row items-center">
           <div className="w-full md:w-1/2 mb-8 md:mb-0">
             <div className="bg-white p-8 border border-gray-200 mb-6 max-w-md mx-auto md:mx-0">
-              <h3 className="text-lg font-serif text-center mb-4">
+              <h3 className="text-4xl font-serif text-center mb-4">
                 OUR VISION
               </h3>
-              <p className="text-sm text-center">
+              <p className="text-lg text-center">
                 To create a stunning collection of jewelry that harmoniously
                 combines classic craftsmanship with modern design.
               </p>
             </div>
             <div className="bg-white p-8 border border-gray-200 max-w-md mx-auto md:mx-0">
-              <h3 className="text-lg font-serif text-center mb-4">
+              <h3 className="text-4xl font-serif text-center mb-4">
                 OUR MISSION
               </h3>
-              <p className="text-sm text-center">
+              <p className="text-lg text-center">
                 To become your go-to jewelry companion for every special moment.
               </p>
             </div>
@@ -203,16 +203,16 @@ function About() {
           </div>
 
           <div className="w-full md:w-2/3 md:pl-12">
-            <h2 className="text-2xl md:text-3xl font-serif text-[#2D1A22] mb-6">
+            <h2 className="text-5xl md:text-3xl font-serif text-[#2D1A22] mb-6">
               The Journey of Our Jewellery Brand
             </h2>
-            <p className="text-sm text-gray-700 mb-4">
+            <p className="text-base text-gray-700 mb-4">
               SLA's inception is a recent one, our brand has emerged as a symbol
               of excellence in the jewelry industry. We create timeless pieces,
               and innovation is only a way to enhance the timeless beauty of
               craftsmanship.
             </p>
-            <p className="text-sm text-gray-700 mb-4">
+            <p className="text-base text-gray-700 mb-4">
               As our reputation flourished, so did our dedication to meeting a
               variety of tastes and preferences. Over the years, we broadened
               our collection to feature an extensive array of jewelry, embracing
@@ -244,10 +244,10 @@ function About() {
                 />
               </svg>
             </div>
-            <h3 className="text-sm font-bold uppercase mb-2">
+            <h3 className="text-lg font-bold uppercase mb-2">
               Quality Control
             </h3>
-            <p className="text-xs text-gray-600">
+            <p className="text-base text-gray-600">
               Each piece of jewelry is subjected to rigorous quality
               examinations to ensure the highest standards of artistry and
               longevity.
@@ -271,10 +271,10 @@ function About() {
                 />
               </svg>
             </div>
-            <h3 className="text-sm font-bold uppercase mb-2">
+            <h3 className="text-lg font-bold uppercase mb-2">
               Convenient Delivery
             </h3>
-            <p className="text-xs text-gray-600">
+            <p className="text-base text-gray-600">
               Our delivery system operates smoothly across the country, ensuring
               your jewelry reaches you safely.
             </p>
@@ -297,10 +297,10 @@ function About() {
                 />
               </svg>
             </div>
-            <h3 className="text-sm font-bold uppercase mb-2">
+            <h3 className="text-lg font-bold uppercase mb-2">
               High Quality Materials
             </h3>
-            <p className="text-xs text-gray-600">
+            <p className="text-base text-gray-600">
               Made with the finest materials, our jewelry pieces are designed to
               last and maintain their beauty.
             </p>
@@ -325,8 +325,8 @@ function About() {
                 />
               </svg>
             </div>
-            <h3 className="text-sm font-bold uppercase mb-2">Dedicated Team</h3>
-            <p className="text-xs text-gray-600">
+            <h3 className="text-lg font-bold uppercase mb-2">Dedicated Team</h3>
+            <p className="text-base text-gray-600">
               We foster working collaborations. Our team is dedicated to
               delivering your requirements promptly & professionally.
             </p>
@@ -349,10 +349,10 @@ function About() {
                 />
               </svg>
             </div>
-            <h3 className="text-sm font-bold uppercase mb-2">
+            <h3 className="text-lg font-bold uppercase mb-2">
               Warranty & Quality
             </h3>
-            <p className="text-xs text-gray-600">
+            <p className="text-base text-gray-600">
               Our extensive quality checks can at every step of your jewelry's
               development, guaranteeing an excellent outcome.
             </p>
@@ -375,10 +375,10 @@ function About() {
                 />
               </svg>
             </div>
-            <h3 className="text-sm font-bold uppercase mb-2">
+            <h3 className="text-lg font-bold uppercase mb-2">
               Exceptional Designs
             </h3>
-            <p className="text-xs text-gray-600">
+            <p className="text-base text-gray-600">
               Explore a collection that blends timeless craftsmanship with
               contemporary designs, ensuring each piece is uniquely exceptional.
             </p>
