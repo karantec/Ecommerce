@@ -1,102 +1,59 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 
 const ProductSelling = () => {
-  // const products = [
-  //   {
-  //     id: 1,
-  //     name: 'DIAMOND CRISTRIAL STUD',
-  //     image: 'Spicial/10.png',
-  //     price: 3000,
-  //     originalPrice: 5000,
-  //     discount: '50% OFF',
-  //     isNew: true
-  //   },
-  //   {
-  //     id: 2,
-  //     name: 'DIAMOND CRISTRIAL STUD',
-  //     image: 'Spicial/11.png',
-  //     price: 3000,
-  //     originalPrice: 5000,
-  //     discount: '50% OFF',
-  //     isNew: false
-  //   },
-  //   {
-  //     id: 3,
-  //     name: 'DIAMOND CRISTRIAL STUD',
-  //     image: 'Spicial/12.png',
-  //     price: 3000,
-  //     originalPrice: 5000,
-  //     discount: '50% OFF',
-  //     isNew: false
-  //   },
-  //   {
-  //     id: 4,
-  //     name: 'DIAMOND CRISTRIAL STUD',
-  //     image: 'Spicial/13.png',
-  //     price: 3000,
-  //     originalPrice: 5000,
-  //     discount: '50% OFF',
-  //     isNew: false
-  //   }
-  // ];
+  const [products, setProducts] = useState([]);
 
-    const [products, setProducts] = useState([]);
-  
-    const fetchCategories = async () => {
-      try {
-        const response = await fetch(
-          "https://jewelleryapp.onrender.com/gold"
-        );
-  
-        const data = await response.json();
+  const fetchCategories = async () => {
+    try {
+      const response = await fetch("https://jewelleryapp.onrender.com/gold");
+      const data = await response.json();
+      setProducts(data.products);
+    } catch (error) {
+      console.error(error);
+      setProducts([]);
+    }
+  };
 
-        setProducts(data.products);
-      } catch (error) {
-        console.error(error);
-        setProducts([]);
-      }
-    };
-  
-    useEffect(() => {
-      fetchCategories();
-    }, []);
-  
+  useEffect(() => {
+    fetchCategories();
+  }, []);
 
   return (
     <div className="container mx-auto px-2 py-20">
-       <div className="text-center mb-8">
+      <div className="text-center mb-8">
         {/* Icon and Line */}
         <div className="flex items-center justify-center space-x-4 mb-2">
-          <div className="w-16 h-px bg-gray-300"></div>
-          <img src="Category/icon.png" alt="Diamond Icon" className="w-6 h-6 inline-block" />
-
+          <div className="w-16 h-px"></div>
+          <img
+            src="Category/icon.png"
+            alt="Diamond Icon"
+            className="w-6 h-6 inline-block"
+          />
           <div className="w-16 h-px bg-gray-300"></div>
         </div>
 
         {/* Title */}
         <h2 className="text-4xl font-garamond bg-gradient-to-r from-[#E66E06] to-[#6E3000] text-transparent bg-clip-text">
-        Best Selling Products
-</h2>
-
-
-        {/* Subtitle */}
-        
+          Best Selling Products
+        </h2>
       </div>
 
-
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {products.slice(0, 10).map((product) => (
-          <div key={product.id} className="relative group bg-gray-50">
+          <div
+            key={product.id}
+            className="relative group bg-white rounded-2xl shadow-md overflow-hidden transition-transform hover:scale-105"
+          >
             <div className="relative">
               {product.isNew && (
-                <span className="absolute top-2 left-2 bg-brown-600 text-white text-xs px-2 py-1 z-10">
+                <span className="absolute top-2 left-2 bg-brown-600 text-white text-xs px-2 py-1 rounded-full z-10">
                   NEW
                 </span>
               )}
               <img
                 src={product.images[0]}
                 alt={product.name}
-                className="w-full h-auto object-contain aspect-square"
+                className="w-full h-auto object-contain aspect-square p-4"
               />
               <div className="absolute top-2 right-2 space-y-2 opacity-0 group-hover:opacity-100 transition-opacity">
                 <button className="bg-white p-2 rounded-full shadow-md hover:bg-gray-100">
@@ -131,15 +88,10 @@ const ProductSelling = () => {
                 </button>
               </div>
             </div>
-            <div className="mt-2 mb-4 text-center">
-              <h3 className="text-sm font-medium uppercase text-[20px] font-Brown">{product.name}</h3>
-              {/* <div className="flex items-center justify-center gap-2 mt-1">
-                <span className="text-lg font-garamond">₹{product.priceDetails.goldPrice}</span>
-                <span className="text-sm text-gray-500 line-through">
-                  ₹{product.priceDetails.goldPrice}
-                </span>
-                <span className="text-sm text-red-600">{product.discount}</span>
-              </div> */}
+            <div className="mt-2 mb-4 text-center px-4">
+              <h3 className="text-[20px] font-medium uppercase font-Brown">
+                {product.name}
+              </h3>
             </div>
           </div>
         ))}
