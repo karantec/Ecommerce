@@ -84,11 +84,10 @@ const ProductDetailComplete = () => {
     );
 
   return (
-    // <div className="p-4 md:p-8 max-w-6xl mx-auto "> Changed This
-    <div className=" width-full ">
+    <div className="w-full">
       <button
         onClick={() => navigate("/shop")}
-        className=" p-4 md:p-8 flex items-center text-gray-600 hover:text-yellow-600 mb-4"
+        className="p-4 flex items-center text-gray-600 hover:text-yellow-600 mb-2"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -106,18 +105,35 @@ const ProductDetailComplete = () => {
         </svg>
         Back to Products
       </button>
-      <div className="p-4 md:p-8 flex flex-col md:flex-row gap-8 ">
+      
+      <div className="px-4 md:px-8 flex flex-col lg:flex-row gap-6">
         {/* Left: Product Images */}
-        <div className="w-full md:w-1/2 ">
-          <div className="flex flex-col md:flex-row gap-4   ">
+        <div className="w-full lg:w-1/2">
+          <div className="flex flex-col md:flex-row gap-4">
+            {/* Main Image */}
+            <div className="flex-1 order-1 md:order-2 flex justify-center mb-4 md:mb-0">
+              <img
+                src={
+                  selectedImage ||
+                  "https://via.placeholder.com/400x400?text=No+Image"
+                }
+                alt={product.name || "Product"}
+                className="w-full max-w-sm h-auto object-contain"
+                onError={(e) => {
+                  e.target.src =
+                    "https://via.placeholder.com/400x400?text=No+Image";
+                }}
+              />
+            </div>
+
             {/* Thumbnails */}
-            <div className="flex md:flex-col md:w-24 gap-2 order-2 md:order-1">
+            <div className="flex md:flex-col flex-wrap justify-center gap-2 order-2 md:order-1 md:w-20">
               {product.images?.map((img, index) => (
                 <img
                   key={index}
                   src={img}
                   alt={`${product.name || "Product"} thumbnail ${index + 1}`}
-                  className={`w-[4rem] h-[4rem] object-cover cursor-pointer border rounded ${
+                  className={`w-16 h-16 object-cover cursor-pointer border rounded ${
                     selectedImage === img
                       ? "border-orange-500"
                       : "border-gray-300"
@@ -130,36 +146,20 @@ const ProductDetailComplete = () => {
                 />
               ))}
             </div>
-
-            {/* Main Image */}
-            <div className="flex-1 order-1 md:order-2   py-5">
-              <img
-                src={
-                  selectedImage ||
-                  "https://via.placeholder.com/400x400?text=No+Image"
-                }
-                alt={product.name || "Product"}
-                className="w-[350px] h-[350px] object-cover "
-                onError={(e) => {
-                  e.target.src =
-                    "https://via.placeholder.com/400x400?text=No+Image";
-                }}
-              />
-            </div>
           </div>
         </div>
 
         {/* Right: Product Info */}
-        <div className="w-full md:w-1/2 space-y-4">
-          <h1 className="text-3xl font-bold">
+        <div className="w-full lg:w-1/2 space-y-4">
+          <h1 className="text-2xl md:text-3xl font-bold">
             {product.name || "Unnamed Product"}
           </h1>
 
           {/* Price Information */}
-          <div className="text-xl text-gray-600">
+          <div className="text-lg md:text-xl text-gray-600">
             {product.priceDetails?.totalPrice ? (
               <>
-                <span className="text-2xl font-bold text-black">
+                <span className="text-xl md:text-2xl font-bold text-black">
                   ₹
                   {parseFloat(product.priceDetails.totalPrice).toLocaleString(
                     "en-IN"
@@ -173,7 +173,7 @@ const ProductDetailComplete = () => {
               </>
             ) : (
               <>
-                <span className="text-2xl font-bold text-black">
+                <span className="text-xl md:text-2xl font-bold text-black">
                   ₹
                   {parseFloat(
                     product.discountedPrice || product.price || 0
@@ -209,7 +209,7 @@ const ProductDetailComplete = () => {
           {/* Product Specifications */}
           <div className="border rounded-lg p-4 bg-gray-50">
             <h2 className="text-lg font-semibold mb-2">Product Details</h2>
-            <div className="grid grid-cols-2 gap-3 text-sm">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
               <p>
                 <span className="font-semibold">Category:</span>{" "}
                 {product.category || "N/A"}
@@ -273,10 +273,12 @@ const ProductDetailComplete = () => {
           </div>
         </div>
       </div>
-      <div className="border-t-2 p-4 md:p-8  border-gray-200 w-full   ">
-        <div className="px-20 ">
-          <h2 className="font-normal text-2xl ">Description</h2>
-          <p className="font-light text-lg ">
+
+      {/* Description Section */}
+      <div className="border-t-2 border-gray-200 w-full mt-8">
+        <div className="px-4 md:px-8 lg:px-16 py-6">
+          <h2 className="font-normal text-xl md:text-2xl mb-4">Description</h2>
+          <p className="font-light text-base md:text-lg">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
             ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
@@ -290,40 +292,45 @@ const ProductDetailComplete = () => {
             pariatur.
           </p>
         </div>
-        <table className="border-2 border-grey100 mx-20 m-5 ">
-          <tbody className="">
-            {descriptionData.map((item) => {
-              return (
-                <tr className="border-2 w-[550px]">
-                  <td className="border-2 bg-gray-200 w-[200px] py-1 px-1 font-normal text-base">
+        
+        <div className="overflow-x-auto px-4 md:px-8 lg:px-16 pb-8">
+          <table className="border-2 border-gray-200 w-full md:w-4/5 mx-auto my-4">
+            <tbody>
+              {descriptionData.map((item, index) => (
+                <tr key={index} className="border-2">
+                  <td className="border-2 bg-gray-200 w-1/3 py-2 px-3 font-normal text-sm md:text-base">
                     {item.name}
                   </td>
-                  <td className="border-2 w-[350px] px-1 font-normal text-base">
+                  <td className="border-2 w-2/3 px-3 py-2 font-normal text-sm md:text-base">
                     {item.value}
                   </td>
                 </tr>
-              );
-            })}
-          </tbody>
-        </table>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
-      <div className="border-t-2 p-4 md:p-8  border-gray-200  w-full ">
+
+      {/* Related Products Section */}
+      <div className="border-t-2 border-gray-200 w-full py-8">
         {/* Icon and Line */}
-        <div className="flex items-center justify-center space-x-4 mb-2">
-          <div className="w-16 h-px bg-gray-300"></div>
+        <div className="flex items-center justify-center space-x-4 mb-4">
+          <div className="w-12 md:w-16 h-px bg-gray-300"></div>
           <img
             src="/Category/icon.png"
             alt="Diamond Icon"
-            className="w-6 h-6 inline-block"
+            className="w-5 h-5 md:w-6 md:h-6 inline-block"
           />
-          <div className="w-16 h-px bg-gray-300"></div>
+          <div className="w-12 md:w-16 h-px bg-gray-300"></div>
         </div>
 
         {/* Title */}
-        <h2 className="text-4xl font-garamond bg-gradient-to-r from-[#E66E06] to-[#6E3000] text-transparent bg-clip-text justify-center items-center flex">
+        <h2 className="text-3xl md:text-4xl font-garamond bg-gradient-to-r from-[#E66E06] to-[#6E3000] text-transparent bg-clip-text text-center mb-6">
           Related Products
         </h2>
-        <div className="flex flex-row my-5  ">
+        
+        {/* Related Products Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 px-4 md:px-8">
           <ProductCard />
           <ProductCard />
           <ProductCard />

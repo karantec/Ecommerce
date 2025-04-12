@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { userStore } from "../../store/userStore";
 
 const Signup = () => {
   const navigate = useNavigate();
+  const setUserData = userStore((state) => state.setUserData);
 
   const [formData, setFormData] = useState({
     name: "",
@@ -63,6 +65,7 @@ const Signup = () => {
       if (response.ok) {
         alert("Signup successful!");
         navigate("/login");
+        setUserData(response.data);
       } else {
         alert(result.message || "Signup failed.");
       }

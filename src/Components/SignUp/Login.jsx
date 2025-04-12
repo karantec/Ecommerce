@@ -2,10 +2,12 @@ import React, { useState } from "react";
 import { FaFacebookF, FaGoogle, FaLinkedinIn } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import { X, User } from "lucide-react";
+import { userStore } from "../../store/userStore";
 
 const Login = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({ email: "", password: "" });
+  const setUserToken = userStore((state) => state.setUserData);
 
   const handleChange = (e) => {
     const { id, value } = e.target;
@@ -27,6 +29,7 @@ const Login = () => {
       if (response.ok) {
         alert("Login successful!");
         navigate("/profile");
+        setUserToken(result.data.token);
       } else {
         alert(result.message || "Login failed.");
       }
