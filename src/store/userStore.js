@@ -24,7 +24,18 @@ export const userStore = create((set) => ({
   createdAt: null,
   token: null,
 
-  setUserData: (userData) => set({ ...userData }),
+  setUserToken: (token) => {
+    set({ token: token });
+  },
+
+  setClearToken: () => {
+    set({ token: null });
+  },
+
+  setUserData: (userObj) => {
+    // console.log("userObj " + userObj);
+    set({ ...userObj });
+  },
 }));
 
 // {

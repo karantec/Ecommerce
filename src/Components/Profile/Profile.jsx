@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { FaUser } from "react-icons/fa";
 import { IoClose } from "react-icons/io5";
+import { userStore } from "../../store/userStore";
 
 const Profile = () => {
   const [profileData, setProfileData] = useState({
@@ -26,7 +27,6 @@ const Profile = () => {
   return (
     <section className="min-h-screen bg-white flex items-center justify-center p-6">
       <div className="max-w-6xl w-full bg-white shadow-xl border rounded-xl flex flex-col md:flex-row overflow-hidden">
-
         {/* Left image */}
         <div className="md:w-1/2 hidden md:block">
           <img
@@ -38,7 +38,6 @@ const Profile = () => {
 
         {/* Profile form */}
         <div className="w-full md:w-1/2 p-6 sm:p-10 relative">
-
           {/* Top icons */}
           <div className="flex justify-between items-center mb-4">
             <FaUser className="text-xl text-gray-500" />
@@ -59,7 +58,6 @@ const Profile = () => {
           </div>
 
           <form onSubmit={handleSave} className="space-y-4">
-
             <div>
               <label className="text-sm font-medium text-gray-700">Name</label>
               <input
@@ -72,7 +70,9 @@ const Profile = () => {
             </div>
 
             <div>
-              <label className="text-sm font-medium text-gray-700">Email account</label>
+              <label className="text-sm font-medium text-gray-700">
+                Email account
+              </label>
               <input
                 type="email"
                 name="email"
@@ -83,7 +83,9 @@ const Profile = () => {
             </div>
 
             <div>
-              <label className="text-sm font-medium text-gray-700">Mobile number</label>
+              <label className="text-sm font-medium text-gray-700">
+                Mobile number
+              </label>
               <input
                 type="text"
                 name="phone"
@@ -95,7 +97,9 @@ const Profile = () => {
             </div>
 
             <div>
-              <label className="text-sm font-medium text-gray-700">Location</label>
+              <label className="text-sm font-medium text-gray-700">
+                Location
+              </label>
               <input
                 type="text"
                 name="location"

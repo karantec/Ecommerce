@@ -1,0 +1,62 @@
+const BASE_URL = "http://localhost:8000";
+
+// Product to add - {userId, productId, quantity}
+export const addToCart = async (productToAdd) => {
+  try {
+    const response = await fetch(`${BASE_URL}/add-to-cart`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(productToAdd),
+    });
+    if (!response.ok) throw new Error("Failed to add to the cart ");
+    return await response.json();
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
+
+// Userid bhejna hai!
+export const getCart = async (userId) => {
+  try {
+    const res = await fetch(`${BASE_URL}/cart/cart/${userId}`);
+    const data = await res.json();
+
+    // console.log("data " + data?.cartId);
+    if (!res.ok) {
+      throw new Error("Failed to get items from cart");
+    }
+
+    return data;
+  } catch (e) {
+    console.log(e.message);
+  }
+};
+
+// userId, ProductId
+export const removeSingleItem = async (userObj) => {
+  try {
+    const response = await fetch(`${BASE_URL}/remove-single-item`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(userObj),
+    });
+    if (!response.ok) throw new Error("Failed to remove single item cart ");
+    return await response.json();
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
+
+export const removeFromCart = async (userObj) => {
+  try {
+    const response = await fetch(`${BASE_URL}/remove-from-cart`, {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(userObj),
+    });
+    if (!response.ok) throw new Error("Failed to remove from the cart ");
+    return await response.json();
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};

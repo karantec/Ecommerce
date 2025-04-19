@@ -1,12 +1,31 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useCart } from "../../CartContext";
+import { useState } from "react";
+import CartNotFound from "./CartNotFound";
+
+export const displayCart = (cartItems) => {
+  console.log("cart items");
+  for (let i of cartItems) {
+    console.log(i);
+  }
+};
 
 const ShoppingCart = () => {
-  const { cart, setCart } = useCart();
+  const {
+    cart,
+    setCart,
+    getCart,
+    addToCart,
+    removeFromCart,
+    removeSingleItem,
+  } = useCart();
+  const [cartItems, setCartItems] = useState(cart);
+
+  // console.log("cart from context " + displayCart(cartItems));
 
   const handleQuantityChange = (id, increment) => {
-    setCart((prevCart) =>
+    setCartItems((prevCart) =>
       prevCart.map((item) =>
         item.id === id
           ? {
@@ -18,13 +37,24 @@ const ShoppingCart = () => {
     );
   };
 
+  // Get Cart from backend
+  const userObj = "67f80c0de5b37dc266e25746";
+  const getCartHandler = (userObj) => {
+    getCart(userObj);
+  };
+
+  // Add to Cart
+  const updateCartHandler = (cart) => {
+    // addToCart(prodObj);
+  };
+
   const handleRemoveItem = (id) => {
     setCart(cart.filter((item) => item.id !== id));
   };
 
   const getSubtotal = () => {
     return cart.reduce(
-      (total, item) => total + item.discountedPrice * item.quantity,
+      (total, item) => total + item.discountPrice * item.quantity,
       0
     );
   };
@@ -41,27 +71,12 @@ const ShoppingCart = () => {
 
   const totals = calculateTotals();
 
+  // useEffect(() => {
+  //   getCartHandler(userObj);
+  // }, []);
+
   if (cart.length === 0) {
-    return (
-      <div className="min-h-full flex flex-col items-center justify-center p-6 text-center">
-        <img
-          src="https://cdn-icons-png.flaticon.com/512/2038/2038854.png"
-          alt="Empty Cart"
-          className="w-48 h-48 mb-6"
-        />
-        <h2 className="text-3xl font-bold mb-3 text-gray-800">
-          Your cart is empty!
-        </h2>
-        <p className="text-lg text-gray-600 mb-6">
-          Looks like you haven't added anything to your cart yet.
-        </p>
-        <Link to="/productlist">
-          <button className="bg-orange-500 text-white px-8 py-3 text-lg font-semibold shadow-md hover:bg-orange-600 transition-all">
-            Start Shopping
-          </button>
-        </Link>
-      </div>
-    );
+    return <CartNotFound />;
   }
 
   return (
@@ -81,7 +96,7 @@ const ShoppingCart = () => {
               </tr>
             </thead>
             <tbody>
-              {cart.map((item) => (
+              {cartItems?.map((item) => (
                 <tr key={item.id} className="border-b">
                   <td className="py-3 px-4 flex items-center space-x-4">
                     <img
@@ -91,7 +106,7 @@ const ShoppingCart = () => {
                     />
                     <span className="truncate font-semibold">{item.name}</span>
                   </td>
-                  <td className="py-3 px-4">₹{item.discountedPrice}</td>
+                  <td className="py-3 px-4">₹{item.discountPrice}</td>
                   <td className="py-3 px-4">
                     <div className="flex items-center border w-fit rounded-full overflow-hidden">
                       <button
@@ -111,7 +126,7 @@ const ShoppingCart = () => {
                     </div>
                   </td>
                   <td className="py-3 px-4">
-                    ₹{item.discountedPrice * item.quantity}
+                    ₹{item.discountPrice * item.quantity}
                   </td>
                 </tr>
               ))}
@@ -142,7 +157,10 @@ const ShoppingCart = () => {
           </Link>
 
           {/* Update Cart Button */}
-          <button className="bg-[#D87F30] text-white px-6 py-2 w-full sm:w-auto">
+          <button
+            onClick={updateCartHandler}
+            className="bg-[#D87F30] text-white px-6 py-2 w-full sm:w-auto"
+          >
             UPDATE CART
           </button>
         </div>

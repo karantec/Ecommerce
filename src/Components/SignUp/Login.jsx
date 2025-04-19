@@ -7,34 +7,44 @@ import { userStore } from "../../store/userStore";
 const Login = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({ email: "", password: "" });
-  const setUserToken = userStore((state) => state.setUserData);
+  const setUserToken = userStore((state) => state.setUserToken);
 
   const handleChange = (e) => {
     const { id, value } = e.target;
     setFormData((prev) => ({ ...prev, [id]: value }));
   };
 
+  const navigateSignUpHandler = () => {
+    navigate("/signup");
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("https://jewelleryapp.onrender.com/auth/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
+      const response = await fetch(
+        "https://jewelleryapp.onrender.com/auth/login",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        }
+      );
       const result = await response.json();
+
+      // console.log("result " + result?.token);
 
       if (response.ok) {
         alert("Login successful!");
         navigate("/profile");
-        setUserToken(result.data.token);
+        setUserToken(result.token);
       } else {
-        alert(result.message || "Login failed.");
+        alert("User Needs to register first");
+        // alert(result.message || "Login failed.");
       }
     } catch (error) {
-      console.error("Error:", error);
+      console.error("Error:", error.message);
       alert("An error occurred. Please try again.");
     }
   };
@@ -63,7 +73,10 @@ const Login = () => {
           <form onSubmit={handleSubmit} className="space-y-6">
             {/* Email */}
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+              <label
+                htmlFor="email"
+                className="block text-sm font-medium text-gray-700"
+              >
                 Your e-mail
               </label>
               <input
@@ -78,7 +91,10 @@ const Login = () => {
 
             {/* Password */}
             <div>
-              <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+              <label
+                htmlFor="password"
+                className="block text-sm font-medium text-gray-700"
+              >
                 Password
               </label>
               <input
@@ -94,6 +110,7 @@ const Login = () => {
             {/* Buttons */}
             <div className="flex flex-col sm:flex-row justify-between gap-4">
               <button
+                onClick={() => navigateSignUpHandler()}
                 type="button"
                 className="w-full sm:w-auto px-6 py-2 rounded-full border-2 border-[#4C2A2A] text-[#4C2A2A] font-medium hover:bg-[#f5f5f5] transition-all"
               >
@@ -130,8 +147,9 @@ const Login = () => {
             {/* Bottom Text */}
             <div className="mt-8 text-center">
               <p className="text-sm text-gray-500">
-                Click on <span className="text-red-500">♡</span> the icon next to the model name to save it to favorites.
-                Use favorite models as samples for creating items with your design.
+                Click on <span className="text-red-500">♡</span> the icon next
+                to the model name to save it to favorites. Use favorite models
+                as samples for creating items with your design.
               </p>
             </div>
 

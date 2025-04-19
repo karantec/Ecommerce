@@ -1,11 +1,11 @@
-import React, { useEffect, useState, useCallback, useRef } from 'react';
-import axios from 'axios';
-import { io } from 'socket.io-client';
+import React, { useEffect, useState, useCallback, useRef, memo } from "react";
+import axios from "axios";
+import { io } from "socket.io-client";
 
 const GoldPrices = () => {
   const [prices, setPrices] = useState({});
   const [lastUpdate, setLastUpdate] = useState(new Date());
-  const [connectionStatus, setConnectionStatus] = useState('connecting');
+  const [connectionStatus, setConnectionStatus] = useState("connecting");
   const socketRef = useRef(null);
   const pricesRef = useRef({}); // Reference to keep track of prices between renders
 
@@ -13,14 +13,16 @@ const GoldPrices = () => {
   const fetchPrices = useCallback(async () => {
     try {
       console.log("Fetching prices via API...");
-      const response = await axios.get('https://jewelleryapp.onrender.com/today-price/PriceRouting');
-      
+      const response = await axios.get(
+        "https://jewelleryapp.onrender.com/today-price/PriceRouting"
+      );
+
       // Transform the data into a map for easier access
       const priceMap = {};
-      response.data.forEach(item => {
+      response.data.forEach((item) => {
         priceMap[item.Carat] = item.TodayPricePerGram;
       });
-      
+
       // Update state only if prices have changed
       if (JSON.stringify(priceMap) !== JSON.stringify(pricesRef.current)) {
         console.log("Prices updated:", priceMap);
@@ -30,7 +32,7 @@ const GoldPrices = () => {
       }
     } catch (error) {
       console.error("Error fetching prices:", error);
-      setConnectionStatus('error');
+      setConnectionStatus("error");
     }
   }, []);
 
@@ -38,7 +40,7 @@ const GoldPrices = () => {
   useEffect(() => {
     // Initial fetch
     fetchPrices();
-    
+
     // Setup regular polling as a fallback mechanism
     const pollInterval = setInterval(() => {
       fetchPrices();
@@ -47,32 +49,32 @@ const GoldPrices = () => {
     // Try to initialize socket if it doesn't exist
     try {
       console.log("Attempting to connect to WebSocket...");
-      socketRef.current = io('https://jewelleryapp.onrender.com');
-      
-      socketRef.current.on('connect', () => {
+      socketRef.current = io("https://jewelleryapp.onrender.com");
+
+      socketRef.current.on("connect", () => {
         console.log("Socket connected successfully!");
-        setConnectionStatus('connected');
+        setConnectionStatus("connected");
       });
-      
-      socketRef.current.on('disconnect', () => {
+
+      socketRef.current.on("disconnect", () => {
         console.log("Socket disconnected");
-        setConnectionStatus('disconnected');
+        setConnectionStatus("disconnected");
       });
-      
-      socketRef.current.on('connect_error', (error) => {
+
+      socketRef.current.on("connect_error", (error) => {
         console.error("Socket connection error:", error);
-        setConnectionStatus('error');
+        setConnectionStatus("error");
       });
-      
-      socketRef.current.on('priceUpdate', (data) => {
+
+      socketRef.current.on("priceUpdate", (data) => {
         console.log("Received price update from socket:", data);
-        
+
         // Transform the data
         const priceMap = {};
-        data.forEach(item => {
+        data.forEach((item) => {
           priceMap[item.Carat] = item.TodayPricePerGram;
         });
-        
+
         // Update state only if prices have changed
         if (JSON.stringify(priceMap) !== JSON.stringify(pricesRef.current)) {
           console.log("Updating prices from socket event");
@@ -83,7 +85,7 @@ const GoldPrices = () => {
       });
     } catch (error) {
       console.error("Failed to initialize socket:", error);
-      setConnectionStatus('error');
+      setConnectionStatus("error");
     }
 
     // Cleanup on component unmount
@@ -95,16 +97,18 @@ const GoldPrices = () => {
         socketRef.current = null;
       }
     };
-  }, [fetchPrices]);
+  }, []);
+  // }, [fetchPrices]);
 
   // Add visual price change indicator
   const getPriceChangeIndicator = (carat) => {
     if (!prices[carat]) return null;
-    
+
     return (
       <div className="mt-2 text-xs">
         <span className="text-black font-bold ">
-        Latest Gold Price & The Last Cart which is written 1K is the silver rate for today
+          Latest Gold Price & The Last Cart which is written 1K is the silver
+          rate for today
         </span>
       </div>
     );
@@ -112,10 +116,13 @@ const GoldPrices = () => {
 
   const renderPriceCard = (carat, purity) => {
     const pricePerGram = prices[carat];
-    const pricePer10g = pricePerGram ? (pricePerGram).toLocaleString() : '...';
-    
+    const pricePer10g = pricePerGram ? pricePerGram.toLocaleString() : "...";
+
     return (
-      <div key={carat} className="flex-1 text-center w-full sm:w-auto bg-white p-6 rounded-lg shadow-md transition-all duration-300 hover:shadow-lg border border-orange-100">
+      <div
+        key={carat}
+        className="flex-1 text-center w-full sm:w-auto bg-white p-6 rounded-lg shadow-md transition-all duration-300 hover:shadow-lg border border-orange-100"
+      >
         <h2 className="text-base sm:text-lg mb-3 sm:mb-4 font-brown font-semibold">
           {carat} Price
         </h2>
@@ -129,22 +136,28 @@ const GoldPrices = () => {
   };
 
   const caratData = [
-    { carat: '24K', purity: '99.9%' },
-    { carat: '22K', purity: '91.7%' },
-    { carat: '18K', purity: '75%' },
-    { carat: '1K', purity: '4.1%' },
+    { carat: "24K", purity: "99.9%" },
+    { carat: "22K", purity: "91.7%" },
+    { carat: "18K", purity: "75%" },
+    { carat: "1K", purity: "4.1%" },
   ];
 
   // Function to render connection status indicator
   const renderConnectionStatus = () => {
     switch (connectionStatus) {
-      case 'connected':
-        return <span className="ml-2 inline-block w-2 h-2 bg-green-500 rounded-full"></span>;
-      case 'connecting':
-        return <span className="ml-2 inline-block w-2 h-2 bg-yellow-500 rounded-full"></span>;
-      case 'disconnected':
-      case 'error':
-        return <span className="ml-2 inline-block w-2 h-2 bg-red-500 rounded-full"></span>;
+      case "connected":
+        return (
+          <span className="ml-2 inline-block w-2 h-2 bg-green-500 rounded-full"></span>
+        );
+      case "connecting":
+        return (
+          <span className="ml-2 inline-block w-2 h-2 bg-yellow-500 rounded-full"></span>
+        );
+      case "disconnected":
+      case "error":
+        return (
+          <span className="ml-2 inline-block w-2 h-2 bg-red-500 rounded-full"></span>
+        );
       default:
         return null;
     }
@@ -161,14 +174,14 @@ const GoldPrices = () => {
       <p className="text-center text-xs text-gray-500 mb-8 sm:mb-12">
         Last updated: {lastUpdate.toLocaleTimeString()}
         {renderConnectionStatus()}
-        <button 
-          onClick={() => fetchPrices()} 
+        <button
+          onClick={() => fetchPrices()}
           className="ml-3 text-blue-500 hover:text-blue-700 underline"
         >
           Refresh Now
         </button>
       </p>
-      
+
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
         {caratData.map((item) => (
           <React.Fragment key={item.carat}>
@@ -180,4 +193,4 @@ const GoldPrices = () => {
   );
 };
 
-export default GoldPrices;
+export default memo(GoldPrices);

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { memo, useEffect, useState } from "react";
 import {
   FaUser,
   FaHeart,
@@ -9,11 +9,24 @@ import {
 } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { useCart } from "../../CartContext";
+import { userStore } from "../../store/userStore";
+import NavLink from "./NavLink";
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeLink, setActiveLink] = useState("");
   const { cartCount } = useCart();
+  const clearToken = userStore((state) => state.setClearToken);
+  const token = userStore((state) => state.token);
+
+  const handleLinkClick = (linkName) => {
+    if (linkName === "Logout") {
+      handleLogout();
+    }
+
+    setActiveLink(linkName);
+    setIsMobileMenuOpen(false);
+  };
 
   const navLinks = [
     { name: "What's New", path: "/" },
@@ -22,14 +35,19 @@ const Navbar = () => {
     { name: "Cart", path: "/cart" },
     { name: "Blog", path: "/blog" },
     { name: "Contact", path: "/contact" },
-    { name: "Login", path: "/login" },
-    { name: "Signup", path: "/signup" },
+    { name: token ? "Logout" : "Login", path: "/login" },
+    !token && { name: "Signup", path: "/signup" },
   ];
 
-  const handleLinkClick = (linkName) => {
-    setActiveLink(linkName);
-    setIsMobileMenuOpen(false);
+  const handleLogout = () => {
+    clearToken();
   };
+
+  useEffect(() => {
+    if (token) {
+      console.log("Token updated " + token);
+    }
+  }, [token]);
 
   return (
     <div>
@@ -58,7 +76,7 @@ const Navbar = () => {
         </button>
 
         {/* Search Bar */}
-        <div className="hidden lg:flex justify-center w-full lg:w-1/3">
+        {/* <div className="hidden lg:flex justify-center w-full lg:w-1/3">
           <div className="relative w-full">
             <FaSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 text-xl" />
             <input
@@ -67,22 +85,20 @@ const Navbar = () => {
               className="border border-[#C1C1C1] rounded-lg bg-[#E9F1ED] pl-12 pr-4 py-3 w-full focus:outline-none text-lg"
             />
           </div>
-        </div>
+        </div> */}
 
         {/* Desktop Navigation */}
         <div className="hidden lg:flex items-center space-x-8">
-          {navLinks.map((link, index) => (
-            <Link
-              key={index}
-              to={link.path}
-              className={`text-gray-700 text-xl ${
-                activeLink === link.name ? "text-yellow-500 font-semibold" : ""
-              } hover:text-yellow-500`}
-              onClick={() => handleLinkClick(link.name)}
-            >
-              {link.name}
-            </Link>
-          ))}
+          {navLinks.map((link, index) => {
+            return (
+              <NavLink
+                link={link}
+                index={index}
+                handleLinkClick={handleLinkClick}
+                activeLink={activeLink}
+              />
+            );
+          })}
         </div>
 
         {/* Icons */}
@@ -98,7 +114,9 @@ const Navbar = () => {
               3
             </span>
           </div>
-          <div className="relative">
+
+          {/* cart icon */}
+          {/* <div className="relative">
             <Link to="/cart" className="text-gray-700">
               <FaShoppingBag className="text-2xl" />
             </Link>
@@ -107,7 +125,7 @@ const Navbar = () => {
                 {cartCount}
               </span>
             )}
-          </div>
+          </div> */}
         </div>
       </div>
 
@@ -130,4 +148,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default memo(Navbar);

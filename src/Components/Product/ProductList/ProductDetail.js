@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useCart } from "../../../CartContext";
 import ProductCard from "./ProductCard";
+import ProductLoader from "./ProductLoader";
 
 const descriptionData = [
   {
@@ -45,6 +46,7 @@ const ProductDetailComplete = () => {
           throw new Error("Failed to fetch product");
         }
         const data = await response.json();
+        console.log("data from gold product route " + data);
         setProduct(data);
         setSelectedImage(data.coverImage || data.images?.[0] || "");
       } catch (error) {
@@ -63,12 +65,7 @@ const ProductDetailComplete = () => {
     navigate("/cart");
   };
 
-  if (loading)
-    return (
-      <div className="flex justify-center items-center h-64">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-yellow-600"></div>
-      </div>
-    );
+  if (loading) return <ProductLoader />;
 
   if (!product)
     return (
@@ -105,7 +102,7 @@ const ProductDetailComplete = () => {
         </svg>
         Back to Products
       </button>
-      
+
       <div className="px-4 md:px-8 flex flex-col lg:flex-row gap-6">
         {/* Left: Product Images */}
         <div className="w-full lg:w-1/2">
@@ -292,7 +289,7 @@ const ProductDetailComplete = () => {
             pariatur.
           </p>
         </div>
-        
+
         <div className="overflow-x-auto px-4 md:px-8 lg:px-16 pb-8">
           <table className="border-2 border-gray-200 w-full md:w-4/5 mx-auto my-4">
             <tbody>
@@ -328,7 +325,7 @@ const ProductDetailComplete = () => {
         <h2 className="text-3xl md:text-4xl font-garamond bg-gradient-to-r from-[#E66E06] to-[#6E3000] text-transparent bg-clip-text text-center mb-6">
           Related Products
         </h2>
-        
+
         {/* Related Products Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 px-4 md:px-8">
           <ProductCard />
