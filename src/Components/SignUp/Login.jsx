@@ -3,11 +3,14 @@ import { FaFacebookF, FaGoogle, FaLinkedinIn } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import { X, User } from "lucide-react";
 import { userStore } from "../../store/userStore";
+import { useCart } from "../../CartContext";
 
 const Login = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({ email: "", password: "" });
-  const setUserToken = userStore((state) => state.setUserToken);
+  // const setUserToken = userStore((state) => state.setUserToken);
+  const setUser = userStore((state) => state.setUserData);
+  const { getCart } = useCart();
 
   const handleChange = (e) => {
     const { id, value } = e.target;
@@ -33,12 +36,16 @@ const Login = () => {
       );
       const result = await response.json();
 
-      // console.log("result " + result?.token);
+      // console.log("result in login  " + JSON.stringify(result, null, 2));
 
       if (response.ok) {
         alert("Login successful!");
         navigate("/profile");
-        setUserToken(result.token);
+        console.log("result user " + JSON.stringify(result?.user, null, 2));
+        // setUserToken({ token: result?.token });
+        setUser({ token: result.token, ...result?.user });
+        getCart(result?.user._id);
+        localStorage.setItem("token", result?.token);
       } else {
         alert("User Needs to register first");
         // alert(result.message || "Login failed.");

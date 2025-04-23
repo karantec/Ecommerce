@@ -3,11 +3,16 @@ const BASE_URL = "http://localhost:8000";
 // Product to add - {userId, productId, quantity}
 export const addToCart = async (productToAdd) => {
   try {
-    const response = await fetch(`${BASE_URL}/add-to-cart`, {
+    const response = await fetch(`${BASE_URL}/cart/add-to-cart`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(productToAdd),
     });
+
+    console.log(
+      "response from add to cart " + JSON.stringify(response, null, 2)
+    );
+
     if (!response.ok) throw new Error("Failed to add to the cart ");
     return await response.json();
   } catch (error) {
@@ -35,7 +40,7 @@ export const getCart = async (userId) => {
 // userId, ProductId
 export const removeSingleItem = async (userObj) => {
   try {
-    const response = await fetch(`${BASE_URL}/remove-single-item`, {
+    const response = await fetch(`${BASE_URL}/cart/remove-single-item`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(userObj),
@@ -49,7 +54,7 @@ export const removeSingleItem = async (userObj) => {
 
 export const removeFromCart = async (userObj) => {
   try {
-    const response = await fetch(`${BASE_URL}/remove-from-cart`, {
+    const response = await fetch(`${BASE_URL}/cart/remove-from-cart`, {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(userObj),

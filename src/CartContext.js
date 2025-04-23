@@ -5,7 +5,8 @@ import {
   removeFromCart,
   removeSingleItem,
 } from "./api/CartService";
-// import { displayCart } from "./Components/Order/Cart";
+import { createOrder, verifyPayment } from "./api/OrderService";
+import { userStore } from "./store/userStore";
 
 const CartContext = createContext({
   cart: [],
@@ -14,77 +15,132 @@ const CartContext = createContext({
   removeFromCart: () => {},
   setCart: () => {},
   getCart: () => {},
+  clearCart: () => {},
+  placeOrder: () => {},
 });
 
 export const CartProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
+  const setCartId = userStore((state) => state.setCartId);
 
-  // ProducObj = {userId, productId, quantity}
   const addToCartHandler = async (productObj) => {
-    // integrating add to cart route
-
     const data = await addToCart(productObj);
-
-    // Set Cart state here and then pass it to cart page
-
-    // setCart((prevCart) => {
-    //   const existingItem = prevCart.find((item) => item.id === productObj.id);
-    //   if (existingItem) {
-    //     return prevCart.map((item) =>
-    //       item.id === productObj.id
-    //         ? { ...item, quantity: item.quantity + 1 }
-    //         : item
-    //     );
-    //   }
-    //   return [...prevCart, { ...productObj, quantity: 1 }];
-    // });
+    console.log("data after add to cart " + JSON.stringify(data, null, 2));
+    getCartHandler(data?.cart.userId);
   };
 
-  // make API calls here
-  // userObj = {userId, productId}
   const removeFromCartHandler = async (userObj) => {
     const data = await removeFromCart(userObj);
-
-    // set cart state and then pass it to cart page
+    console.log("data after remove from cart " + JSON.stringify(data, null, 2));
+    getCartHandler(userObj.userId); // <- Refresh cart
   };
 
-  // userObj
   const removeSingleItemHandler = async (userObj) => {
     const data = await removeSingleItem(userObj);
-
-    // set cart state and then pass it tocart page
+    console.log(
+      "data after remove single cart " + JSON.stringify(data, null, 2)
+    );
+    getCartHandler(userObj.userId); // <- Refresh cart
   };
 
-  // userObj - {userId}
   const getCartHandler = async (userObj) => {
-    const data = await getCart(userObj);
-    const dataItems = [...data.items];
+    try {
+      const data = await getCart(userObj);
+      let dataItems = [];
 
-    // displayCart(dataItems);
+      if (data?.items?.length > 0) {
+        dataItems = [...data.items];
+      }
 
-    setCart((prev) => {
-      const updated = dataItems?.map((item) => {
-        return {
+      console.log("cart data " + JSON.stringify(data, null, 2));
+      console.log("cart id in context getcart handler  " + data?.cartId);
+      // Set the cartId in the store
+      if (data?.cartId) {
+        localStorage.setItem("cartId", data?.cartId);
+        userStore.getState().setCartId(data.cartId); // Update cartId in Zustand store
+      }
+
+      // Set the cart items in the store
+      setCart(
+        dataItems.map((item) => ({
           quantity: item?.quantity,
           realTimeTotalPrice: item?.realTimeTotalPrice,
           ...item?.product,
-        };
-      });
-      return [...updated, ...prev];
-    });
-
-    // setCart((prev) => {
-    //   return [...prev];
-    // });
+        }))
+      );
+    } catch (error) {
+      console.error("Error fetching cart data:", error.message);
+    }
   };
 
+  const clearCartHandler = () => {
+    setCart([]);
+  };
+
+  const placeOrderHandler = async (orderData) => {
+    console.log("cart id " + JSON.stringify(orderData, null, 2));
+    try {
+      const data = await createOrder(orderData);
+      console.log("✅ Order response:", data);
+
+      if (orderData.paymentMethod === "ONLINE") {
+        const options = {
+          key: process.env.RAZORPAY_KEY_ID,
+          amount: data.razorpayOrder.amount,
+          currency: "INR",
+          name: "Jewellery Store",
+          description: "Order Payment",
+          order_id: data.razorpayOrder.id,
+          handler: async function (response) {
+            const paymentData = {
+              ...response,
+              orderId: data.order._id,
+            };
+
+            try {
+              const verifyResponse = await verifyPayment(paymentData);
+              console.log("✅ Payment verified:", verifyResponse);
+              alert("Payment successful!");
+              clearCartHandler();
+            } catch (err) {
+              console.error("❌ Payment verification failed:", err.message);
+              alert("Payment failed or verification failed.");
+            }
+          },
+          prefill: {
+            name: orderData.shippingAddress.fullName,
+            email: "mukut@test.com",
+            contact: orderData.shippingAddress.phone,
+          },
+          theme: {
+            color: "#3399cc",
+          },
+        };
+
+        const rzp = new window.Razorpay(options);
+        rzp.open();
+      } else {
+        alert("Order placed successfully with COD!");
+        clearCartHandler();
+      }
+    } catch (error) {
+      console.error("❌ Error placing order:", error.message);
+      console.log("🔥 Full error object:", error);
+      alert("Failed to place order");
+    }
+  };
+
+  console.log("cart from context " + JSON.stringify(cart, null, 2));
+
   const cartContextValues = {
-    cart: cart,
-    setCart: setCart,
+    cart,
+    setCart,
     addToCart: addToCartHandler,
     removeSingleItem: removeSingleItemHandler,
     removeFromCart: removeFromCartHandler,
     getCart: getCartHandler,
+    clearCart: clearCartHandler,
+    placeOrder: placeOrderHandler,
   };
 
   return (

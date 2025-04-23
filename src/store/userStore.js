@@ -1,6 +1,8 @@
 import { create } from "zustand";
 
 export const userStore = create((set) => ({
+  cartId: null,
+  _id: null,
   fullName: null,
   email: null,
   phone: null,
@@ -24,17 +26,23 @@ export const userStore = create((set) => ({
   createdAt: null,
   token: null,
 
-  setUserToken: (token) => {
-    set({ token: token });
-  },
+  // setUserToken: ({ token }) => {
+  //   set({ token: token });
+  // },
 
   setClearToken: () => {
     set({ token: null });
   },
 
   setUserData: (userObj) => {
-    // console.log("userObj " + userObj);
+    // console.log("userObj " + JSON.stringify(userObj, null, 2));
     set({ ...userObj });
+  },
+  setCartId: (cartObj) => {
+    console.log("cartObj " + JSON.stringify(cartObj, null, 2));
+    set((prev) => {
+      return { ...cartObj, ...prev };
+    });
   },
 }));
 

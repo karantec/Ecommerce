@@ -2,8 +2,8 @@ import React, { memo, useEffect, useState } from "react";
 import {
   FaUser,
   FaHeart,
-  FaShoppingBag,
-  FaSearch,
+  // FaShoppingBag,
+  // FaSearch,
   FaBars,
   FaTimes,
 } from "react-icons/fa";
@@ -15,7 +15,7 @@ import NavLink from "./NavLink";
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeLink, setActiveLink] = useState("");
-  const { cartCount } = useCart();
+  const { cartCount, clearCart } = useCart();
   const clearToken = userStore((state) => state.setClearToken);
   const token = userStore((state) => state.token);
 
@@ -41,6 +41,7 @@ const Navbar = () => {
 
   const handleLogout = () => {
     clearToken();
+    clearCart();
   };
 
   useEffect(() => {

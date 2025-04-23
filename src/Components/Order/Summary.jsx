@@ -1,8 +1,75 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useCart } from "../../CartContext";
+import { userStore } from "../../store/userStore";
 
 const OrderSummary = () => {
   const [paymentMethod, setPaymentMethod] = useState("cash-on-delivery");
+  const userDetails = userStore((state) => state);
+  const { placeOrder, getCart } = useCart();
+
+  // Function to fetch cart data
+  const getCartHandler = async (userObj) => {
+    try {
+      const data = await getCart(userObj);
+      let dataItems = [];
+
+      if (data?.items?.length > 0) {
+        dataItems = [...data.items];
+      }
+
+      console.log("cart data " + JSON.stringify(data, null, 2));
+
+      // Set the cartId in the store
+      if (data?.cartId) {
+        userStore.getState().setCartId(data.cartId); // Update cartId in Zustand store
+      }
+
+      // Set the cart items in the store
+      userStore.getState().setCartItems(
+        dataItems.map((item) => ({
+          quantity: item?.quantity,
+          realTimeTotalPrice: item?.realTimeTotalPrice,
+          ...item?.product,
+        }))
+      );
+    } catch (error) {
+      console.error("Error fetching cart data:", error.message);
+    }
+  };
+  // Fetch cartId from userStore directly
+  const cartId = userStore((state) => state.cartId);
+  // const cartId = localStorage.getItem("cartId");
+
+  // Ensure cartId is fetched and set before rendering the component
+  useEffect(() => {
+    // If the cartId is missing, fetch it again
+    if (!cartId && userDetails?.userId) {
+      console.log("Cart ID is missing, fetching cart...");
+      getCartHandler({ userId: userDetails?.userId }); // Pass the userId to fetch the cart
+    }
+  }, [cartId, userDetails?.userId]); // Only run if cartId or userId changes
+
+  console.log("cartId in summary: ", cartId);
+
+  // Handler to place the order
+  const placeOrderHandler = async () => {
+    if (!cartId) {
+      console.error("Cart ID is missing, cannot place the order.");
+      return;
+    }
+
+    try {
+      // Proceed with order placement
+      await placeOrder({
+        cartId: { _id: cartId },
+        shippingAddress: { ...userDetails.addresses[0] },
+        paymentMode: "ONLINE",
+      });
+    } catch (error) {
+      console.error("Error placing order:", error.message);
+    }
+  };
 
   const products = [
     {
@@ -19,7 +86,10 @@ const OrderSummary = () => {
     },
   ];
 
-  const subtotal = products.reduce((total, product) => total + product.price * product.quantity, 0);
+  const subtotal = products.reduce(
+    (total, product) => total + product.price * product.quantity,
+    0
+  );
   const gst = subtotal * 0.18;
   const total = subtotal + gst;
 
@@ -40,7 +110,9 @@ const OrderSummary = () => {
                 <p className="text-xs text-gray-500">QTY {product.quantity}</p>
               </div>
             </div>
-            <p className="text-sm font-semibold">₹{product.price * product.quantity}</p>
+            <p className="text-sm font-semibold">
+              ₹{product.price * product.quantity}
+            </p>
           </div>
         ))}
       </div>
@@ -109,19 +181,24 @@ const OrderSummary = () => {
             />
             <div>
               <span className="text-sm font-semibold">Cash on Delivery</span>
-              <p className="text-xs text-gray-500">Pay with cash upon delivery.</p>
+              <p className="text-xs text-gray-500">
+                Pay with cash upon delivery.
+              </p>
             </div>
           </label>
         </div>
       </div>
 
       {/* Place Order Button */}
-     <Link to="/confirm"> <button
-        type="button"
-        className="mt-6 w-full py-3 text-center bg-orange-600 text-white font-bold text-sm rounded-md hover:bg-orange-500 transition"
-      >
-        PLACE ORDER
-      </button></Link> 
+      <Link to="/confirm">
+        <button
+          onClick={placeOrderHandler}
+          type="button"
+          className="mt-6 w-full py-3 text-center bg-orange-600 text-white font-bold text-sm rounded-md hover:bg-orange-500 transition"
+        >
+          PLACE ORDER
+        </button>
+      </Link>
     </div>
   );
 };

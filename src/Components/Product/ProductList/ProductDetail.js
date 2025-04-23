@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useCart } from "../../../CartContext";
 import ProductCard from "./ProductCard";
 import ProductLoader from "./ProductLoader";
+import { userStore } from "../../../store/userStore";
 
 const descriptionData = [
   {
@@ -34,6 +35,7 @@ const ProductDetailComplete = () => {
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [selectedImage, setSelectedImage] = useState("");
+  const userid = userStore((state) => state._id);
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -46,7 +48,9 @@ const ProductDetailComplete = () => {
           throw new Error("Failed to fetch product");
         }
         const data = await response.json();
-        console.log("data from gold product route " + data);
+        console.log(
+          "data from gold product route " + JSON.stringify(data, null, 2)
+        );
         setProduct(data);
         setSelectedImage(data.coverImage || data.images?.[0] || "");
       } catch (error) {
@@ -60,7 +64,13 @@ const ProductDetailComplete = () => {
   }, [productId]);
 
   const handleAddToCart = () => {
-    const productToAdd = { ...product, quantity: 1 };
+    const productToAdd = {
+      userId: userid,
+      productId: productId,
+      quantity: 1,
+    };
+    console.log("product to add " + JSON.stringify(productToAdd, null, 2));
+    // const productToAdd = { ...product, quantity: 1 };
     addToCart(productToAdd);
     navigate("/cart");
   };
