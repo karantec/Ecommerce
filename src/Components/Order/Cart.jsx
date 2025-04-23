@@ -27,6 +27,7 @@ const ShoppingCart = () => {
     await getCart(userid); // sync updated cart
   };
 
+  // This function is preserved, but the remove button is no longer rendered
   const handleRemoveItem = async (id) => {
     await removeFromCart({ userId: userid, productId: id });
     await getCart(userid); // refresh after removal
@@ -73,7 +74,6 @@ const ShoppingCart = () => {
                 <th className="py-3 px-4">Price</th>
                 <th className="py-3 px-4">Quantity</th>
                 <th className="py-3 px-4">Subtotal</th>
-                <th className="py-3 px-4">Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -113,14 +113,6 @@ const ShoppingCart = () => {
                     </div>
                   </td>
                   <td className="py-3 px-4">₹{item.realTimeTotalPrice}</td>
-                  <td className="py-3 px-4">
-                    <button
-                      onClick={() => handleRemoveItem(item._id)}
-                      className="text-red-500 hover:underline"
-                    >
-                      Remove
-                    </button>
-                  </td>
                 </tr>
               ))}
             </tbody>

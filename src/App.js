@@ -21,6 +21,8 @@ import BlogDetail from "./Components/Blogs/BlogDetail";
 import OrderHistory from "./Components/Order/OrderHistory";
 import OrderDetails from "./Components/Order/OrderDetails";
 import ProductPage from "./Components/Product/ProductList/ProductPage";
+import Terms from "./Components/Order/Terms";
+import PrivacyPolicy from "./Components/Order/PrivacyPolicy";
 
 function App() {
   const [cart, setCart] = useState([]);
@@ -30,7 +32,9 @@ function App() {
       const existingItem = prevCart.find((item) => item.id === product.id);
       if (existingItem) {
         return prevCart.map((item) =>
-          item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
+          item.id === product.id
+            ? { ...item, quantity: item.quantity + 1 }
+            : item
         );
       } else {
         return [...prevCart, { ...product, quantity: 1 }];
@@ -52,25 +56,36 @@ function App() {
           <Route path="/blog/:id" element={<BlogDetail />} />
           <Route path="/checkout" element={<SecureCheckout />} />
           <Route path="/confirm" element={<Final />} />
-          <Route path='/shop' element={<ProductPage/>}/>
+          <Route path="/shop" element={<ProductPage />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/wishlist" element={<Wishlist />} />
+          <Route path="/terms" element={<Terms />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route
             path="/product/:productId"
             element={<ProductDetailComplete addToCart={addToCart} />}
           />
-          <Route path="/cart" element={<ShoppingCart cart={cart} setCart={setCart} />} />
+          <Route
+            path="/cart"
+            element={<ShoppingCart cart={cart} setCart={setCart} />}
+          />
           <Route path="*" element={<NotFound />} />
-          <Route path="/orders" element={
-            // <ProtectedRoute>
-            <OrderHistory />
-            // </ProtectedRoute>
-          } />
-          <Route path="/orders/:id" element={
-            // <ProtectedRoute>
-            <OrderDetails />
-            // </ProtectedRoute>
-          } />
+          <Route
+            path="/orders"
+            element={
+              // <ProtectedRoute>
+              <OrderHistory />
+              // </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/orders/:id"
+            element={
+              // <ProtectedRoute>
+              <OrderDetails />
+              // </ProtectedRoute>
+            }
+          />
         </Routes>
         <Footer />
       </div>
