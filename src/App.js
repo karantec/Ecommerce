@@ -24,6 +24,7 @@ import ProductPage from "./Components/Product/ProductList/ProductPage";
 import Terms from "./Components/Order/Terms";
 import PrivacyPolicy from "./Components/Order/PrivacyPolicy";
 import PhoneLogin from "./Components/SignUp/PhoneLogin";
+import Shipping from "./Components/Order/Shipping";
 
 function App() {
   const [cart, setCart] = useState([]);
@@ -63,6 +64,7 @@ function App() {
           <Route path="/phone-login" element={<PhoneLogin />} />
           <Route path="/terms" element={<Terms />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/shipping-policy" element={<Shipping />} />
           <Route
             path="/product/:productId"
             element={<ProductDetailComplete addToCart={addToCart} />}

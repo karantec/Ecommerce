@@ -13,90 +13,145 @@ const Terms = () => {
               1. Introduction
             </h2>
             <p>
-              Welcome to Frame Digital Solution Pvt. Ltd. By accessing and using
-              our website, software, and services, you acknowledge that you have
-              read, understood, and agree to comply with these Terms &
-              Conditions. If you do not agree with any part of these terms, you
-              should discontinue use immediately.
+              Welcome to Sri Laxmi Alankar! By accessing our website
+              (www.srilaxmialankar.com), using our services, or purchasing our
+              products, you agree to comply with and be bound by the following
+              Terms & Conditions. Please read them carefully before proceeding.
             </p>
+          </section>
+
+          <section>
+            <h2 className="text-lg font-semibold text-[#784421] mb-2">
+              2. Eligibility
+            </h2>
+            <ul className="list-disc list-inside ml-4">
+              <li>Users must be 18 years or older to place an order.</li>
+              <li>
+                If under 18, parental or guardian consent is required to use the
+                website and place an order.
+              </li>
+            </ul>
+          </section>
+
+          <section>
+            <h2 className="text-lg font-semibold text-[#784421] mb-2">
+              3. Pricing & Payment
+            </h2>
             <p>
-              These Terms & Conditions constitute a legally binding agreement
-              between Frame Digital Solution Pvt. Ltd. (referred to as "the
-              Company," "we," "us," or "our") and any individual or entity using
-              our services (referred to as "User," "Client," or "you").
+              <strong>Domestic Orders (India):</strong>
             </p>
-          </section>
-
-          <section>
-            <h2 className="text-lg font-semibold text-[#784421] mb-2">
-              2. Definitions
-            </h2>
-            <p>For clarity, the following terms are defined:</p>
             <ul className="list-disc list-inside ml-4">
+              <li>Prices are quoted in INR and include GST.</li>
               <li>
-                “Company” refers to Frame Digital Solution Pvt. Ltd., including
-                its subsidiaries, affiliates, and employees.
+                Prices may vary with market rates of gold, diamonds, and
+                gemstones.
               </li>
-              <li>
-                “Services” refers to all IT solutions, SaaS platforms, digital
-                consulting, and software development services offered by the
-                Company.
-              </li>
-              <li>
-                “User” refers to any individual, business, or organization
-                accessing or using our services, either directly or indirectly.
-              </li>
-              <li>
-                “Agreement” refers to this document and any additional service
-                agreements between the Company and the User.
-              </li>
+              <li>Card charges may apply.</li>
+            </ul>
+            <p className="mt-2">
+              <strong>Accepted Payment Methods:</strong>
+            </p>
+            <ul className="list-disc list-inside ml-4">
+              <li>Credit/Debit Cards (Visa, MasterCard, Rupay)</li>
+              <li>UPI (Google Pay, PhonePe, Paytm)</li>
+              <li>Net Banking</li>
+              <li>Bank Transfer (for bulk or custom orders)</li>
             </ul>
           </section>
 
           <section>
             <h2 className="text-lg font-semibold text-[#784421] mb-2">
-              3. Scope of Services
+              4. PAN Card Requirement
             </h2>
-            <p>Frame Digital Solution Pvt. Ltd. provides:</p>
             <ul className="list-disc list-inside ml-4">
-              <li>
-                Custom Software Development (Web, Mobile, Cloud, Enterprise
-                Solutions)
-              </li>
-              <li>SaaS Solutions (Software as a Service)</li>
-              <li>AI & Machine Learning Applications</li>
-              <li>Cloud Migration, Management, and Security</li>
-              <li>IT Consulting, Cybersecurity, and Digital Transformation</li>
-              <li>
-                Enterprise Resource Planning (ERP) and Automation Solutions
-              </li>
-              <li>E-commerce, FinTech, and Payment Gateway Solutions</li>
+              <li>Mandatory for orders above ₹2 lakhs.</li>
+              <li>Name on PAN card must match the billing name.</li>
+              <li>Submit PAN securely via email or website upload.</li>
             </ul>
+          </section>
+
+          <section>
+            <h2 className="text-lg font-semibold text-[#784421] mb-2">
+              5. Warranty & Authenticity
+            </h2>
+            <ul className="list-disc list-inside ml-4">
+              <li>All products are BIS hallmarked.</li>
+              <li>Diamonds/gemstones include an IGI certificate.</li>
+              <li>Lifetime gold jewelry exchange based on current rates.</li>
+              <li>Free lifetime polishing and cleaning services.</li>
+              <li>Free repair for manufacturing defects within 6 months.</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2 className="text-lg font-semibold text-[#784421] mb-2">
+              6. Cancellation Policy
+            </h2>
+            <ul className="list-disc list-inside ml-4">
+              <li>Orders can be cancelled before dispatch confirmation.</li>
+              <li>Custom orders cannot be cancelled once processing starts.</li>
+              <li>To cancel, call: 0621-2245632 or +91-9304907331</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2 className="text-lg font-semibold text-[#784421] mb-2">
+              7. Privacy & Data Protection
+            </h2>
             <p>
-              All services are provided in accordance with agreed-upon project
-              timelines, specifications, and contractual obligations.
+              Your personal data is securely stored and encrypted. We only share
+              information with payment processors and shipping providers. Read
+              our full Privacy Policy for details.
             </p>
           </section>
 
           <section>
             <h2 className="text-lg font-semibold text-[#784421] mb-2">
-              4. User Obligations
+              8. Governing Law & Jurisdiction
             </h2>
-            <p>By accessing our services, you agree to:</p>
+            <p>
+              These terms are governed by Indian law. Any disputes will fall
+              under the jurisdiction of Muzaffarpur, Bihar.
+            </p>
+          </section>
+
+          <section>
+            <h2 className="text-lg font-semibold text-[#784421] mb-2">
+              9. Promotions & Offers
+            </h2>
             <ul className="list-disc list-inside ml-4">
+              <li>Promotions cannot be combined unless specified.</li>
+              <li>Offer validity is subject to change without notice.</li>
               <li>
-                Provide accurate, current, and complete information during
-                registration or when required.
-              </li>
-              <li>
-                Maintain the confidentiality of your account credentials and be
-                responsible for all activities under your account.
-              </li>
-              <li>
-                Comply with all applicable laws and regulations related to
-                software usage, cybersecurity, and data privacy.
+                Promo codes must be applied at checkout, not retroactively.
               </li>
             </ul>
+          </section>
+
+          <section>
+            <h2 className="text-lg font-semibold text-[#784421] mb-2">
+              10. Contact Information
+            </h2>
+            <ul className="list-disc list-inside ml-4">
+              <li>Phone: +91 9304907331</li>
+              <li>Tel: 0621-2245632</li>
+              <li>Website: www.srilaxmialankar.com</li>
+              <li>
+                Store Address: Beside of Baba Garibnath Mandir, Muzaffarpur -
+                842001
+              </li>
+            </ul>
+          </section>
+
+          <section>
+            <h2 className="text-lg font-semibold text-[#784421] mb-2">
+              11. Changes to Terms & Conditions
+            </h2>
+            <p>
+              Sri Laxmi Alankar reserves the right to update these Terms &
+              Conditions at any time without prior notice. Please review them
+              regularly.
+            </p>
           </section>
         </div>
       </div>

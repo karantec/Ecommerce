@@ -15,10 +15,11 @@ import NavLink from "./NavLink";
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeLink, setActiveLink] = useState("");
+
   const { cartCount, clearCart } = useCart();
   const clearToken = userStore((state) => state.setClearToken);
   const token = localStorage.getItem("token");
-
+  const [navToken, setNavToken] = useState(token);
   const handleLinkClick = (linkName) => {
     if (linkName === "Logout") {
       handleLogout();
@@ -35,21 +36,22 @@ const Navbar = () => {
     { name: "Cart", path: "/cart" },
     { name: "Blog", path: "/blog" },
     { name: "Contact", path: "/contact" },
-    { name: token ? "Logout" : "Login", path: "/login" },
-    !token && { name: "Signup", path: "/signup" },
+    { name: navToken ? "Logout" : "Login", path: "/login" },
+    !navToken && { name: "Signup", path: "/signup" },
   ];
 
   const handleLogout = () => {
-    clearToken();
+    clearToken(null);
     clearCart();
     localStorage.setItem("token", null);
+    setNavToken(null);
   };
 
   useEffect(() => {
-    if (token) {
-      console.log("Token updated " + token);
+    if (navToken) {
+      console.log("Token updated " + navToken);
     }
-  }, [token]);
+  }, [navToken]);
 
   return (
     <div>

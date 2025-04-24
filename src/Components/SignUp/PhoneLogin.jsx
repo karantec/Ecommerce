@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
+import { userStore } from "../../store/userStore";
 
 const BASE_URL = "https://jewelleryapp.onrender.com/auth";
 
@@ -9,6 +10,7 @@ const PhoneLogin = () => {
   const [otp, setOtp] = useState("");
   const [otpSent, setOtpSent] = useState(false);
   const navigate = useNavigate();
+  // const setToken = userStore((state) => state.setToken);
 
   const sendOTP = async () => {
     if (!phone) return toast.error("Enter phone number first");
@@ -57,6 +59,8 @@ const PhoneLogin = () => {
       if (res.ok) {
         toast.success("OTP verified!");
         localStorage.setItem("token", data?.token);
+        //  setToken(data?.token);
+
         // Save token if needed: localStorage.setItem("token", data.token);
         setTimeout(() => navigate("/shop"), 1500);
       } else {
