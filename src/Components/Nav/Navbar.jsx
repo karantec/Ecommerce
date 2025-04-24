@@ -17,7 +17,7 @@ const Navbar = () => {
   const [activeLink, setActiveLink] = useState("");
   const { cartCount, clearCart } = useCart();
   const clearToken = userStore((state) => state.setClearToken);
-  const token = userStore((state) => state.token);
+  const token = localStorage.getItem("token");
 
   const handleLinkClick = (linkName) => {
     if (linkName === "Logout") {
@@ -42,6 +42,7 @@ const Navbar = () => {
   const handleLogout = () => {
     clearToken();
     clearCart();
+    localStorage.setItem("token", null);
   };
 
   useEffect(() => {

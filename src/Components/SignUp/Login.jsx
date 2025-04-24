@@ -8,17 +8,12 @@ import { useCart } from "../../CartContext";
 const Login = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({ email: "", password: "" });
-  // const setUserToken = userStore((state) => state.setUserToken);
   const setUser = userStore((state) => state.setUserData);
   const { getCart } = useCart();
 
   const handleChange = (e) => {
     const { id, value } = e.target;
     setFormData((prev) => ({ ...prev, [id]: value }));
-  };
-
-  const navigateSignUpHandler = () => {
-    navigate("/signup");
   };
 
   const handleSubmit = async (e) => {
@@ -36,19 +31,14 @@ const Login = () => {
       );
       const result = await response.json();
 
-      // console.log("result in login  " + JSON.stringify(result, null, 2));
-
       if (response.ok) {
         alert("Login successful!");
         navigate("/profile");
-        console.log("result user " + JSON.stringify(result?.user, null, 2));
-        // setUserToken({ token: result?.token });
         setUser({ token: result.token, ...result?.user });
         getCart(result?.user._id);
         localStorage.setItem("token", result?.token);
       } else {
         alert("User Needs to register first");
-        // alert(result.message || "Login failed.");
       }
     } catch (error) {
       console.error("Error:", error.message);
@@ -57,9 +47,8 @@ const Login = () => {
   };
 
   return (
-    <section className="min-h-screen  mt-5 flex items-center justify-center px-4">
+    <section className="min-h-screen mt-5 flex items-center justify-center px-4">
       <div className="w-full max-w-5xl bg-white rounded-xl shadow-lg overflow-hidden flex flex-col md:flex-row">
-        {/* Left Side - Image */}
         <div className="md:w-1/2 w-full h-64 md:h-auto">
           <img
             src="https://manubhai.in/SocialMedia/post_artworks/DGBD00687.jpg"
@@ -68,17 +57,16 @@ const Login = () => {
           />
         </div>
 
-        {/* Right Side - Form */}
         <div className="md:w-1/2 w-full p-6 md:p-10">
-          {/* Header Icons */}
           <div className="flex justify-between items-center mb-6">
             <User className="text-gray-600" />
-            <X className="text-gray-600 cursor-pointer" />
+            <X
+              className="text-gray-600 cursor-pointer"
+              onClick={() => navigate(-1)}
+            />
           </div>
 
-          {/* Form */}
           <form onSubmit={handleSubmit} className="space-y-6">
-            {/* Email */}
             <div>
               <label
                 htmlFor="email"
@@ -91,12 +79,11 @@ const Login = () => {
                 id="email"
                 value={formData.email}
                 onChange={handleChange}
-                className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2"
                 placeholder="bestsite@gmail.com"
               />
             </div>
 
-            {/* Password */}
             <div>
               <label
                 htmlFor="password"
@@ -109,15 +96,14 @@ const Login = () => {
                 id="password"
                 value={formData.password}
                 onChange={handleChange}
-                className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2"
                 placeholder="********"
               />
             </div>
 
-            {/* Buttons */}
             <div className="flex flex-col sm:flex-row justify-between gap-4">
               <button
-                onClick={() => navigateSignUpHandler()}
+                onClick={() => navigate("/signup")}
                 type="button"
                 className="w-full sm:w-auto px-6 py-2 rounded-full border-2 border-[#4C2A2A] text-[#4C2A2A] font-medium hover:bg-[#f5f5f5] transition-all"
               >
@@ -131,7 +117,17 @@ const Login = () => {
               </button>
             </div>
 
-            {/* Recover Password */}
+            {/* Login with Phone Number */}
+            <div className="text-center mt-4">
+              <button
+                type="button"
+                onClick={() => navigate("/phone-login")}
+                className="text-indigo-600 hover:text-indigo-800 font-semibold"
+              >
+                Login using Phone Number
+              </button>
+            </div>
+
             <div className="text-sm text-right mt-4">
               <Link
                 to="/forgot-password"
@@ -139,32 +135,6 @@ const Login = () => {
               >
                 Recover Password
               </Link>
-            </div>
-
-            {/* Quick Login */}
-            <div className="pt-4 text-center">
-              <p className="text-sm text-gray-600">Quick Login:</p>
-              <div className="flex justify-center space-x-4 mt-2">
-                <FaFacebookF className="text-blue-700 cursor-pointer hover:scale-110" />
-                <FaGoogle className="text-red-600 cursor-pointer hover:scale-110" />
-                <FaLinkedinIn className="text-blue-500 cursor-pointer hover:scale-110" />
-              </div>
-            </div>
-
-            {/* Bottom Text */}
-            <div className="mt-8 text-center">
-              <p className="text-sm text-gray-500">
-                Click on <span className="text-red-500">♡</span> the icon next
-                to the model name to save it to favorites. Use favorite models
-                as samples for creating items with your design.
-              </p>
-            </div>
-
-            {/* Continue Shopping Button */}
-            <div className="mt-4 text-center">
-              <button className="w-full sm:w-auto px-6 py-3 rounded-full border border-gray-300 text-gray-700 hover:bg-gray-100">
-                Continue Shopping
-              </button>
             </div>
           </form>
         </div>

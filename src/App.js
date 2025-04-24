@@ -23,6 +23,7 @@ import OrderDetails from "./Components/Order/OrderDetails";
 import ProductPage from "./Components/Product/ProductList/ProductPage";
 import Terms from "./Components/Order/Terms";
 import PrivacyPolicy from "./Components/Order/PrivacyPolicy";
+import PhoneLogin from "./Components/SignUp/PhoneLogin";
 
 function App() {
   const [cart, setCart] = useState([]);
@@ -59,6 +60,7 @@ function App() {
           <Route path="/shop" element={<ProductPage />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/wishlist" element={<Wishlist />} />
+          <Route path="/phone-login" element={<PhoneLogin />} />
           <Route path="/terms" element={<Terms />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route

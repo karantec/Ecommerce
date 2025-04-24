@@ -24,6 +24,10 @@ const Profile = () => {
     alert("Profile updated successfully!");
   };
 
+  const token = localStorage.getItem("token");
+
+  console.log("token from phon login " + token);
+
   return (
     <section className="min-h-screen bg-white flex items-center justify-center p-6">
       <div className="max-w-6xl w-full bg-white shadow-xl border rounded-xl flex flex-col md:flex-row overflow-hidden">
