@@ -58,7 +58,7 @@ const PhoneLogin = () => {
         toast.success("OTP verified!");
         localStorage.setItem("token", data?.token);
         // Save token if needed: localStorage.setItem("token", data.token);
-        setTimeout(() => navigate("/profile"), 1500);
+        setTimeout(() => navigate("/shop"), 1500);
       } else {
         toast.error(data.message || "Invalid OTP");
       }
