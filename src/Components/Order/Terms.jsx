@@ -2,161 +2,152 @@ import React from "react";
 
 const Terms = () => {
   return (
-    <div className="bg-[#FAF7F2] min-h-screen px-4 sm:px-6 lg:px-10 py-10 space-y-10">
-      <div className="p-6 bg-white shadow-md w-full">
-        <h1 className="text-2xl font-bold mb-6 text-[#784421]">
-          Terms & Conditions
-        </h1>
-        <div className="space-y-6 text-[16px] leading-relaxed">
-          <section>
-            <h2 className="text-lg font-semibold text-[#784421] mb-2">
-              1. Introduction
-            </h2>
-            <p>
-              Welcome to Sri Laxmi Alankar! By accessing our website
-              (www.srilaxmialankar.com), using our services, or purchasing our
-              products, you agree to comply with and be bound by the following
-              Terms & Conditions. Please read them carefully before proceeding.
-            </p>
-          </section>
-
-          <section>
-            <h2 className="text-lg font-semibold text-[#784421] mb-2">
-              2. Eligibility
-            </h2>
-            <ul className="list-disc list-inside ml-4">
-              <li>Users must be 18 years or older to place an order.</li>
-              <li>
-                If under 18, parental or guardian consent is required to use the
-                website and place an order.
-              </li>
-            </ul>
-          </section>
-
-          <section>
-            <h2 className="text-lg font-semibold text-[#784421] mb-2">
-              3. Pricing & Payment
-            </h2>
-            <p>
-              <strong>Domestic Orders (India):</strong>
-            </p>
-            <ul className="list-disc list-inside ml-4">
-              <li>Prices are quoted in INR and include GST.</li>
-              <li>
-                Prices may vary with market rates of gold, diamonds, and
-                gemstones.
-              </li>
-              <li>Card charges may apply.</li>
-            </ul>
-            <p className="mt-2">
-              <strong>Accepted Payment Methods:</strong>
-            </p>
-            <ul className="list-disc list-inside ml-4">
-              <li>Credit/Debit Cards (Visa, MasterCard, Rupay)</li>
-              <li>UPI (Google Pay, PhonePe, Paytm)</li>
-              <li>Net Banking</li>
-              <li>Bank Transfer (for bulk or custom orders)</li>
-            </ul>
-          </section>
-
-          <section>
-            <h2 className="text-lg font-semibold text-[#784421] mb-2">
-              4. PAN Card Requirement
-            </h2>
-            <ul className="list-disc list-inside ml-4">
-              <li>Mandatory for orders above ₹2 lakhs.</li>
-              <li>Name on PAN card must match the billing name.</li>
-              <li>Submit PAN securely via email or website upload.</li>
-            </ul>
-          </section>
-
-          <section>
-            <h2 className="text-lg font-semibold text-[#784421] mb-2">
-              5. Warranty & Authenticity
-            </h2>
-            <ul className="list-disc list-inside ml-4">
-              <li>All products are BIS hallmarked.</li>
-              <li>Diamonds/gemstones include an IGI certificate.</li>
-              <li>Lifetime gold jewelry exchange based on current rates.</li>
-              <li>Free lifetime polishing and cleaning services.</li>
-              <li>Free repair for manufacturing defects within 6 months.</li>
-            </ul>
-          </section>
-
-          <section>
-            <h2 className="text-lg font-semibold text-[#784421] mb-2">
-              6. Cancellation Policy
-            </h2>
-            <ul className="list-disc list-inside ml-4">
-              <li>Orders can be cancelled before dispatch confirmation.</li>
-              <li>Custom orders cannot be cancelled once processing starts.</li>
-              <li>To cancel, call: 0621-2245632 or +91-9304907331</li>
-            </ul>
-          </section>
-
-          <section>
-            <h2 className="text-lg font-semibold text-[#784421] mb-2">
-              7. Privacy & Data Protection
-            </h2>
-            <p>
-              Your personal data is securely stored and encrypted. We only share
-              information with payment processors and shipping providers. Read
-              our full Privacy Policy for details.
-            </p>
-          </section>
-
-          <section>
-            <h2 className="text-lg font-semibold text-[#784421] mb-2">
-              8. Governing Law & Jurisdiction
-            </h2>
-            <p>
-              These terms are governed by Indian law. Any disputes will fall
-              under the jurisdiction of Muzaffarpur, Bihar.
-            </p>
-          </section>
-
-          <section>
-            <h2 className="text-lg font-semibold text-[#784421] mb-2">
-              9. Promotions & Offers
-            </h2>
-            <ul className="list-disc list-inside ml-4">
-              <li>Promotions cannot be combined unless specified.</li>
-              <li>Offer validity is subject to change without notice.</li>
-              <li>
-                Promo codes must be applied at checkout, not retroactively.
-              </li>
-            </ul>
-          </section>
-
-          <section>
-            <h2 className="text-lg font-semibold text-[#784421] mb-2">
-              10. Contact Information
-            </h2>
-            <ul className="list-disc list-inside ml-4">
-              <li>Phone: +91 9304907331</li>
-              <li>Tel: 0621-2245632</li>
-              <li>Website: www.srilaxmialankar.com</li>
-              <li>
-                Store Address: Beside of Baba Garibnath Mandir, Muzaffarpur -
-                842001
-              </li>
-            </ul>
-          </section>
-
-          <section>
-            <h2 className="text-lg font-semibold text-[#784421] mb-2">
-              11. Changes to Terms & Conditions
-            </h2>
-            <p>
-              Sri Laxmi Alankar reserves the right to update these Terms &
-              Conditions at any time without prior notice. Please review them
-              regularly.
-            </p>
-          </section>
+    <div className="bg-[#FAF7F2] min-h-screen px-4 sm:px-8 lg:px-16 py-12">
+      <div className="max-w-5xl mx-auto bg-white rounded-2xl shadow-lg p-8 lg:p-12 space-y-10">
+        <div>
+          <h1 className="text-3xl lg:text-4xl font-bold text-[#784421] mb-6 border-b border-[#eee] pb-4">
+            Terms & Conditions
+          </h1>
+          <p className="text-gray-700 text-lg leading-relaxed">
+            Welcome to Sri Laxmi Alankar! By accessing our website
+            (www.srilaxmialankar.com), using our services, or purchasing our
+            products, you agree to comply with and be bound by the following
+            Terms & Conditions.
+          </p>
         </div>
+
+        <Section title="1. Eligibility">
+          <List
+            items={[
+              "Users must be 18 years or older to place an order.",
+              "If under 18, parental or guardian consent is required to use the website and place an order.",
+            ]}
+          />
+        </Section>
+
+        <Section title="2. Pricing & Payment">
+          <SubSection title="Domestic Orders (India):">
+            <List
+              items={[
+                "Prices are quoted in INR and include GST.",
+                "Prices may vary with market rates of gold, diamonds, and gemstones.",
+                "Card charges may apply.",
+              ]}
+            />
+          </SubSection>
+          <SubSection title="Accepted Payment Methods:">
+            <List
+              items={[
+                "Credit/Debit Cards (Visa, MasterCard, Rupay)",
+                "UPI (Google Pay, PhonePe, Paytm)",
+                "Net Banking",
+                "Bank Transfer (for bulk or custom orders)",
+              ]}
+            />
+          </SubSection>
+        </Section>
+
+        <Section title="3. PAN Card Requirement">
+          <List
+            items={[
+              "Mandatory for orders above ₹2 lakhs.",
+              "Name on PAN card must match the billing name.",
+              "Submit PAN securely via email or website upload.",
+            ]}
+          />
+        </Section>
+
+        <Section title="4. Warranty & Authenticity">
+          <List
+            items={[
+              "All products are BIS hallmarked.",
+              "Diamonds/gemstones include an IGI certificate.",
+              "Lifetime gold jewelry exchange based on current rates.",
+              "Free lifetime polishing and cleaning services.",
+              "Free repair for manufacturing defects within 6 months.",
+            ]}
+          />
+        </Section>
+
+        <Section title="5. Cancellation Policy">
+          <List
+            items={[
+              "Orders can be cancelled before dispatch confirmation.",
+              "Custom orders cannot be cancelled once processing starts.",
+              "To cancel, call: 0621-2245632 or +91-9304907331",
+            ]}
+          />
+        </Section>
+
+        <Section title="6. Privacy & Data Protection">
+          <p className="text-gray-700">
+            Your personal data is securely stored and encrypted. We only share
+            information with payment processors and shipping providers. Read our
+            full Privacy Policy for details.
+          </p>
+        </Section>
+
+        <Section title="7. Governing Law & Jurisdiction">
+          <p className="text-gray-700">
+            These terms are governed by Indian law. Any disputes will fall under
+            the jurisdiction of Muzaffarpur, Bihar.
+          </p>
+        </Section>
+
+        <Section title="8. Promotions & Offers">
+          <List
+            items={[
+              "Promotions cannot be combined unless specified.",
+              "Offer validity is subject to change without notice.",
+              "Promo codes must be applied at checkout, not retroactively.",
+            ]}
+          />
+        </Section>
+
+        <Section title="9. Contact Information">
+          <List
+            items={[
+              "Phone: +91 9304907331",
+              "Tel: 0621-2245632",
+              "Website: www.srilaxmialankar.com",
+              "Store Address: Beside of Baba Garibnath Mandir, Muzaffarpur - 842001",
+            ]}
+          />
+        </Section>
+
+        <Section title="10. Changes to Terms & Conditions">
+          <p className="text-gray-700">
+            Sri Laxmi Alankar reserves the right to update these Terms &
+            Conditions at any time without prior notice. Please review them
+            regularly.
+          </p>
+        </Section>
       </div>
     </div>
   );
 };
+
+// Reusable Components
+const Section = ({ title, children }) => (
+  <div className="space-y-4">
+    <h2 className="text-2xl font-semibold text-[#784421]">{title}</h2>
+    <div className="space-y-4">{children}</div>
+  </div>
+);
+
+const SubSection = ({ title, children }) => (
+  <div>
+    <h3 className="text-lg font-medium text-[#5a3720] mb-2">{title}</h3>
+    <div className="text-gray-700 text-[16px] leading-relaxed">{children}</div>
+  </div>
+);
+
+const List = ({ items }) => (
+  <ul className="list-disc pl-5 text-gray-700 space-y-2">
+    {items.map((item, idx) => (
+      <li key={idx}>{item}</li>
+    ))}
+  </ul>
+);
 
 export default Terms;

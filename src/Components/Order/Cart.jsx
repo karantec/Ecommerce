@@ -21,16 +21,16 @@ const ShoppingCart = () => {
     if (increment === 1) {
       await addToCart({ userId: userid, productId: id, quantity: 1 });
     } else if (increment === -1 && item.quantity > 1) {
-      await removeSingleItem({ userId: userid, productId: id });
+      removeSingleItem({ userId: userid, productId: id });
     }
 
-    await getCart(userid); // sync updated cart
+    getCart(userid); // sync updated cart
   };
 
   // This function is preserved, but the remove button is no longer rendered
   const handleRemoveItem = async (id) => {
-    await removeFromCart({ userId: userid, productId: id });
-    await getCart(userid); // refresh after removal
+    removeFromCart({ userId: userid, productId: id });
+    getCart(userid); // refresh after removal
   };
 
   const getSubtotal = () => {

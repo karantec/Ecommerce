@@ -11,6 +11,7 @@ const PhoneLogin = () => {
   const [otpSent, setOtpSent] = useState(false);
   const navigate = useNavigate();
   const setToken = userStore((state) => state.setUserToken);
+  const setUserData = userStore((state) => state.setUserData);
 
   const sendOTP = async () => {
     if (!phone) return toast.error("Enter phone number first");
@@ -54,13 +55,32 @@ const PhoneLogin = () => {
 
       const data = await res.json();
 
-      console.log("verify otp " + JSON.stringify(data));
+      console.log("verify otp " + JSON.stringify(data, null, 2));
+
+      // {
+      //   "message": "OTP verified successfully",
+      //   "user": {
+      //     "_id": "67f3c79a3884d518177faff7",
+      //     "phone": "+919798316854",
+      //     "isVerified": true,
+      //     "otpVerification": {
+      //       "verified": true,
+      //       "lastVerifiedAt": "2025-04-25T11:12:31.100Z"
+      //     }
+      //   },
+      //   "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2YzYzc5YTM4ODRkNTE4MTc3ZmFmZjciLCJpYXQiOjE3NDU1Nzk1NTEsImV4cCI6MTc0NTU4Njc1MX0.LrdjmMgy-12u_IOv0_-TFfG_yyNX40AliaRM9a1-GjY"
+      // }
 
       if (res.ok) {
         toast.success("OTP verified!");
         localStorage.setItem("token", data?.token);
 
         setToken(data?.token);
+        const userObj = {
+          token: data?.token,
+          ...data?.user,
+        };
+        setUserData(userObj);
 
         // Save token if needed: localStorage.setItem("token", data.token);
         setTimeout(() => navigate("/shop"), 1500);

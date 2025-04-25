@@ -24,6 +24,7 @@ export const CartProvider = ({ children }) => {
   const setCartId = userStore((state) => state.setCartId);
 
   const addToCartHandler = async (productObj) => {
+    // console.log(JSON.stringify(productObj, null, 2));
     const data = await addToCart(productObj);
     console.log("data after add to cart " + JSON.stringify(data, null, 2));
     getCartHandler(data?.cart.userId);
