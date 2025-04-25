@@ -7,7 +7,7 @@ import {
   FaBars,
   FaTimes,
 } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useCart } from "../../CartContext";
 import { userStore } from "../../store/userStore";
 import NavLink from "./NavLink";
@@ -18,8 +18,9 @@ const Navbar = () => {
 
   const { cartCount, clearCart } = useCart();
   const clearToken = userStore((state) => state.setClearToken);
-  const token = localStorage.getItem("token");
-  const [navToken, setNavToken] = useState(token);
+  const navToken = userStore((state) => state?.token);
+  const navigate = useNavigate();
+
   const handleLinkClick = (linkName) => {
     if (linkName === "Logout") {
       handleLogout();
@@ -37,22 +38,22 @@ const Navbar = () => {
     { name: "Blog", path: "/blog" },
     { name: "Contact", path: "/contact" },
     { name: navToken ? "Logout" : "Login", path: "/login" },
-    !navToken && { name: "Signup", path: "/signup" },
+    // !navToken && { name: "Signup", path: "/signup" },
   ];
 
   const handleLogout = () => {
-    clearToken(null);
+    clearToken();
     clearCart();
-    localStorage.setItem("token", null);
-    setNavToken(null);
+    localStorage.removeItem("token");
+    navigate("/login");
   };
 
   useEffect(() => {
-    if (navToken) {
-      console.log("Token updated " + navToken);
+    const storedToken = localStorage.getItem("token");
+    if (storedToken && storedToken !== "null") {
+      userStore.getState().setUserToken(storedToken); // important!
     }
-  }, [navToken]);
-
+  }, []);
   return (
     <div>
       {/* Top bar */}

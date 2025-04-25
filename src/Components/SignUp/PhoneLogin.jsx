@@ -10,7 +10,7 @@ const PhoneLogin = () => {
   const [otp, setOtp] = useState("");
   const [otpSent, setOtpSent] = useState(false);
   const navigate = useNavigate();
-  // const setToken = userStore((state) => state.setToken);
+  const setToken = userStore((state) => state.setUserToken);
 
   const sendOTP = async () => {
     if (!phone) return toast.error("Enter phone number first");
@@ -59,7 +59,8 @@ const PhoneLogin = () => {
       if (res.ok) {
         toast.success("OTP verified!");
         localStorage.setItem("token", data?.token);
-        //  setToken(data?.token);
+
+        setToken(data?.token);
 
         // Save token if needed: localStorage.setItem("token", data.token);
         setTimeout(() => navigate("/shop"), 1500);

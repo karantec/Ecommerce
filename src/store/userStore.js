@@ -26,8 +26,8 @@ export const userStore = create((set) => ({
   createdAt: null,
   token: null,
 
-  setUserToken: ({ token }) => {
-    set({ token: token });
+  setUserToken: (token) => {
+    set({ token });
   },
 
   setClearToken: () => {
