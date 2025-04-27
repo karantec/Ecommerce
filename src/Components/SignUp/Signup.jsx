@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { userStore } from "../../store/userStore";
+import { Eye, EyeOff } from "lucide-react"; // Eye icons
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -12,7 +13,6 @@ const Signup = () => {
     password: "",
     confirmPassword: "",
     phone: "",
-    profileImage: "",
     addresses: [
       {
         type: "Home",
@@ -23,27 +23,20 @@ const Signup = () => {
         country: "",
         primaryPhone: "",
       },
-      {
-        type: "Work",
-        addressLine: "",
-        city: "",
-        state: "",
-        zipcode: "",
-        country: "",
-        primaryPhone: "",
-      },
     ],
   });
+
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const handleChange = (e) => {
     const { id, value } = e.target;
     setFormData({ ...formData, [id]: value });
   };
 
-  const handleAddressChange = (index, field, value) => {
-    const updatedAddresses = [...formData.addresses];
-    updatedAddresses[index][field] = value;
-    setFormData({ ...formData, addresses: updatedAddresses });
+  const handleAddressChange = (field, value) => {
+    const updatedAddress = { ...formData.addresses[0], [field]: value };
+    setFormData({ ...formData, addresses: [updatedAddress] });
   };
 
   const handleSubmit = async (e) => {
@@ -55,11 +48,14 @@ const Signup = () => {
     }
 
     try {
-      const response = await fetch("https://jewelleryapp.onrender.com/auth/signup", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
+      const response = await fetch(
+        "https://jewelleryapp.onrender.com/auth/signup",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(formData),
+        }
+      );
 
       const result = await response.json();
       if (response.ok) {
@@ -78,7 +74,6 @@ const Signup = () => {
   return (
     <section className="min-h-screen bg-gray-100 py-12">
       <div className="max-w-6xl mx-auto bg-white rounded-3xl shadow-2xl overflow-hidden flex flex-col md:flex-row">
-        
         {/* Left Image Section */}
         <div className="md:w-1/2 hidden md:block">
           <img
@@ -90,8 +85,10 @@ const Signup = () => {
 
         {/* Signup Form Section */}
         <div className="w-full md:w-1/2 p-8 sm:p-12">
-          <h2 className="text-3xl font-bold text-center text-brown-800 mb-6">Create an Account</h2>
-          
+          <h2 className="text-3xl font-bold text-center text-brown-800 mb-6">
+            Create an Account
+          </h2>
+
           <form onSubmit={handleSubmit} className="space-y-5">
             <input
               type="text"
@@ -113,25 +110,49 @@ const Signup = () => {
               className="w-full border rounded-lg px-4 py-3"
             />
 
+            {/* Password Fields */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <input
-                type="password"
-                id="password"
-                value={formData.password}
-                onChange={handleChange}
-                placeholder="Password"
-                required
-                className="w-full border rounded-lg px-4 py-3"
-              />
-              <input
-                type="password"
-                id="confirmPassword"
-                value={formData.confirmPassword}
-                onChange={handleChange}
-                placeholder="Confirm Password"
-                required
-                className="w-full border rounded-lg px-4 py-3"
-              />
+              <div className="relative">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  id="password"
+                  value={formData.password}
+                  onChange={handleChange}
+                  placeholder="Password"
+                  required
+                  className="w-full border rounded-lg px-4 py-3 pr-12"
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword((prev) => !prev)}
+                  className="absolute top-1/2 right-4 transform -translate-y-1/2 text-gray-600"
+                >
+                  {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                </button>
+              </div>
+
+              <div className="relative">
+                <input
+                  type={showConfirmPassword ? "text" : "password"}
+                  id="confirmPassword"
+                  value={formData.confirmPassword}
+                  onChange={handleChange}
+                  placeholder="Confirm Password"
+                  required
+                  className="w-full border rounded-lg px-4 py-3 pr-12"
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowConfirmPassword((prev) => !prev)}
+                  className="absolute top-1/2 right-4 transform -translate-y-1/2 text-gray-600"
+                >
+                  {showConfirmPassword ? (
+                    <EyeOff size={20} />
+                  ) : (
+                    <Eye size={20} />
+                  )}
+                </button>
+              </div>
             </div>
 
             <input
@@ -144,77 +165,76 @@ const Signup = () => {
               className="w-full border rounded-lg px-4 py-3"
             />
 
-            <input
-              type="text"
-              id="profileImage"
-              value={formData.profileImage}
-              onChange={handleChange}
-              placeholder="Profile Image URL"
-              className="w-full border rounded-lg px-4 py-3"
-            />
+            {/* Only Home Address */}
+            <div className="bg-gray-50 p-5 rounded-xl border mb-3">
+              <h4 className="font-medium text-lg text-gray-700 mb-4">
+                Home Address
+              </h4>
 
-            {/* Address Fields */}
-            {formData.addresses.map((addr, index) => (
-              <div key={index} className="bg-gray-50 p-5 rounded-xl border mb-3">
-                <h4 className="font-medium text-lg text-gray-700 mb-4">{addr.type} Address</h4>
+              <input
+                type="text"
+                placeholder="Address Line"
+                value={formData.addresses[0].addressLine}
+                onChange={(e) =>
+                  handleAddressChange("addressLine", e.target.value)
+                }
+                className="w-full border mb-3 rounded-lg px-4 py-3"
+                required
+              />
 
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-3">
                 <input
                   type="text"
-                  placeholder="Address Line"
-                  value={addr.addressLine}
-                  onChange={(e) => handleAddressChange(index, "addressLine", e.target.value)}
-                  className="w-full border mb-3 rounded-lg px-4 py-3"
+                  placeholder="City"
+                  value={formData.addresses[0].city}
+                  onChange={(e) => handleAddressChange("city", e.target.value)}
+                  className="border rounded-lg px-4 py-3"
                   required
                 />
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-3">
-                  <input
-                    type="text"
-                    placeholder="City"
-                    value={addr.city}
-                    onChange={(e) => handleAddressChange(index, "city", e.target.value)}
-                    className="border rounded-lg px-4 py-3"
-                    required
-                  />
-                  <input
-                    type="text"
-                    placeholder="State"
-                    value={addr.state}
-                    onChange={(e) => handleAddressChange(index, "state", e.target.value)}
-                    className="border rounded-lg px-4 py-3"
-                    required
-                  />
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-3">
-                  <input
-                    type="text"
-                    placeholder="ZIP Code"
-                    value={addr.zipcode}
-                    onChange={(e) => handleAddressChange(index, "zipcode", e.target.value)}
-                    className="border rounded-lg px-4 py-3"
-                    required
-                  />
-                  <input
-                    type="text"
-                    placeholder="Country"
-                    value={addr.country}
-                    onChange={(e) => handleAddressChange(index, "country", e.target.value)}
-                    className="border rounded-lg px-4 py-3"
-                    required
-                  />
-                </div>
-
                 <input
                   type="text"
-                  placeholder="Primary Phone"
-                  value={addr.primaryPhone}
-                  onChange={(e) => handleAddressChange(index, "primaryPhone", e.target.value)}
-                  className="w-full border rounded-lg px-4 py-3"
+                  placeholder="State"
+                  value={formData.addresses[0].state}
+                  onChange={(e) => handleAddressChange("state", e.target.value)}
+                  className="border rounded-lg px-4 py-3"
                   required
                 />
               </div>
-            ))}
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-3">
+                <input
+                  type="text"
+                  placeholder="ZIP Code"
+                  value={formData.addresses[0].zipcode}
+                  onChange={(e) =>
+                    handleAddressChange("zipcode", e.target.value)
+                  }
+                  className="border rounded-lg px-4 py-3"
+                  required
+                />
+                <input
+                  type="text"
+                  placeholder="Country"
+                  value={formData.addresses[0].country}
+                  onChange={(e) =>
+                    handleAddressChange("country", e.target.value)
+                  }
+                  className="border rounded-lg px-4 py-3"
+                  required
+                />
+              </div>
+
+              <input
+                type="text"
+                placeholder="Primary Phone"
+                value={formData.addresses[0].primaryPhone}
+                onChange={(e) =>
+                  handleAddressChange("primaryPhone", e.target.value)
+                }
+                className="w-full border rounded-lg px-4 py-3"
+                required
+              />
+            </div>
 
             <button
               type="submit"
@@ -226,7 +246,10 @@ const Signup = () => {
 
           <p className="mt-6 text-center text-gray-600 text-sm">
             Already have an account?{" "}
-            <Link to="/login" className="text-brown-700 font-semibold hover:underline">
+            <Link
+              to="/login"
+              className="text-brown-700 font-semibold hover:underline"
+            >
               Login
             </Link>
           </p>

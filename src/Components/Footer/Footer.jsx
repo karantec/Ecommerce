@@ -35,6 +35,14 @@ const Footer = () => {
                 </li>
                 <li className="mb-3">
                   <a
+                    href="/order-history"
+                    className="text-gray-600 hover:text-gray-800"
+                  >
+                    Order History
+                  </a>
+                </li>
+                <li className="mb-3">
+                  <a
                     href="/track-order"
                     className="text-gray-600 hover:text-gray-800"
                   >
