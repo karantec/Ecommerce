@@ -5,6 +5,7 @@ import {
   FaYoutube,
   FaTwitter,
   FaPinterest,
+  FaWhatsapp,
 } from "react-icons/fa";
 
 const ContactSection = () => {
@@ -58,7 +59,7 @@ const ContactSection = () => {
             </h3>
             <div className="flex space-x-4 mt-2">
               <a
-                href="https://instagram.com"
+                href="https://www.instagram.com/sri_laxmialankar?igsh=MTRlbDJ4Z2RpbGNsNQ%3D%3D"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-gray-600 hover:text-orange-600"
@@ -66,7 +67,7 @@ const ContactSection = () => {
                 <FaInstagram size={24} />
               </a>
               <a
-                href="https://facebook.com"
+                href="https://www.facebook.com/profile.php?id=100065134027201&rdid=15tpnC0CSO4SoMmx&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F15p8Tw8KcD%2F#"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-gray-600 hover:text-orange-600"
@@ -90,12 +91,12 @@ const ContactSection = () => {
                 <FaTwitter size={24} />
               </a>
               <a
-                href="https://pinterest.com"
+                href="https://chat.whatsapp.com/DsjiQibuRimCn77xXeT1EJ"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-gray-600 hover:text-orange-600"
               >
-                <FaPinterest size={24} />
+                <FaWhatsapp size={24} />
               </a>
             </div>
           </div>

@@ -1,19 +1,22 @@
 import React, { useEffect, useState } from "react";
-import bgImage from "../../assets/home.jpg";
 
 const HeroSection = () => {
-  const [carousel, setCarousel] = useState({ text: "", images: [] });
+  const [carouselImages, setCarouselImages] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          "https://jewelleryapp.onrender.com/home/get"
+          "https://jewelleryapp.onrender.com/crousel/"
         );
         const data = await response.json();
-        // Access the carousel from the first item in the array
-        setCarousel(data[0].carousel);
+
+        console.log("carousel data", data);
+
+        // Extract image URLs from data
+        const images = data.map((item) => item.image);
+        setCarouselImages(images);
       } catch (error) {
         console.error("Error fetching hero section data:", error);
       }
@@ -22,42 +25,31 @@ const HeroSection = () => {
     fetchData();
   }, []);
 
-  // Auto-slide every 3 seconds
   useEffect(() => {
-    if (carousel?.images?.length > 1) {
+    if (carouselImages.length > 1) {
       const interval = setInterval(() => {
-        setCurrentIndex(
-          (prevIndex) => (prevIndex + 1) % (carousel?.images?.length || 1)
-        );
+        setCurrentIndex((prevIndex) => (prevIndex + 1) % carouselImages.length);
       }, 3000);
       return () => clearInterval(interval);
     }
-  }, [carousel?.images]); // Add carousel.images as dependency
+  }, [carouselImages]);
 
   const handleNext = () => {
-    if (carousel?.images?.length) {
-      setCurrentIndex((prevIndex) => (prevIndex + 1) % carousel.images.length);
-    }
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % carouselImages.length);
   };
 
   const handlePrev = () => {
-    if (carousel?.images?.length) {
-      setCurrentIndex(
-        (prevIndex) =>
-          (prevIndex - 1 + carousel.images.length) % carousel.images.length
-      );
-    }
+    setCurrentIndex(
+      (prevIndex) =>
+        (prevIndex - 1 + carouselImages.length) % carouselImages.length
+    );
   };
 
   return (
     <div
       className="relative h-[80vh] md:h-screen flex items-center justify-center bg-cover bg-center transition-all duration-700"
       style={{
-        // backgroundImage: `url(${
-        //   carousel?.images?.[currentIndex] || "home.png"
-        // })`,
-        backgroundImage: `url(${bgImage})`,
-        backgroundSize: "stretch",
+        backgroundImage: `url(${carouselImages[currentIndex] || "home.png"})`,
       }}
     >
       {/* Overlay */}
@@ -81,7 +73,7 @@ const HeroSection = () => {
       </div>
 
       {/* Navigation Buttons */}
-      {carousel?.images?.length > 1 && (
+      {carouselImages.length > 1 && (
         <>
           <button
             className="absolute left-2 sm:left-4 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-30 text-white p-2 sm:p-3 rounded-full"
@@ -99,9 +91,9 @@ const HeroSection = () => {
       )}
 
       {/* Dots Indicator */}
-      {carousel?.images?.length > 1 && (
+      {carouselImages.length > 1 && (
         <div className="absolute bottom-4 flex space-x-2">
-          {carousel?.images?.map((_, index) => (
+          {carouselImages.map((_, index) => (
             <div
               key={index}
               className={`h-2 w-2 sm:h-3 sm:w-3 rounded-full transition-all ${

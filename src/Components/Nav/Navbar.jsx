@@ -55,14 +55,14 @@ const Navbar = () => {
     }
   }, []);
   return (
-    <div>
+    <div className="">
       {/* Top bar */}
       <div className="bg-[#6E3000] text-white text-center py-2 text-lg">
         Free express worldwide shipping. Subscribe to discover
       </div>
 
       {/* Main navigation */}
-      <div className="bg-[#E9F1ED] px-6 py-5 flex items-center justify-between">
+      <div className="bg-[#E9F1ED] px-6  flex items-center justify-between">
         {/* Logo */}
         <Link to="/">
           <img

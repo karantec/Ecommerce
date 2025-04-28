@@ -183,11 +183,33 @@ const GoldPrices = () => {
       </p>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
-        {caratData.map((item) => (
-          <React.Fragment key={item.carat}>
-            {renderPriceCard(item.carat, item.purity)}
-          </React.Fragment>
-        ))}
+        {caratData.map((item, index) => {
+          if (index === caratData.length - 1) {
+            return (
+              <React.Fragment key={item.carat}>
+                <div
+                  key={index}
+                  className="flex-1 text-center w-full sm:w-auto bg-white p-6 rounded-lg shadow-md transition-all duration-300 hover:shadow-lg border border-orange-100"
+                >
+                  <h2 className="text-base sm:text-lg mb-3 sm:mb-4 font-brown font-semibold">
+                    1K Price
+                  </h2>
+                  <div className="text-brown-600 text-4xl sm:text-5xl font-semibold mb-3 sm:mb-4">
+                    <span className="font-normal">₹</span> {`9,800`}
+                  </div>
+                  <p className="text-gray-600 text-sm sm:text-base">
+                    10g Silver
+                  </p>
+                </div>
+              </React.Fragment>
+            );
+          }
+          return (
+            <React.Fragment key={item.carat}>
+              {renderPriceCard(item.carat, item.purity)}
+            </React.Fragment>
+          );
+        })}
       </div>
     </div>
   );
