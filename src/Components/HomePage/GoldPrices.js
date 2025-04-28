@@ -139,7 +139,7 @@ const GoldPrices = () => {
     { carat: "24K", purity: "99.9%" },
     { carat: "22K", purity: "91.7%" },
     { carat: "18K", purity: "75%" },
-    { carat: "1K", purity: "4.1%" },
+    { carat: "Silver fo 10g", purity: "4.1%" },
   ];
 
   // Function to render connection status indicator
@@ -192,7 +192,7 @@ const GoldPrices = () => {
                   className="flex-1 text-center w-full sm:w-auto bg-white p-6 rounded-lg shadow-md transition-all duration-300 hover:shadow-lg border border-orange-100"
                 >
                   <h2 className="text-base sm:text-lg mb-3 sm:mb-4 font-brown font-semibold">
-                    1K Price
+                    Silver
                   </h2>
                   <div className="text-brown-600 text-4xl sm:text-5xl font-semibold mb-3 sm:mb-4">
                     <span className="font-normal">₹</span> {`9,800`}
