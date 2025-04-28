@@ -12,19 +12,35 @@ const descriptionData = [
   },
   {
     name: "Style",
-    value: "Classic style",
+    value: "Traditional Indian Bridal Set",
   },
   {
     name: "Certificate",
-    value: "ISO-898921212",
+    value: "BIS Hallmarked (22KT Gold)",
   },
   {
     name: "Size",
-    value: "34mm x 450mm x 19mm",
+    value: "22 Karat Gold (916 Purity)",
   },
   {
-    name: "Memory",
-    value: "36GB RAM",
+    name: "Total Weight",
+    value: "Approx. 65–75 grams (complete set)",
+  },
+  {
+    name: "Set Includes",
+    value: "Necklace, Earrings, Maang Tikka",
+  },
+  {
+    name: "Occasion",
+    value: "Wedding, Engagement, Bridal Wear",
+  },
+  {
+    name: "Design Theme",
+    value: "Temple Art, Floral Motifs, Filigree",
+  },
+  {
+    name: "Finish",
+    value: "High Polish with Antique Detailing",
   },
 ];
 
@@ -286,17 +302,14 @@ const ProductDetailComplete = () => {
         <div className="px-4 md:px-8 lg:px-16 py-6">
           <h2 className="font-normal text-xl md:text-2xl mb-4">Description</h2>
           <p className="font-light text-base md:text-lg">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur.Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-            nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur.
+            {`Celebrate elegance with this handcrafted gold necklace from SriLaxmi Alankar. Designed in
+a classic style, this piece combines timeless artistry with contemporary grace, making it
+perfect for weddings, festive occasions, and traditional celebrations. Meticulously crafted by
+skilled artisans, every detail reflects our commitment to heritage, precision, and luxury.
+Made from certified BIS-hallmarked gold, the necklace features intricate motifs inspired by
+Indian temple architecture. Whether paired with a saree or lehenga, this piece adds
+unmatched charm to your look and creates memories that last a lifetime.
+`}
           </p>
         </div>
 

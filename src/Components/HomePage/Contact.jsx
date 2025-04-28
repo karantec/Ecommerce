@@ -1,5 +1,11 @@
 import React from "react";
-import { FaInstagram, FaFacebook, FaYoutube, FaTwitter, FaPinterest } from "react-icons/fa";
+import {
+  FaInstagram,
+  FaFacebook,
+  FaYoutube,
+  FaTwitter,
+  FaPinterest,
+} from "react-icons/fa";
 
 const ContactSection = () => {
   return (
@@ -9,7 +15,9 @@ const ContactSection = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
           {/* Contact Information */}
           <div className="flex flex-col items-center md:items-start">
-            <h3 className="text-lg font-semibold text-gray-700 mb-2">Contact Us</h3>
+            <h3 className="text-lg font-semibold text-gray-700 mb-2">
+              Contact Us
+            </h3>
             <p className="text-sm text-gray-600 mb-2">
               Working Hours Monday to Saturday <br />
               9:00am to 6:30pm
@@ -23,7 +31,7 @@ const ContactSection = () => {
               Let's Get in Touch
             </h3>
             <p className="text-sm text-gray-600 mb-4">
-              Lorem Ipsum is simply dummy text of the printing.
+              {`Stay connected with SriLaxmi Alankar. Receive updates on new collections, offers, and more`}
             </p>
             <form className="flex items-center w-full max-w-md">
               <input
@@ -49,19 +57,44 @@ const ContactSection = () => {
               Follow Us On Social Media
             </h3>
             <div className="flex space-x-4 mt-2">
-              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-orange-600">
+              <a
+                href="https://instagram.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-600 hover:text-orange-600"
+              >
                 <FaInstagram size={24} />
               </a>
-              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-orange-600">
+              <a
+                href="https://facebook.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-600 hover:text-orange-600"
+              >
                 <FaFacebook size={24} />
               </a>
-              <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-orange-600">
+              <a
+                href="https://youtube.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-600 hover:text-orange-600"
+              >
                 <FaYoutube size={24} />
               </a>
-              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-orange-600">
+              <a
+                href="https://twitter.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-600 hover:text-orange-600"
+              >
                 <FaTwitter size={24} />
               </a>
-              <a href="https://pinterest.com" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-orange-600">
+              <a
+                href="https://pinterest.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-600 hover:text-orange-600"
+              >
                 <FaPinterest size={24} />
               </a>
             </div>

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import bgImage from "../../assets/home.jpg";
 
 const HeroSection = () => {
   const [carousel, setCarousel] = useState({ text: "", images: [] });
@@ -52,9 +53,11 @@ const HeroSection = () => {
     <div
       className="relative h-[80vh] md:h-screen flex items-center justify-center bg-cover bg-center transition-all duration-700"
       style={{
-        backgroundImage: `url(${
-          carousel?.images?.[currentIndex] || "home.png"
-        })`,
+        // backgroundImage: `url(${
+        //   carousel?.images?.[currentIndex] || "home.png"
+        // })`,
+        backgroundImage: `url(${bgImage})`,
+        backgroundSize: "stretch",
       }}
     >
       {/* Overlay */}

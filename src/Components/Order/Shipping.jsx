@@ -58,7 +58,7 @@ const Shipping = () => {
         </Section>
 
         {/* Return & Exchange */}
-        <Section title="Return & Exchange Policy">
+        <Section title="Return Policy">
           <List
             items={[
               "No returns for change of mind, personal preferences, or minor variations in color/weight.",
