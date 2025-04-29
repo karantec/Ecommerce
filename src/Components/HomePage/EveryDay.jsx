@@ -1,37 +1,41 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 
 const JewelryShowcase = () => {
   const [products, setProducts] = useState([]);
 
-  const fetchCategories = async () => {
+  const fetchProducts = async () => {
     try {
-      const response = await fetch("https://jewelleryapp.onrender.com/gold");
+      const response = await fetch(
+        "https://jewelleryapp.onrender.com/Everyday"
+      );
       const data = await response.json();
-      setProducts(data.products);
+      setProducts(data);
     } catch (error) {
-      console.error(error);
+      console.error("Failed to fetch everyday products:", error);
       setProducts([]);
     }
   };
 
   useEffect(() => {
-    fetchCategories();
+    fetchProducts();
   }, []);
 
   const handleShare = (product) => {
     const shareData = {
       title: product.name,
       text: `Check out this elegant jewelry: ${product.name}`,
-      url: `https://yourdomain.com/product/${product._id}`, // Replace with actual product detail page URL
+      url: `https://yourdomain.com/product/${product._id}`, // Replace with your real product URL
     };
 
     if (navigator.share) {
       navigator
         .share(shareData)
-        .then(() => console.log('Product shared successfully!'))
-        .catch((error) => console.error('Sharing failed', error));
+        .then(() => console.log("Product shared successfully!"))
+        .catch((error) => console.error("Sharing failed", error));
     } else {
-      alert('Sharing is not supported on your browser. Copy the link manually.');
+      alert(
+        "Sharing is not supported on your browser. Copy the link manually."
+      );
     }
   };
 
@@ -41,7 +45,11 @@ const JewelryShowcase = () => {
       <div className="text-center mb-8">
         <div className="flex items-center justify-center space-x-4 mb-2">
           <div className="w-16 h-px bg-gray-300"></div>
-          <img src="Category/icon.png" alt="Diamond Icon" className="w-6 h-6 inline-block" />
+          <img
+            src="Category/icon.png"
+            alt="Diamond Icon"
+            className="w-6 h-6 inline-block"
+          />
           <div className="w-16 h-px bg-gray-300"></div>
         </div>
 
@@ -56,72 +64,47 @@ const JewelryShowcase = () => {
 
       {/* Product Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        {products.sort(() => 0.5 - Math.random()).slice(0, 6).map((product) => (
-          <div
-            key={product._id}
-            className="relative group rounded-lg overflow-hidden transition-shadow hover:shadow-md"
-          >
-            <div className="relative">
-              {product.isNew && (
-                <span className="absolute top-2 left-2 bg-brown-600 text-white text-xs px-2 py-1 rounded z-10">
-                  NEW
-                </span>
-              )}
-              <img
-                src={product.images[0]}
-                alt={product.name}
-                className="w-full h-auto object-contain aspect-square bg-white"
-              />
-              <div className="absolute top-2 right-2 space-y-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                {/* Favorite Button (Optional) */}
-                <button className="bg-white p-2 rounded-full shadow-md hover:bg-gray-100">
-                  <svg
-                    className="w-5 h-5"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
+        {products
+          .sort(() => 0.5 - Math.random())
+          .slice(0, 6)
+          .map((product) => (
+            <div
+              key={product._id}
+              className="relative group rounded-lg overflow-hidden transition-shadow hover:shadow-md"
+            >
+              <div className="relative">
+                <img
+                  src={product.image}
+                  alt={product.name}
+                  className="w-full h-auto object-contain aspect-square bg-white"
+                />
+                <div className="absolute top-2 right-2 space-y-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                  {/* Share Button */}
+                  <button
+                    onClick={() => handleShare(product)}
+                    className="bg-white p-2 rounded-full shadow-md hover:bg-gray-100"
                   >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-                    />
-                  </svg>
-                </button>
-
-                {/* Share Button */}
-                <button
-                  onClick={() => handleShare(product)}
-                  className="bg-white p-2 rounded-full shadow-md hover:bg-gray-100"
-                >
-                  <svg
-                    className="w-5 h-5"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"
-                    />
-                  </svg>
-                </button>
+                    <svg
+                      className="w-5 h-5"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"
+                      />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+              <div className="mt-2 mb-4 text-center">
+                <h3 className="text-sm font-medium">{product.name}</h3>
               </div>
             </div>
-            <div className="mt-2 mb-4 text-center">
-              <h3 className="text-sm font-medium">{product.name}</h3>
-              {/* Uncomment if needed */}
-              {/* <div className="flex items-center justify-center gap-2 mt-1">
-                <span className="text-md font-bold">₹{product.priceDetails.goldPrice}</span>
-                <span className="text-sm text-gray-500 line-through">₹{product.priceDetails.goldPrice}</span>
-                <span className="text-sm text-red-600">{product?.discount || 0}</span>
-              </div> */}
-            </div>
-          </div>
-        ))}
+          ))}
       </div>
 
       {/* Dots Indicator */}
@@ -130,7 +113,9 @@ const JewelryShowcase = () => {
           {[1, 2, 3, 4].map((dot) => (
             <button
               key={dot}
-              className={`w-2 h-2 rounded-full ${dot === 1 ? 'bg-orange-500' : 'bg-gray-300'}`}
+              className={`w-2 h-2 rounded-full ${
+                dot === 1 ? "bg-orange-500" : "bg-gray-300"
+              }`}
             />
           ))}
         </div>

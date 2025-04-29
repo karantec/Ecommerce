@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { FaFacebookF, FaGoogle, FaLinkedinIn } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import { X, User } from "lucide-react";
 import { userStore } from "../../store/userStore";
 import { useCart } from "../../CartContext";
+import login from "../../assets/login.jpg";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -51,7 +51,7 @@ const Login = () => {
       <div className="w-full max-w-5xl bg-white rounded-xl shadow-lg overflow-hidden flex flex-col md:flex-row">
         <div className="md:w-1/2 w-full h-64 md:h-auto">
           <img
-            src="https://manubhai.in/SocialMedia/post_artworks/DGBD00687.jpg"
+            src={login}
             alt="Jewellery"
             className="w-full h-full object-cover md:rounded-l-xl"
           />

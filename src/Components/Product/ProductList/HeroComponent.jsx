@@ -22,7 +22,7 @@ const HeroComponent = () => {
     if (slides.length > 1) {
       const interval = setInterval(() => {
         setCurrentIndex((prevIndex) => (prevIndex + 1) % slides.length);
-      }, 5000); // Change slide every 4 seconds
+      }, 3500); // Change slide every 4 seconds
       return () => clearInterval(interval);
     }
   }, [slides]);

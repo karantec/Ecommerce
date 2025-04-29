@@ -1,27 +1,27 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 
 const ProductSelling = () => {
   const [products, setProducts] = useState([]);
 
-  const fetchCategories = async () => {
+  const fetchBestSelling = async () => {
     try {
-      const response = await fetch("https://jewelleryapp.onrender.com/gold");
+      const response = await fetch("https://jewelleryapp.onrender.com/best");
       const data = await response.json();
-      setProducts(data.products);
+      console.log("Best selling data:", data);
+      setProducts(data);
     } catch (error) {
-      console.error(error);
+      console.error("Error fetching best selling products:", error);
       setProducts([]);
     }
   };
 
   useEffect(() => {
-    fetchCategories();
+    fetchBestSelling();
   }, []);
 
   return (
     <div className="container mx-auto px-2 py-20">
       <div className="text-center mb-8">
-        {/* Icon and Line */}
         <div className="flex items-center justify-center space-x-4 mb-2">
           <div className="w-16 h-px"></div>
           <img
@@ -31,8 +31,6 @@ const ProductSelling = () => {
           />
           <div className="w-16 h-px bg-gray-300"></div>
         </div>
-
-        {/* Title */}
         <h2 className="text-4xl font-garamond bg-gradient-to-r from-[#E66E06] to-[#6E3000] text-transparent bg-clip-text">
           Best Selling Products
         </h2>
@@ -41,17 +39,12 @@ const ProductSelling = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {products.slice(0, 10).map((product) => (
           <div
-            key={product.id}
+            key={product._id}
             className="relative group bg-white rounded-2xl shadow-md overflow-hidden transition-transform hover:scale-105"
           >
             <div className="relative">
-              {product.isNew && (
-                <span className="absolute top-2 left-2 bg-brown-600 text-white text-xs px-2 py-1 rounded-full z-10">
-                  NEW
-                </span>
-              )}
               <img
-                src={product.images[0]}
+                src={product.image}
                 alt={product.name}
                 className="w-full h-auto object-contain aspect-square p-4"
               />
@@ -103,7 +96,7 @@ const ProductSelling = () => {
             <button
               key={dot}
               className={`w-2 h-2 rounded-full ${
-                dot === 1 ? 'bg-orange-500' : 'bg-gray-300'
+                dot === 1 ? "bg-orange-500" : "bg-gray-300"
               }`}
             />
           ))}

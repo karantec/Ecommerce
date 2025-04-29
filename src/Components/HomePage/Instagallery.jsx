@@ -1,20 +1,24 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 const InstagramGallery = () => {
-  const images = [
-    "/Instagram/31.png", // Replace with actual image paths
-    "/Instagram/32.png",
-    "/Instagram/33.png",
-    "/Instagram/34.png",
-    "/Instagram/34.png",
-    "/Instagram/35.png",
-    "/Instagram/36.png",
-    "/Instagram/37.png",
-    "/Instagram/38.png",
-    "/Instagram/39.png",
-    "/Instagram/40.png",
-    "/Instagram/41.png",
-  ];
+  const [images, setImages] = useState([]);
+
+  const fetchInstagramImages = async () => {
+    try {
+      const response = await fetch(
+        "https://jewelleryapp.onrender.com/instagram"
+      );
+      const data = await response.json();
+      setImages(data);
+    } catch (error) {
+      console.error("Failed to fetch Instagram posts:", error);
+      setImages([]);
+    }
+  };
+
+  useEffect(() => {
+    fetchInstagramImages();
+  }, []);
 
   return (
     <div className="max-w-screen-xl mx-auto px-4 py-10">
@@ -22,10 +26,10 @@ const InstagramGallery = () => {
         Follow Us On Instagram
       </h2>
       <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
-        {images.map((image, index) => (
-          <div key={index} className="overflow-hidden rounded-lg shadow-md">
+        {images.map((post, index) => (
+          <div key={post._id} className="overflow-hidden rounded-lg shadow-md">
             <img
-              src={image}
+              src={post.image}
               alt={`Instagram post ${index + 1}`}
               className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
             />
