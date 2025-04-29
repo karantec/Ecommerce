@@ -18,7 +18,7 @@ const Home = () => {
   return (
     <div>
       <HeroSection />
-      <FeaturesSection />
+      {/* <FeaturesSection /> */}
       <GoldPrices />
 
       <JewelryGrid />

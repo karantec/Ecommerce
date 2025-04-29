@@ -14,8 +14,8 @@ const Footer = () => {
               className="w-44 h-18"
             />
             <p className="text-2xl font-garmond text-black">
-              Shri Laxmi Alankar is more than a jewelry store—it is a
-              destination for those who cherish the art of fine jewelry.
+              Sri Laxmi alankar is more than a jewelry store—it is a destination
+              for those who cherish the art of fine jewelry.
             </p>
           </div>
 
