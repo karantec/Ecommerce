@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from "react";
 
-const JewelryShowcase = () => {
+const JewelryShowcase = ({ navigateShop }) => {
   const [products, setProducts] = useState([]);
+
+  const shopNavigationHandler = () => {
+    navigateShop();
+  };
 
   const fetchProducts = async () => {
     try {
@@ -69,6 +73,7 @@ const JewelryShowcase = () => {
           .slice(0, 6)
           .map((product) => (
             <div
+              onClick={shopNavigationHandler}
               key={product._id}
               className="relative group rounded-lg overflow-hidden transition-shadow hover:shadow-md"
             >

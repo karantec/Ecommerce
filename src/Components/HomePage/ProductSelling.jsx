@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from "react";
 
-const ProductSelling = () => {
+const ProductSelling = ({ navigateShop }) => {
   const [products, setProducts] = useState([]);
+
+  const shopNavigationHandler = () => {
+    navigateShop();
+  };
 
   const fetchBestSelling = async () => {
     try {
@@ -39,6 +43,7 @@ const ProductSelling = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {products.slice(0, 10).map((product) => (
           <div
+            onClick={shopNavigationHandler}
             key={product._id}
             className="relative group bg-white rounded-2xl shadow-md overflow-hidden transition-transform hover:scale-105"
           >

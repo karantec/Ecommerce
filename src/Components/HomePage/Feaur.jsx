@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from "react";
 
-const FeatureProducts = () => {
+const FeatureProducts = ({ navigateShop }) => {
   const [products, setProducts] = useState([]);
+
+  const shopNavigationHandler = () => {
+    navigateShop();
+  };
 
   const fetchFeaturedProducts = async () => {
     try {
@@ -53,6 +57,7 @@ const FeatureProducts = () => {
               .slice(0, 6)
               .map((product) => (
                 <div
+                  onClick={shopNavigationHandler}
                   key={product._id}
                   className="rounded-xl shadow transition duration-300 overflow-hidden"
                 >
@@ -64,7 +69,6 @@ const FeatureProducts = () => {
                       className="w-full h-full object-contain p-4 transition-transform duration-300 hover:scale-105"
                     />
                   </div>
-
                   {/* Name & Optional Description */}
                   <div className="text-center py-3 px-2">
                     <h3 className="font-Brown uppercase text-sm text-gray-800">

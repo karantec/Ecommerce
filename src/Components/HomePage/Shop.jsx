@@ -7,8 +7,12 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 
-const CategoryShowcase = () => {
+const CategoryShowcase = ({ navigateShop }) => {
   const [categories, setCategories] = useState([]);
+
+  const shopNavigationHandler = () => {
+    navigateShop();
+  };
 
   const fetchCategories = async () => {
     try {
@@ -71,7 +75,10 @@ const CategoryShowcase = () => {
       >
         {categories.map((category) => (
           <SwiperSlide key={category._id}>
-            <div className="relative group cursor-pointer overflow-hidden rounded-lg shadow-md">
+            <div
+              onClick={shopNavigationHandler}
+              className=" relative group cursor-pointer overflow-hidden rounded-lg shadow-md"
+            >
               <img
                 src={category.image}
                 alt={category.title}

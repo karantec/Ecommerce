@@ -13,8 +13,15 @@ import BlogSection from "./BlogSection";
 
 import TestimonialsComponent from "./Testimonial";
 import GoldPrices from "./GoldPrices";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
+  const navigate = useNavigate();
+
+  const navigateToShopHandler = () => {
+    navigate("/shop");
+  };
+
   return (
     <div>
       <HeroSection />
@@ -22,12 +29,12 @@ const Home = () => {
       <GoldPrices />
 
       <JewelryGrid />
-      <CategoryShowcase />
-      <JewelryShowcase />
-      <FeatureProducts />
+      <CategoryShowcase navigateShop={navigateToShopHandler} />
+      <JewelryShowcase navigateShop={navigateToShopHandler} />
+      <FeatureProducts navigateShop={navigateToShopHandler} />
       <TestimonialsComponent />
       <DiamondRingHero />
-      <ProductSelling />
+      <ProductSelling navigateShop={navigateToShopHandler} />
       {/* <JewelryShowcases/> */}
       <BlogSection />
       <InstagramGallery />
