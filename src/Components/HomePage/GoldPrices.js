@@ -14,7 +14,7 @@ const GoldPrices = () => {
     try {
       console.log("Fetching prices via API...");
       const response = await axios.get(
-        "jewelleryapp-production-0734.up.railway.app/today-price/PriceRouting"
+        "https://jewelleryapp.onrender.com/today-price/PriceRouting"
       );
 
       // Transform the data into a map for easier access
@@ -49,7 +49,7 @@ const GoldPrices = () => {
     // Try to initialize socket if it doesn't exist
     try {
       console.log("Attempting to connect to WebSocket...");
-      socketRef.current = io("jewelleryapp-production-0734.up.railway.app");
+      socketRef.current = io("https://jewelleryapp.onrender.com");
 
       socketRef.current.on("connect", () => {
         console.log("Socket connected successfully!");

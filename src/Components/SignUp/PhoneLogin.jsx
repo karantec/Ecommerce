@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
 import { userStore } from "../../store/userStore";
 
-const BASE_URL = "jewelleryapp-production-0734.up.railway.app/auth";
+const BASE_URL = "https://jewelleryapp.onrender.com/auth";
 
 const PhoneLogin = () => {
   const [phone, setPhone] = useState("");

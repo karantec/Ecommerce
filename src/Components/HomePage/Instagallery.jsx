@@ -6,7 +6,7 @@ const InstagramGallery = () => {
   const fetchInstagramImages = async () => {
     try {
       const response = await fetch(
-        "jewelleryapp-production-0734.up.railway.app/instagram"
+        "https://jewelleryapp.onrender.com/instagram"
       );
       const data = await response.json();
       setImages(data);

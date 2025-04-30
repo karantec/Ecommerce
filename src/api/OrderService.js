@@ -1,6 +1,6 @@
 import { userStore } from "../store/userStore";
 
-// const BASE_URL = "jewelleryapp-production-0734.up.railway.app/order";
+// const BASE_URL = "https://jewelleryapp.onrender.com/order";
 const BASE_URL = "http://localhost:8000/order";
 
 const getAuthHeaders = () => {

@@ -96,7 +96,7 @@ const ViewProductsPage = () => {
     try {
       setIsLoading(true);
       const response = await axios.get(
-        "jewelleryapp-production-0734.up.railway.app/gold"
+        "https://jewelleryapp.onrender.com/gold"
       );
       console.log("Fetched products:", response.data);
 
@@ -131,7 +131,7 @@ const ViewProductsPage = () => {
     try {
       setCategoriesLoading(true);
       const response = await axios.get(
-        "jewelleryapp-production-0734.up.railway.app/category/getAllCategory"
+        "https://jewelleryapp.onrender.com/category/getAllCategory"
       );
       console.log("Fetched categories:", response.data);
 
@@ -163,7 +163,7 @@ const ViewProductsPage = () => {
   const fetchGoldPrices = async () => {
     try {
       const response = await axios.get(
-        "jewelleryapp-production-0734.up.railway.app/today-price/PriceRouting"
+        "https://jewelleryapp.onrender.com/today-price/PriceRouting"
       );
       console.log("Fetched gold prices:", response.data);
 

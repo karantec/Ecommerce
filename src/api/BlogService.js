@@ -1,4 +1,4 @@
-const BASE_URL = "jewelleryapp-production-0734.up.railway.app/blog";
+const BASE_URL = "https://jewelleryapp.onrender.com/blog";
 
 export const getAllBlogs = async () => {
   try {

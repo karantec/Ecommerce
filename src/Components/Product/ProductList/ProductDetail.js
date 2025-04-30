@@ -58,7 +58,7 @@ const ProductDetailComplete = () => {
       setLoading(true);
       try {
         const response = await fetch(
-          `jewelleryapp-production-0734.up.railway.app/gold/${productId}`
+          `https://jewelleryapp.onrender.com/gold/${productId}`
         );
         if (!response.ok) {
           throw new Error("Failed to fetch product");

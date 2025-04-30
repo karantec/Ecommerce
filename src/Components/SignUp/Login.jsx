@@ -20,7 +20,7 @@ const Login = () => {
     e.preventDefault();
     try {
       const response = await fetch(
-        "jewelleryapp-production-0734.up.railway.app/auth/login",
+        "https://jewelleryapp.onrender.com/auth/login",
         {
           method: "POST",
           headers: {
