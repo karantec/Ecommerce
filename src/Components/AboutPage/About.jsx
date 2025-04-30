@@ -8,7 +8,9 @@ function About() {
   useEffect(() => {
     const fetchAboutData = async () => {
       try {
-        const res = await fetch("https://jewelleryapp.onrender.com/about");
+        const res = await fetch(
+          "jewelleryapp-production-0734.up.railway.app/about"
+        );
         const data = await res.json();
         setAboutData(data.abouts[0]); // Assuming you want the first object
       } catch (error) {

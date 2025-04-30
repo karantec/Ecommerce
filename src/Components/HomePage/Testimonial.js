@@ -9,7 +9,7 @@ const TestimonialsComponent = () => {
     const fetchTestimonials = async () => {
       try {
         const res = await fetch(
-          "https://jewelleryapp.onrender.com/testimonial"
+          "jewelleryapp-production-0734.up.railway.app/testimonial"
         );
         const data = await res.json();
         setTestimonials(data);

@@ -5,7 +5,9 @@ const FeatureProducts = () => {
 
   const fetchFeaturedProducts = async () => {
     try {
-      const response = await fetch("https://jewelleryapp.onrender.com/feature");
+      const response = await fetch(
+        "jewelleryapp-production-0734.up.railway.app/feature"
+      );
       const data = await response.json();
       setProducts(data);
     } catch (error) {

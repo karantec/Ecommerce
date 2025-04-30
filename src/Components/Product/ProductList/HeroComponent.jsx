@@ -7,7 +7,9 @@ const HeroComponent = () => {
   useEffect(() => {
     const fetchSlides = async () => {
       try {
-        const response = await fetch("https://jewelleryapp.onrender.com/shop");
+        const response = await fetch(
+          "jewelleryapp-production-0734.up.railway.app/shop"
+        );
         const data = await response.json();
         setSlides(data);
       } catch (error) {

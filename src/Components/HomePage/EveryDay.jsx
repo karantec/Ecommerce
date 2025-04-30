@@ -6,7 +6,7 @@ const JewelryShowcase = () => {
   const fetchProducts = async () => {
     try {
       const response = await fetch(
-        "https://jewelleryapp.onrender.com/Everyday"
+        "jewelleryapp-production-0734.up.railway.app/Everyday"
       );
       const data = await response.json();
       setProducts(data);

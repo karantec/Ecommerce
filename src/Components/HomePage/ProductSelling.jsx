@@ -5,7 +5,9 @@ const ProductSelling = () => {
 
   const fetchBestSelling = async () => {
     try {
-      const response = await fetch("https://jewelleryapp.onrender.com/best");
+      const response = await fetch(
+        "jewelleryapp-production-0734.up.railway.app/best"
+      );
       const data = await response.json();
       console.log("Best selling data:", data);
       setProducts(data);
