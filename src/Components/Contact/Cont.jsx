@@ -1,4 +1,5 @@
 import React from "react";
+import contact from "../../assets/contact.jpg";
 
 const Cont = () => {
   return (
@@ -11,7 +12,7 @@ const Cont = () => {
               <div className="group w-full h-full">
                 <div className="relative h-full">
                   <img
-                    src="https://rukminim2.flixcart.com/image/850/1000/xif0q/jewellery-set/l/8/o/cultured-na-1-plkl100ssjkog-tonolika-jewellery-original-imah34pfksxprew5.jpeg?q=90&crop=false"
+                    src={contact}
                     alt="Contact Us"
                     className="w-full h-full lg:rounded-l-2xl rounded-2xl bg-blend-multiply bg-indigo-700 object-cover"
                   />
@@ -21,12 +22,18 @@ const Cont = () => {
                   <div className="absolute bottom-0 w-full px-4 sm:px-5 lg:px-11 py-6">
                     <div className="bg-white rounded-lg p-6">
                       {/* Contact Information */}
-                      <a href="tel:4706011911" className="flex items-center mb-6">
+                      <a
+                        href="tel:4706011911"
+                        className="flex items-center mb-6"
+                      >
                         <h5 className="text-black text-base sm:text-lg font-normal leading-6 ml-4 sm:ml-5">
                           470-601-1911
                         </h5>
                       </a>
-                      <a href="mailto:Pagedone1234@gmail.com" className="flex items-center mb-6">
+                      <a
+                        href="mailto:Pagedone1234@gmail.com"
+                        className="flex items-center mb-6"
+                      >
                         <h5 className="text-black text-base sm:text-lg font-normal leading-6 ml-4 sm:ml-5">
                           Pagedone1234@gmail.com
                         </h5>

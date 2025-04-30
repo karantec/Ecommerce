@@ -75,7 +75,7 @@ function App() {
           />
           <Route path="*" element={<NotFound />} />
           <Route
-            path="/orders"
+            path="/order-history"
             element={
               // <ProtectedRoute>
               <OrderHistory />
