@@ -107,7 +107,7 @@ const ProductDetailComplete = () => {
     );
 
   return (
-    <div className="w-full">
+    <div className="w-full ">
       <button
         onClick={() => navigate("/shop")}
         className="p-4 flex items-center text-gray-600 hover:text-yellow-600 mb-2"
@@ -129,10 +129,10 @@ const ProductDetailComplete = () => {
         Back to Products
       </button>
 
-      <div className="px-4 md:px-8 flex flex-col lg:flex-row gap-6">
+      <div className="self-center  items-center px-4 md:px-8 flex flex-col lg:flex-row ">
         {/* Left: Product Images */}
-        <div className="w-full lg:w-1/2">
-          <div className="flex flex-col md:flex-row gap-4">
+        <div className="w-full lg:w-1/2  pl-[10rem]">
+          <div className="flex flex-col md:flex-row ">
             {/* Main Image */}
             <div className="flex-1 order-1 md:order-2 flex justify-center mb-4 md:mb-0">
               <img
@@ -150,7 +150,7 @@ const ProductDetailComplete = () => {
             </div>
 
             {/* Thumbnails */}
-            <div className="flex md:flex-col flex-wrap justify-center gap-2 order-2 md:order-1 md:w-20">
+            <div className=" flex md:flex-col flex-wrap justify-center gap-2 order-2 md:order-1 md:w-20">
               {product.images?.map((img, index) => (
                 <img
                   key={index}
@@ -173,7 +173,7 @@ const ProductDetailComplete = () => {
         </div>
 
         {/* Right: Product Info */}
-        <div className="w-full lg:w-1/2 space-y-4">
+        <div className=" w-full lg:w-1/2 space-y-4 pr-[10rem]">
           <h1 className="text-2xl md:text-3xl font-bold">
             {product.name || "Unnamed Product"}
           </h1>

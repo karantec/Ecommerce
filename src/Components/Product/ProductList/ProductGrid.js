@@ -570,6 +570,7 @@ const ViewProductsPage = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
             {currentProducts.map((product) => (
               <div
+                onClick={() => navigate(`/product/${product._id}`)}
                 key={product._id}
                 className="bg-white p-3 rounded-xl shadow-md border border-gray-200 transition-transform transform hover:scale-[1.02] hover:shadow-lg"
               >
@@ -591,7 +592,6 @@ const ViewProductsPage = () => {
                 <p className="text-xs text-gray-500 line-clamp-2 h-[2.5rem]">
                   {product.description}
                 </p>
-
                 <div className="mt-2 flex flex-wrap gap-1 text-xs">
                   <span className="px-2 py-0.5 bg-yellow-100 text-yellow-800 font-medium rounded">
                     {product.carat || product.karat || "N/A"}
@@ -603,7 +603,6 @@ const ViewProductsPage = () => {
                     Gross: {product.grossWeight || product.weight || "N/A"}g
                   </span>
                 </div>
-
                 {calculatedPrices[product._id] ? (
                   <div className="mt-2 py-1 border-t text-sm">
                     <span className="text-gray-600">Current Price: </span>
@@ -630,14 +629,12 @@ const ViewProductsPage = () => {
                     </div>
                   )
                 )}
-
                 <div className="flex justify-end mt-3">
-                  <button
+                  {/* <button
                     className=" bg-yellow-500 text-white px-3 py-1.5 text-xs rounded-md hover:bg-yellow-600"
-                    onClick={() => navigate(`/product/${product._id}`)}
                   >
                     See more
-                  </button>
+                  </button> */}
                 </div>
               </div>
             ))}
