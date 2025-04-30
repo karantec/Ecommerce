@@ -75,6 +75,7 @@ const Terms = () => {
               "Orders can be cancelled before dispatch confirmation.",
               "Custom orders cannot be cancelled once processing starts.",
               "To cancel, call: 0621-2245632 or +91-9304907331",
+              "Refund are not applicable",
             ]}
           />
         </Section>
