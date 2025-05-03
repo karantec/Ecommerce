@@ -242,7 +242,8 @@ const ViewProductsPage = () => {
       return setupPolling();
     }
 
-    const wsUrl = "wss://jewelleryapp.onrender.com/ws/goldprice";
+    // const wsUrl = "wss://backend.srilaxmialankar.com/ws/goldprice";
+    const wsUrl = "ws://https://backend.srilaxmialankar.com/ws/goldprice";
 
     console.log("Attempting to set up WebSocket connection");
     setWsStatus("Connecting...");

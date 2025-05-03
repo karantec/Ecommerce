@@ -17,7 +17,7 @@ const CategoryShowcase = ({ navigateShop }) => {
   const fetchCategories = async () => {
     try {
       const response = await fetch(
-        "https://jewelleryapp.onrender.com/category/getAllCategory"
+        "https://backend.srilaxmialankar.com/category/getAllCategory"
       );
 
       const data = await response.json();

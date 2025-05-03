@@ -97,6 +97,7 @@ const Navbar = () => {
           {navLinks.map((link, index) => {
             return (
               <NavLink
+                key={index}
                 link={link}
                 index={index}
                 handleLinkClick={handleLinkClick}

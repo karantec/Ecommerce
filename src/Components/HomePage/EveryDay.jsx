@@ -10,7 +10,7 @@ const JewelryShowcase = ({ navigateShop }) => {
   const fetchProducts = async () => {
     try {
       const response = await fetch(
-        "https://jewelleryapp.onrender.com/Everyday"
+        "https://backend.srilaxmialankar.com/Everyday"
       );
       const data = await response.json();
       setProducts(data);

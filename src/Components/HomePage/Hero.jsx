@@ -8,7 +8,7 @@ const HeroSection = () => {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          "https://jewelleryapp.onrender.com/crousel/"
+          "https://backend.srilaxmialankar.com/crousel/"
         );
         const data = await response.json();
 

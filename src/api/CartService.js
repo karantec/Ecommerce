@@ -1,4 +1,5 @@
-const BASE_URL = "http://localhost:8000";
+const BASE_URL = "https://backend.srilaxmialankar.com";
+// const BASE_URL = "https://jewelleryapp.onrender.com"
 
 // Product to add - {userId, productId, quantity}
 export const addToCart = async (productToAdd) => {
@@ -22,6 +23,7 @@ export const addToCart = async (productToAdd) => {
 
 // Userid bhejna hai!
 export const getCart = async (userId) => {
+  console.log("userid in cart service " + userId);
   try {
     const res = await fetch(`${BASE_URL}/cart/cart/${userId}`);
     const data = await res.json();

@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
 import { userStore } from "../../store/userStore";
+import { X, Phone } from "lucide-react";
+import login from "../../assets/login.jpg";
 
-const BASE_URL = "https://jewelleryapp.onrender.com/auth";
+const BASE_URL = "https://backend.srilaxmialankar.com/auth";
 
 const PhoneLogin = () => {
   const [phone, setPhone] = useState("");
@@ -26,8 +28,6 @@ const PhoneLogin = () => {
       });
 
       const data = await res.json();
-
-      console.log("send otp " + JSON.stringify(data));
 
       if (res.ok) {
         toast.success("OTP sent to your phone");
@@ -55,8 +55,6 @@ const PhoneLogin = () => {
 
       const data = await res.json();
 
-      console.log("verify otp " + JSON.stringify(data, null, 2));
-
       if (res.ok) {
         toast.success("OTP verified!");
         localStorage.setItem("token", data?.token);
@@ -68,7 +66,6 @@ const PhoneLogin = () => {
         };
         setUserData(userObj);
 
-        // Save token if needed: localStorage.setItem("token", data.token);
         setTimeout(() => navigate("/shop"), 1500);
       } else {
         toast.error(data.message || "Invalid OTP");
@@ -80,57 +77,91 @@ const PhoneLogin = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
+    <section className="min-h-screen mt-5 flex items-center justify-center px-4">
       <Toaster />
-      <div className="w-full max-w-md bg-white rounded-lg shadow-md p-6">
-        <h2 className="text-xl font-semibold text-center mb-6">
-          Phone Number Login
-        </h2>
-
-        <input
-          type="text"
-          placeholder="Enter phone number"
-          value={phone}
-          onChange={(e) => setPhone(e.target.value)}
-          className="w-full mb-4 px-4 py-2 border rounded-md"
-        />
-
-        {otpSent && (
-          <input
-            type="text"
-            placeholder="Enter OTP"
-            value={otp}
-            onChange={(e) => setOtp(e.target.value)}
-            className="w-full mb-4 px-4 py-2 border rounded-md"
+      <div className="w-full max-w-5xl bg-white rounded-xl shadow-lg overflow-hidden flex flex-col md:flex-row">
+        {/* Image Section */}
+        <div className="md:w-1/2 w-full h-64 md:h-auto">
+          <img
+            src={login}
+            alt="Login Visual"
+            className="w-full h-full object-cover md:rounded-l-xl"
           />
-        )}
+        </div>
 
-        {!otpSent ? (
-          <button
-            onClick={sendOTP}
-            className="w-full bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700"
-          >
-            Send OTP
-          </button>
-        ) : (
-          <button
-            onClick={verifyOTP}
-            className="w-full bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700"
-          >
-            Verify OTP
-          </button>
-        )}
+        {/* Form Section */}
+        <div className="md:w-1/2 w-full p-6 md:p-10">
+          <div className="flex justify-between items-center mb-6">
+            <Phone className="text-gray-600" />
+            <X
+              className="text-gray-600 cursor-pointer"
+              onClick={() => navigate(-1)}
+            />
+          </div>
 
-        <div className="mt-4 text-center">
-          <button
-            onClick={() => navigate(-1)}
-            className="text-gray-600 hover:underline"
-          >
-            Go Back
-          </button>
+          <h2 className="text-xl font-semibold text-center mb-6">
+            Phone Number Login
+          </h2>
+
+          <div className="space-y-6">
+            <div>
+              <label className="block text-sm font-medium text-gray-700">
+                Phone Number
+              </label>
+              <input
+                type="text"
+                placeholder="Enter phone number"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+                className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2"
+              />
+            </div>
+
+            {otpSent && (
+              <div>
+                <label className="block text-sm font-medium text-gray-700">
+                  OTP
+                </label>
+                <input
+                  type="text"
+                  placeholder="Enter OTP"
+                  value={otp}
+                  onChange={(e) => setOtp(e.target.value)}
+                  className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2"
+                />
+              </div>
+            )}
+
+            <div className="flex flex-col sm:flex-row justify-between gap-4">
+              {!otpSent ? (
+                <button
+                  onClick={sendOTP}
+                  className="w-full sm:w-auto px-6 py-2 rounded-full bg-indigo-600 text-white font-medium hover:bg-indigo-700 transition-all"
+                >
+                  Send OTP
+                </button>
+              ) : (
+                <button
+                  onClick={verifyOTP}
+                  className="w-full sm:w-auto px-6 py-2 rounded-full bg-green-600 text-white font-medium hover:bg-green-700 transition-all"
+                >
+                  Verify OTP
+                </button>
+              )}
+            </div>
+
+            <div className="text-center mt-4">
+              <button
+                onClick={() => navigate("/login")}
+                className="text-indigo-600 hover:text-indigo-800 font-semibold"
+              >
+                Login using Email
+              </button>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

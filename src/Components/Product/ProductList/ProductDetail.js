@@ -58,7 +58,7 @@ const ProductDetailComplete = () => {
       setLoading(true);
       try {
         const response = await fetch(
-          `https://jewelleryapp.onrender.com/gold/${productId}`
+          `https://backend.srilaxmialankar.com/gold/${productId}`
         );
         if (!response.ok) {
           throw new Error("Failed to fetch product");

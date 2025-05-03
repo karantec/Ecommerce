@@ -9,7 +9,7 @@ const ProductSelling = ({ navigateShop }) => {
 
   const fetchBestSelling = async () => {
     try {
-      const response = await fetch("https://jewelleryapp.onrender.com/best");
+      const response = await fetch("https://backend.srilaxmialankar.com/best");
       const data = await response.json();
       console.log("Best selling data:", data);
       setProducts(data);

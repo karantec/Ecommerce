@@ -20,7 +20,7 @@ const Login = () => {
     e.preventDefault();
     try {
       const response = await fetch(
-        "https://jewelleryapp.onrender.com/auth/login",
+        "https://backend.srilaxmialankar.com/auth/login",
         {
           method: "POST",
           headers: {
@@ -30,6 +30,8 @@ const Login = () => {
         }
       );
       const result = await response.json();
+
+      console.log("result after login " + JSON.stringify(result, null, 2));
 
       if (response.ok) {
         alert("Login successful!");
