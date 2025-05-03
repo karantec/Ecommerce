@@ -45,7 +45,7 @@ export const CartProvider = ({ children }) => {
   };
 
   const getCartHandler = async (userObj) => {
-    console.log("userObj " + userObj);
+    //  console.log("userObj " + userObj);
 
     try {
       const data = await getCart(userObj);

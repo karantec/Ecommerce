@@ -18,20 +18,24 @@ const ShoppingCart = () => {
     const item = cart.find((item) => item._id === id);
     if (!item) return;
 
-    if (increment === 1) {
+    const newQuantity = item.quantity + increment;
+
+    if (newQuantity <= 0) {
+      await removeFromCart({ userId: userid, productId: id });
+    } else if (increment === 1) {
       await addToCart({ userId: userid, productId: id, quantity: 1 });
-    } else if (increment === -1 && item.quantity > 1) {
-      removeSingleItem({ userId: userid, productId: id });
+    } else if (increment === -1) {
+      await removeSingleItem({ userId: userid, productId: id });
     }
 
     getCart(userid); // sync updated cart
   };
 
   // This function is preserved, but the remove button is no longer rendered
-  const handleRemoveItem = async (id) => {
-    removeFromCart({ userId: userid, productId: id });
-    getCart(userid); // refresh after removal
-  };
+  // const handleRemoveItem = async (id) => {
+  //   removeFromCart({ userId: userid, productId: id });
+  //   getCart(userid); // refresh after removal
+  // };
 
   const getSubtotal = () => {
     return cart.reduce((total, item) => {
@@ -99,7 +103,7 @@ const ShoppingCart = () => {
                       <button
                         onClick={() => handleQuantityChange(item._id, -1)}
                         className="px-3 py-1 bg-gray-200"
-                        disabled={item.quantity === 1}
+                        // disabled={item.quantity === 1}
                       >
                         -
                       </button>

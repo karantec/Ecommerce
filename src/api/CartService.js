@@ -10,9 +10,9 @@ export const addToCart = async (productToAdd) => {
       body: JSON.stringify(productToAdd),
     });
 
-    console.log(
-      "response from add to cart " + JSON.stringify(response, null, 2)
-    );
+    // console.log(
+    //   "response from add to cart " + JSON.stringify(response, null, 2)
+    // );
 
     if (!response.ok) throw new Error("Failed to add to the cart ");
     return await response.json();
@@ -42,7 +42,7 @@ export const getCart = async (userId) => {
 // userId, ProductId
 export const removeSingleItem = async (userObj) => {
   try {
-    const response = await fetch(`${BASE_URL}/cart/remove-single-item`, {
+    const response = await fetch(`${BASE_URL}/cart/cart/remove-single-item`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(userObj),

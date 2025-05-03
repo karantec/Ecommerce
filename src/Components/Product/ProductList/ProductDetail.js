@@ -6,42 +6,15 @@ import ProductLoader from "./ProductLoader";
 import { userStore } from "../../../store/userStore";
 
 const descriptionData = [
-  {
-    name: "Model",
-    value: "#8786867",
-  },
-  {
-    name: "Style",
-    value: "Traditional Indian Bridal Set",
-  },
-  {
-    name: "Certificate",
-    value: "BIS Hallmarked (22KT Gold)",
-  },
-  {
-    name: "Size",
-    value: "22 Karat Gold (916 Purity)",
-  },
-  {
-    name: "Total Weight",
-    value: "Approx. 65–75 grams (complete set)",
-  },
-  {
-    name: "Set Includes",
-    value: "Necklace, Earrings, Maang Tikka",
-  },
-  {
-    name: "Occasion",
-    value: "Wedding, Engagement, Bridal Wear",
-  },
-  {
-    name: "Design Theme",
-    value: "Temple Art, Floral Motifs, Filigree",
-  },
-  {
-    name: "Finish",
-    value: "High Polish with Antique Detailing",
-  },
+  { name: "Model", value: "#8786867" },
+  { name: "Style", value: "Traditional Indian Bridal Set" },
+  { name: "Certificate", value: "BIS Hallmarked (22KT Gold)" },
+  { name: "Size", value: "22 Karat Gold (916 Purity)" },
+  { name: "Total Weight", value: "Approx. 65–75 grams (complete set)" },
+  { name: "Set Includes", value: "Necklace, Earrings, Maang Tikka" },
+  { name: "Occasion", value: "Wedding, Engagement, Bridal Wear" },
+  { name: "Design Theme", value: "Temple Art, Floral Motifs, Filigree" },
+  { name: "Finish", value: "High Polish with Antique Detailing" },
 ];
 
 const ProductDetailComplete = () => {
@@ -60,13 +33,9 @@ const ProductDetailComplete = () => {
         const response = await fetch(
           `https://backend.srilaxmialankar.com/gold/${productId}`
         );
-        if (!response.ok) {
-          throw new Error("Failed to fetch product");
-        }
+        if (!response.ok) throw new Error("Failed to fetch product");
+
         const data = await response.json();
-        console.log(
-          "data from gold product route " + JSON.stringify(data, null, 2)
-        );
         setProduct(data);
         setSelectedImage(data.coverImage || data.images?.[0] || "");
       } catch (error) {
@@ -85,8 +54,6 @@ const ProductDetailComplete = () => {
       productId: productId,
       quantity: 1,
     };
-    console.log("product to add " + JSON.stringify(productToAdd, null, 2));
-    // const productToAdd = { ...product, quantity: 1 };
     addToCart(productToAdd);
     navigate("/cart");
   };
@@ -107,10 +74,11 @@ const ProductDetailComplete = () => {
     );
 
   return (
-    <div className="w-full ">
+    <div className="w-full max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Back Button */}
       <button
         onClick={() => navigate("/shop")}
-        className="p-4 flex items-center text-gray-600 hover:text-yellow-600 mb-2"
+        className="p-4 flex items-center text-gray-600 hover:text-yellow-600 mb-4"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -129,60 +97,59 @@ const ProductDetailComplete = () => {
         Back to Products
       </button>
 
-      <div className="self-center  items-center px-4 md:px-8 flex flex-col lg:flex-row ">
-        {/* Left: Product Images */}
-        <div className="w-full lg:w-1/2  pl-[10rem]">
-          <div className="flex flex-col md:flex-row ">
+      {/* Main Content */}
+      <div className="flex flex-col lg:flex-row gap-10">
+        {/* Left: Images */}
+        <div className="w-full lg:w-1/2">
+          <div className="flex flex-col md:flex-row gap-4">
             {/* Main Image */}
-            <div className="flex-1 order-1 md:order-2 flex justify-center mb-4 md:mb-0">
+            <div className="flex-1 flex justify-center">
               <img
                 src={
                   selectedImage ||
                   "https://via.placeholder.com/400x400?text=No+Image"
                 }
                 alt={product.name || "Product"}
-                className="w-full max-w-sm h-auto object-contain"
-                onError={(e) => {
-                  e.target.src =
-                    "https://via.placeholder.com/400x400?text=No+Image";
-                }}
+                className="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg h-auto object-contain"
+                onError={(e) =>
+                  (e.target.src =
+                    "https://via.placeholder.com/400x400?text=No+Image")
+                }
               />
             </div>
 
             {/* Thumbnails */}
-            <div className=" flex md:flex-col flex-wrap justify-center gap-2 order-2 md:order-1 md:w-20">
+            <div className="flex md:flex-col gap-2 flex-wrap justify-center items-start">
               {product.images?.map((img, index) => (
                 <img
                   key={index}
                   src={img}
-                  alt={`${product.name || "Product"} thumbnail ${index + 1}`}
-                  className={`w-16 h-16 object-cover cursor-pointer border rounded ${
+                  alt={`Thumbnail ${index + 1}`}
+                  className={`w-14 h-14 md:w-16 md:h-16 object-cover cursor-pointer border rounded ${
                     selectedImage === img
                       ? "border-orange-500"
                       : "border-gray-300"
                   }`}
                   onClick={() => setSelectedImage(img)}
-                  onError={(e) => {
-                    e.target.src =
-                      "https://via.placeholder.com/150?text=No+Image";
-                  }}
+                  onError={(e) =>
+                    (e.target.src =
+                      "https://via.placeholder.com/150?text=No+Image")
+                  }
                 />
               ))}
             </div>
           </div>
         </div>
 
-        {/* Right: Product Info */}
-        <div className=" w-full lg:w-1/2 space-y-4 pr-[10rem]">
-          <h1 className="text-2xl md:text-3xl font-bold">
-            {product.name || "Unnamed Product"}
-          </h1>
+        {/* Right: Info */}
+        <div className="w-full lg:w-1/2 space-y-4">
+          <h1 className="text-2xl sm:text-3xl font-bold">{product.name}</h1>
 
-          {/* Price Information */}
-          <div className="text-lg md:text-xl text-gray-600">
+          {/* Price */}
+          <div className="text-lg sm:text-xl text-gray-600">
             {product.priceDetails?.totalPrice ? (
               <>
-                <span className="text-xl md:text-2xl font-bold text-black">
+                <span className="text-xl font-bold text-black">
                   ₹
                   {parseFloat(product.priceDetails.totalPrice).toLocaleString(
                     "en-IN"
@@ -196,7 +163,7 @@ const ProductDetailComplete = () => {
               </>
             ) : (
               <>
-                <span className="text-xl md:text-2xl font-bold text-black">
+                <span className="text-xl font-bold text-black">
                   ₹
                   {parseFloat(
                     product.discountedPrice || product.price || 0
@@ -229,7 +196,7 @@ const ProductDetailComplete = () => {
             {product.description || "No description available."}
           </p>
 
-          {/* Product Specifications */}
+          {/* Specifications */}
           <div className="border rounded-lg p-4 bg-gray-50">
             <h2 className="text-lg font-semibold mb-2">Product Details</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
@@ -270,7 +237,7 @@ const ProductDetailComplete = () => {
             </div>
           </div>
 
-          {/* Action Buttons */}
+          {/* Add to Cart Button */}
           <div className="flex flex-col sm:flex-row gap-3 pt-2">
             <button
               onClick={handleAddToCart}
@@ -297,31 +264,24 @@ const ProductDetailComplete = () => {
         </div>
       </div>
 
-      {/* Description Section */}
+      {/* Description Text */}
       <div className="border-t-2 border-gray-200 w-full mt-8">
-        <div className="px-4 md:px-8 lg:px-16 py-6">
-          <h2 className="font-normal text-xl md:text-2xl mb-4">Description</h2>
-          <p className="font-light text-base md:text-lg">
-            {`Celebrate elegance with this handcrafted gold necklace from SriLaxmi Alankar. Designed in
-a classic style, this piece combines timeless artistry with contemporary grace, making it
-perfect for weddings, festive occasions, and traditional celebrations. Meticulously crafted by
-skilled artisans, every detail reflects our commitment to heritage, precision, and luxury.
-Made from certified BIS-hallmarked gold, the necklace features intricate motifs inspired by
-Indian temple architecture. Whether paired with a saree or lehenga, this piece adds
-unmatched charm to your look and creates memories that last a lifetime.
-`}
+        <div className="px-2 sm:px-4 md:px-8 py-6">
+          <h2 className="text-xl sm:text-2xl mb-4">Description</h2>
+          <p className="text-base sm:text-lg text-gray-700 whitespace-pre-line">
+            {`Celebrate elegance with this handcrafted gold necklace from SriLaxmi Alankar. Designed in a classic style, this piece combines timeless artistry with contemporary grace, making it perfect for weddings, festive occasions, and traditional celebrations. Meticulously crafted by skilled artisans, every detail reflects our commitment to heritage, precision, and luxury. Made from certified BIS-hallmarked gold, the necklace features intricate motifs inspired by Indian temple architecture. Whether paired with a saree or lehenga, this piece adds unmatched charm to your look and creates memories that last a lifetime.`}
           </p>
         </div>
 
-        <div className="overflow-x-auto px-4 md:px-8 lg:px-16 pb-8">
+        <div className="overflow-x-auto px-2 sm:px-4 md:px-8 pb-8">
           <table className="border-2 border-gray-200 w-full md:w-4/5 mx-auto my-4">
             <tbody>
               {descriptionData.map((item, index) => (
                 <tr key={index} className="border-2">
-                  <td className="border-2 bg-gray-200 w-1/3 py-2 px-3 font-normal text-sm md:text-base">
+                  <td className="border-2 bg-gray-200 w-1/3 py-2 px-3 text-sm sm:text-base">
                     {item.name}
                   </td>
-                  <td className="border-2 w-2/3 px-3 py-2 font-normal text-sm md:text-base">
+                  <td className="border-2 w-2/3 px-3 py-2 text-sm sm:text-base">
                     {item.value}
                   </td>
                 </tr>
@@ -331,26 +291,23 @@ unmatched charm to your look and creates memories that last a lifetime.
         </div>
       </div>
 
-      {/* Related Products Section */}
+      {/* Related Products */}
       <div className="border-t-2 border-gray-200 w-full py-8">
-        {/* Icon and Line */}
         <div className="flex items-center justify-center space-x-4 mb-4">
           <div className="w-12 md:w-16 h-px bg-gray-300"></div>
           <img
             src="/Category/icon.png"
             alt="Diamond Icon"
-            className="w-5 h-5 md:w-6 md:h-6 inline-block"
+            className="w-5 h-5 md:w-6 md:h-6"
           />
           <div className="w-12 md:w-16 h-px bg-gray-300"></div>
         </div>
 
-        {/* Title */}
         <h2 className="text-3xl md:text-4xl font-garamond bg-gradient-to-r from-[#E66E06] to-[#6E3000] text-transparent bg-clip-text text-center mb-6">
           Related Products
         </h2>
 
-        {/* Related Products Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 px-4 md:px-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 px-2 sm:px-4 md:px-8">
           <ProductCard />
           <ProductCard />
           <ProductCard />
