@@ -5,18 +5,6 @@ import ProductCard from "./ProductCard";
 import ProductLoader from "./ProductLoader";
 import { userStore } from "../../../store/userStore";
 
-const descriptionData = [
-  { name: "Model", value: "#8786867" },
-  { name: "Style", value: "Traditional Indian Bridal Set" },
-  { name: "Certificate", value: "BIS Hallmarked (22KT Gold)" },
-  { name: "Size", value: "22 Karat Gold (916 Purity)" },
-  { name: "Total Weight", value: "Approx. 65–75 grams (complete set)" },
-  { name: "Set Includes", value: "Necklace, Earrings, Maang Tikka" },
-  { name: "Occasion", value: "Wedding, Engagement, Bridal Wear" },
-  { name: "Design Theme", value: "Temple Art, Floral Motifs, Filigree" },
-  { name: "Finish", value: "High Polish with Antique Detailing" },
-];
-
 const ProductDetailComplete = () => {
   const { productId } = useParams();
   const navigate = useNavigate();
@@ -24,6 +12,7 @@ const ProductDetailComplete = () => {
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [selectedImage, setSelectedImage] = useState("");
+  const [shopDetails, setShopDetails] = useState(null);
   const userid = userStore((state) => state._id);
 
   useEffect(() => {
@@ -34,7 +23,6 @@ const ProductDetailComplete = () => {
           `https://backend.srilaxmialankar.com/gold/${productId}`
         );
         if (!response.ok) throw new Error("Failed to fetch product");
-
         const data = await response.json();
         setProduct(data);
         setSelectedImage(data.coverImage || data.images?.[0] || "");
@@ -45,7 +33,23 @@ const ProductDetailComplete = () => {
       }
     };
 
+    const fetchShopDetails = async () => {
+      try {
+        const response = await fetch(
+          "https://backend.srilaxmialankar.com/shopdetails"
+        );
+
+        if (!response.ok) throw new Error("Failed to fetch shop details");
+        const data = await response.json();
+        console.log("response new api" + JSON.stringify(data, null, 2));
+        setShopDetails(data[0]);
+      } catch (error) {
+        console.error("Error fetching shop details:", error);
+      }
+    };
+
     fetchProduct();
+    fetchShopDetails();
   }, [productId]);
 
   const handleAddToCart = () => {
@@ -72,6 +76,29 @@ const ProductDetailComplete = () => {
         </button>
       </div>
     );
+
+  const dynamicDescriptionData = shopDetails
+    ? [
+        { name: "Model", value: shopDetails.modelNumber },
+        { name: "Style", value: shopDetails.style },
+        { name: "Certificate", value: shopDetails.certificate },
+        { name: "Size", value: shopDetails.goldPurity },
+        { name: "Total Weight", value: shopDetails.totalWeight },
+        {
+          name: "Set Includes",
+          value: shopDetails.setIncludes?.join(", "),
+        },
+        {
+          name: "Occasion",
+          value: shopDetails.occasion?.join(", "),
+        },
+        {
+          name: "Design Theme",
+          value: shopDetails.designTheme?.join(", "),
+        },
+        { name: "Finish", value: shopDetails.finish },
+      ]
+    : [];
 
   return (
     <div className="w-full max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -102,7 +129,6 @@ const ProductDetailComplete = () => {
         {/* Left: Images */}
         <div className="w-full lg:w-1/2">
           <div className="flex flex-col md:flex-row gap-4">
-            {/* Main Image */}
             <div className="flex-1 flex justify-center">
               <img
                 src={
@@ -118,7 +144,6 @@ const ProductDetailComplete = () => {
               />
             </div>
 
-            {/* Thumbnails */}
             <div className="flex md:flex-col gap-2 flex-wrap justify-center items-start">
               {product.images?.map((img, index) => (
                 <img
@@ -237,7 +262,7 @@ const ProductDetailComplete = () => {
             </div>
           </div>
 
-          {/* Add to Cart Button */}
+          {/* Add to Cart */}
           <div className="flex flex-col sm:flex-row gap-3 pt-2">
             <button
               onClick={handleAddToCart}
@@ -269,14 +294,15 @@ const ProductDetailComplete = () => {
         <div className="px-2 sm:px-4 md:px-8 py-6">
           <h2 className="text-xl sm:text-2xl mb-4">Description</h2>
           <p className="text-base sm:text-lg text-gray-700 whitespace-pre-line">
-            {`Celebrate elegance with this handcrafted gold necklace from SriLaxmi Alankar. Designed in a classic style, this piece combines timeless artistry with contemporary grace, making it perfect for weddings, festive occasions, and traditional celebrations. Meticulously crafted by skilled artisans, every detail reflects our commitment to heritage, precision, and luxury. Made from certified BIS-hallmarked gold, the necklace features intricate motifs inspired by Indian temple architecture. Whether paired with a saree or lehenga, this piece adds unmatched charm to your look and creates memories that last a lifetime.`}
+            {shopDetails?.description ||
+              "Celebrate elegance with SriLaxmi Alankar’s exclusive gold jewelry."}
           </p>
         </div>
 
         <div className="overflow-x-auto px-2 sm:px-4 md:px-8 pb-8">
           <table className="border-2 border-gray-200 w-full md:w-4/5 mx-auto my-4">
             <tbody>
-              {descriptionData.map((item, index) => (
+              {dynamicDescriptionData.map((item, index) => (
                 <tr key={index} className="border-2">
                   <td className="border-2 bg-gray-200 w-1/3 py-2 px-3 text-sm sm:text-base">
                     {item.name}
