@@ -41,7 +41,7 @@ const ProductDetailComplete = () => {
 
         if (!response.ok) throw new Error("Failed to fetch shop details");
         const data = await response.json();
-        console.log("response new api" + JSON.stringify(data, null, 2));
+        // console.log("response new api" + JSON.stringify(data, null, 2));
         setShopDetails(data[0]);
       } catch (error) {
         console.error("Error fetching shop details:", error);
