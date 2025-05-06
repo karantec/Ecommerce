@@ -85,9 +85,9 @@ const GoldPrices = () => {
     if (!prices[carat]) return null;
     return (
       <div className="mt-2 text-xs">
-        <span className="text-black font-bold">
+        {/* <span className="text-black font-bold">
           Latest Gold Price & The Last Card (Silver) shows today’s silver rate
-        </span>
+        </span> */}
       </div>
     );
   };
