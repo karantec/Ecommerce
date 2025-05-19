@@ -1,9 +1,12 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useCart } from "../../../CartContext";
 import ProductCard from "./ProductCard";
 import ProductLoader from "./ProductLoader";
 import { userStore } from "../../../store/userStore";
+import toast, { Toaster } from "react-hot-toast";
+
+const alertLoginHandler = () => toast.error("User needs to Login First!");
 
 const ProductDetailComplete = () => {
   const { productId } = useParams();
@@ -53,6 +56,11 @@ const ProductDetailComplete = () => {
   }, [productId]);
 
   const handleAddToCart = () => {
+    console.log("userid " + userid);
+    if (!userid) {
+      console.log("inside if");
+      return alertLoginHandler();
+    }
     const productToAdd = {
       userId: userid,
       productId: productId,
@@ -340,6 +348,7 @@ const ProductDetailComplete = () => {
           <ProductCard />
         </div>
       </div>
+      <Toaster />
     </div>
   );
 };
