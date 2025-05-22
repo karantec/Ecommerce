@@ -16,6 +16,8 @@ const ProductDetailComplete = () => {
   const [loading, setLoading] = useState(true);
   const [selectedImage, setSelectedImage] = useState("");
   const [shopDetails, setShopDetails] = useState(null);
+  const [relatedProducts, setRelatedProducts] = useState([]);
+  const [loadingRelated, setLoadingRelated] = useState(false);
   const userid = userStore((state) => state._id);
 
   useEffect(() => {
@@ -44,15 +46,32 @@ const ProductDetailComplete = () => {
 
         if (!response.ok) throw new Error("Failed to fetch shop details");
         const data = await response.json();
-        // console.log("response new api" + JSON.stringify(data, null, 2));
         setShopDetails(data[0]);
       } catch (error) {
         console.error("Error fetching shop details:", error);
       }
     };
 
+    const fetchRelatedProducts = async () => {
+      setLoadingRelated(true);
+      try {
+        const response = await fetch(
+          "https://backend.srilaxmialankar.com/related/"
+        );
+        if (!response.ok) throw new Error("Failed to fetch related products");
+        const data = await response.json();
+        setRelatedProducts(data || []);
+      } catch (error) {
+        console.error("Error fetching related products:", error);
+        setRelatedProducts([]);
+      } finally {
+        setLoadingRelated(false);
+      }
+    };
+
     fetchProduct();
     fetchShopDetails();
+    fetchRelatedProducts();
   }, [productId]);
 
   const handleAddToCart = () => {
@@ -68,6 +87,13 @@ const ProductDetailComplete = () => {
     };
     addToCart(productToAdd);
     navigate("/cart");
+  };
+
+  const handleRelatedProductClick = (relatedProduct) => {
+    // Navigate to related product or handle click
+    console.log("Related product clicked:", relatedProduct);
+    // You can navigate to a product detail page or show more info
+    // navigate(`/product/${relatedProduct._id}`);
   };
 
   if (loading) return <ProductLoader />;
@@ -303,7 +329,7 @@ const ProductDetailComplete = () => {
           <h2 className="text-xl sm:text-2xl mb-4">Description</h2>
           <p className="text-base sm:text-lg text-gray-700 whitespace-pre-line">
             {shopDetails?.description ||
-              "Celebrate elegance with SriLaxmi Alankar’s exclusive gold jewelry."}
+              "Celebrate elegance with SriLaxmi Alankar's exclusive gold jewelry."}
           </p>
         </div>
 
@@ -341,12 +367,89 @@ const ProductDetailComplete = () => {
           Related Products
         </h2>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 px-2 sm:px-4 md:px-8">
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-        </div>
+        {loadingRelated ? (
+          <div className="flex justify-center items-center py-12">
+            <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-yellow-600"></div>
+            <span className="ml-2 text-gray-600">
+              Loading related products...
+            </span>
+          </div>
+        ) : relatedProducts.length > 0 ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 px-2 sm:px-4 md:px-8">
+            {relatedProducts.map((relatedProduct) => (
+              <div
+                key={relatedProduct._id}
+                className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 cursor-pointer"
+                onClick={() => handleRelatedProductClick(relatedProduct)}
+              >
+                <div className="aspect-square overflow-hidden">
+                  <img
+                    src={relatedProduct.image}
+                    alt={relatedProduct.name}
+                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                    onError={(e) => {
+                      e.target.src =
+                        "https://via.placeholder.com/300x300?text=No+Image";
+                    }}
+                  />
+                </div>
+                <div className="p-4">
+                  <h3 className="font-semibold text-lg mb-2 text-gray-800">
+                    {relatedProduct.name}
+                  </h3>
+                  <p className="text-gray-600 text-sm mb-3 line-clamp-2">
+                    {relatedProduct.description}
+                  </p>
+                  <div className="flex justify-between items-center">
+                    <span className="text-xs text-gray-500">
+                      {new Date(relatedProduct.createdAt).toLocaleDateString(
+                        "en-US",
+                        {
+                          year: "numeric",
+                          month: "short",
+                          day: "numeric",
+                        }
+                      )}
+                    </span>
+                    <button
+                      className="bg-yellow-500 hover:bg-yellow-600 text-white px-3 py-1 rounded text-sm transition-colors duration-300"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleRelatedProductClick(relatedProduct);
+                      }}
+                    >
+                      View Details
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className="text-center py-12">
+            <div className="text-gray-500 mb-4">
+              <svg
+                className="mx-auto h-12 w-12 text-gray-400"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2M4 13h2m13-8V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v1M9 6V4a1 1 0 00-1-1H4a1 1 0 00-1 1v2"
+                />
+              </svg>
+            </div>
+            <p className="text-gray-500 text-lg">
+              No related products available
+            </p>
+            <p className="text-gray-400 text-sm mt-2">
+              Check back later for more items
+            </p>
+          </div>
+        )}
       </div>
       <Toaster />
     </div>
