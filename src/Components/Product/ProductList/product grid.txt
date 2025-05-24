@@ -15,8 +15,9 @@ const ViewProductsPage = () => {
   const pollingIntervalRef = useRef(null);
   const navigate = useNavigate();
 
-  // Favorites state
+  // Favorites/Wishlist state
   const [favorites, setFavorites] = useState(new Set());
+  const [wishlistLoading, setWishlistLoading] = useState(false);
 
   // Pagination states
   const [currentPage, setCurrentPage] = useState(1);
@@ -28,30 +29,24 @@ const ViewProductsPage = () => {
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [selectedCarat, setSelectedCarat] = useState("all");
 
-  // Replace the existing favorites loading useEffect with this:
-  useEffect(() => {
-    // First try to load from API, fallback to localStorage
-    const loadFavorites = async () => {
-      try {
-        await fetchUserWishlist();
-      } catch (error) {
-        // Fallback to localStorage if API fails
-        const savedFavorites = localStorage.getItem("jewelryFavorites");
-        if (savedFavorites) {
-          try {
-            const favoritesArray = JSON.parse(savedFavorites);
-            setFavorites(new Set(favoritesArray));
-          } catch (error) {
-            console.error("Error loading favorites from localStorage:", error);
-          }
-        }
-      }
-    };
+  // You might want to get this from auth context or props
+  // For now, I'll use a placeholder - replace with actual user ID
+  const userId = "67f80c0de5b37dc266e25746"; // Replace with actual user ID from auth
 
-    loadFavorites();
+  // Load favorites from localStorage on component mount (as fallback)
+  useEffect(() => {
+    const savedFavorites = localStorage.getItem("jewelryFavorites");
+    if (savedFavorites) {
+      try {
+        const favoritesArray = JSON.parse(savedFavorites);
+        setFavorites(new Set(favoritesArray));
+      } catch (error) {
+        console.error("Error loading favorites from localStorage:", error);
+      }
+    }
   }, []);
 
-  // Save favorites to localStorage whenever favorites change
+  // Save favorites to localStorage whenever favorites change (as backup)
   useEffect(() => {
     try {
       localStorage.setItem("jewelryFavorites", JSON.stringify([...favorites]));
@@ -60,38 +55,125 @@ const ViewProductsPage = () => {
     }
   }, [favorites]);
 
-  // Toggle favorite status
-  // Replace your existing toggleFavorite function with this:
+  // Add to wishlist API call
+  const addToWishlist = async (productId) => {
+    try {
+      setWishlistLoading(true);
+      const response = await axios.post("http://localhost:8000/wishlist/wishlist", {
+        userId: userId,
+        productId: productId,
+        quantity: 1
+      });
+
+      console.log("Added to wishlist:", response.data);
+      
+      // Update local favorites state
+      setFavorites(prev => new Set([...prev, productId]));
+      
+      return { success: true, data: response.data };
+    } catch (error) {
+      console.error("Error adding to wishlist:", error);
+      
+      // Show user-friendly error message
+      const errorMessage = error.response?.data?.message || "Failed to add to wishlist";
+      alert(errorMessage);
+      
+      return { success: false, error: errorMessage };
+    } finally {
+      setWishlistLoading(false);
+    }
+  };
+
+  // Remove from wishlist API call
+  const removeFromWishlist = async (productId) => {
+    try {
+      setWishlistLoading(true);
+      
+      // If you have a DELETE endpoint, use it here
+      // For now, I'll assume the same endpoint handles removal
+      const response = await axios.delete(`http://localhost:8000/wishlist/wishlist`, {
+        data: {
+          userId: userId,
+          productId: productId
+        }
+      });
+
+      console.log("Removed from wishlist:", response.data);
+      
+      // Update local favorites state
+      setFavorites(prev => {
+        const newFavorites = new Set(prev);
+        newFavorites.delete(productId);
+        return newFavorites;
+      });
+      
+      return { success: true, data: response.data };
+    } catch (error) {
+      console.error("Error removing from wishlist:", error);
+      
+      // If DELETE endpoint doesn't exist, you might need to handle this differently
+      // For now, just remove from local state
+      setFavorites(prev => {
+        const newFavorites = new Set(prev);
+        newFavorites.delete(productId);
+        return newFavorites;
+      });
+      
+      const errorMessage = error.response?.data?.message || "Failed to remove from wishlist";
+      console.warn(errorMessage);
+      
+      return { success: false, error: errorMessage };
+    } finally {
+      setWishlistLoading(false);
+    }
+  };
+
+  // Fetch user's wishlist on component mount
+  const fetchUserWishlist = async () => {
+    try {
+      // Assuming there's a GET endpoint to fetch user's wishlist
+      const response = await axios.get(`http://localhost:8000/wishlist/wishlist/${userId}`);
+      
+      if (response.data && response.data.items) {
+        const wishlistProductIds = response.data.items.map(item => item.productId);
+        setFavorites(new Set(wishlistProductIds));
+      }
+    } catch (error) {
+      console.error("Error fetching wishlist:", error);
+      // If API fails, fall back to localStorage
+      const savedFavorites = localStorage.getItem("jewelryFavorites");
+      if (savedFavorites) {
+        try {
+          const favoritesArray = JSON.parse(savedFavorites);
+          setFavorites(new Set(favoritesArray));
+        } catch (parseError) {
+          console.error("Error parsing localStorage favorites:", parseError);
+        }
+      }
+    }
+  };
+
+  // Toggle favorite status with API integration
   const toggleFavorite = async (productId, event) => {
     // Prevent card click event from firing
     event.stopPropagation();
 
-    try {
-      const isFavorited = favorites.has(productId);
+    // Prevent multiple simultaneous requests
+    if (wishlistLoading) return;
 
-      if (isFavorited) {
-        // Remove from wishlist
+    const isCurrentlyFavorited = favorites.has(productId);
+
+    try {
+      if (isCurrentlyFavorited) {
         await removeFromWishlist(productId);
-        setFavorites((prev) => {
-          const newFavorites = new Set(prev);
-          newFavorites.delete(productId);
-          return newFavorites;
-        });
       } else {
-        // Add to wishlist
         await addToWishlist(productId);
-        setFavorites((prev) => {
-          const newFavorites = new Set(prev);
-          newFavorites.add(productId);
-          return newFavorites;
-        });
       }
     } catch (error) {
-      console.error("Error updating wishlist:", error);
-      // Show error message to user (you can add a toast notification here)
-      alert("Failed to update wishlist. Please try again.");
+      console.error("Error toggling wishlist:", error);
     }
   };
+
   // Memoize the price calculation function
   const calculateProductPrices = useCallback((productsList, prices) => {
     console.log("Calculating prices with gold prices:", prices);
@@ -227,6 +309,7 @@ const ViewProductsPage = () => {
       setCategoriesLoading(false);
     }
   };
+
   const fetchGoldPrices = async () => {
     try {
       const response = await axios.get(
@@ -391,6 +474,7 @@ const ViewProductsPage = () => {
         fetchGoldPrices(),
         fetchProducts(),
         fetchCategories(),
+        fetchUserWishlist(), // Fetch user's wishlist
       ]);
 
       // Calculate prices if all data is loaded
@@ -471,69 +555,6 @@ const ViewProductsPage = () => {
   const uniqueCarats = [
     ...new Set(products.map((product) => (product.carat || "").toUpperCase())),
   ].filter(Boolean);
-
-  const addToWishlist = async (productId) => {
-    try {
-      const userId = "67f80c0de5b37dc266e25746";
-      const response = await axios.post(
-        "http://localhost:8000/wishlist/wishlist",
-        { productId, userId },
-        {
-          headers: {
-            "Content-Type": "application/json",
-            // Add authorization header if needed
-            // 'Authorization': `Bearer ${token}`
-          },
-        }
-      );
-      return response.data;
-    } catch (error) {
-      console.error("Error adding to wishlist:", error);
-      throw error;
-    }
-  };
-
-  const removeFromWishlist = async (productId) => {
-    try {
-      // Assuming you have a DELETE endpoint
-      const response = await axios.delete(
-        `http://localhost:8000/wishlist/wishlist/${productId}`,
-        {
-          headers: {
-            // Add authorization header if needed
-            // 'Authorization': `Bearer ${token}`
-          },
-        }
-      );
-      return response.data;
-    } catch (error) {
-      console.error("Error removing from wishlist:", error);
-      throw error;
-    }
-  };
-
-  const fetchUserWishlist = async () => {
-    try {
-      const response = await axios.get(
-        "http://localhost:8000/wishlist/wishlist",
-        {
-          headers: {
-            // Add authorization header if needed
-            // 'Authorization': `Bearer ${token}`
-          },
-        }
-      );
-
-      if (response.data && response.data.items) {
-        const wishlistProductIds = response.data.items.map(
-          (item) => item.productId
-        );
-        setFavorites(new Set(wishlistProductIds));
-      }
-    } catch (error) {
-      console.error("Error fetching wishlist:", error);
-    }
-  };
 
   return (
     <div className="p-6 bg-gray-100 min-h-screen">
@@ -717,30 +738,35 @@ const ViewProductsPage = () => {
                 {/* Favorite button */}
                 <button
                   onClick={(e) => toggleFavorite(product._id, e)}
+                  disabled={wishlistLoading}
                   className={`absolute top-3 right-3 z-10 w-8 h-8 rounded-full flex items-center justify-center transition-all duration-200 ${
                     favorites.has(product._id)
                       ? "bg-red-500 text-white shadow-lg scale-110"
                       : "bg-white/80 text-gray-400 hover:bg-red-50 hover:text-red-500 shadow-md backdrop-blur-sm"
-                  }`}
+                  } ${wishlistLoading ? "opacity-50 cursor-not-allowed" : ""}`}
                   title={
                     favorites.has(product._id)
-                      ? "Remove from favorites"
-                      : "Add to favorites"
+                      ? "Remove from wishlist"
+                      : "Add to wishlist"
                   }
                 >
-                  <svg
-                    className="w-4 h-4"
-                    fill={favorites.has(product._id) ? "currentColor" : "none"}
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={favorites.has(product._id) ? 0 : 2}
-                      d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"
-                    />
-                  </svg>
+                  {wishlistLoading ? (
+                    <div className="w-4 h-4 border-2 border-current border-t-transparent rounded-full animate-spin"></div>
+                  ) : (
+                    <svg
+                      className="w-4 h-4"
+                      fill={favorites.has(product._id) ? "currentColor" : "none"}
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={favorites.has(product._id) ? 0 : 2}
+                        d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"
+                      />
+                    </svg>
+                  )}
                 </button>
 
                 <img
@@ -779,115 +805,3 @@ const ViewProductsPage = () => {
                       ₹
                       {parseFloat(
                         calculatedPrices[product._id].total
-                      ).toLocaleString()}
-                    </span>
-                  </div>
-                ) : (
-                  product.price && (
-                    <div className="mt-2 py-1 border-t text-sm">
-                      <span className="text-gray-600">Price: </span>
-                      <span className="font-bold text-yellow-700">
-                        ₹{product.price.toLocaleString()}
-                      </span>
-                      {product.discountedPrice && (
-                        <p className="text-xs text-green-600 mt-0.5">
-                          Discounted: ₹
-                          {product.discountedPrice.toLocaleString()}
-                        </p>
-                      )}
-                    </div>
-                  )
-                )}
-              </div>
-            ))}
-          </div>
-
-          {/* Pagination with dropdown */}
-          {filteredProducts.length > 0 && (
-            <div className="flex flex-col md:flex-row justify-between items-center mt-8 gap-4">
-              <div className="text-sm text-gray-500">
-                Showing {indexOfFirstProduct + 1}-
-                {Math.min(indexOfLastProduct, filteredProducts.length)} of{" "}
-                {filteredProducts.length} products
-              </div>
-
-              <div className="flex items-center gap-3">
-                <button
-                  onClick={prevPage}
-                  disabled={currentPage === 1}
-                  className={`relative inline-flex items-center px-3 py-2 rounded border ${
-                    currentPage === 1
-                      ? "bg-gray-100 text-gray-400 cursor-not-allowed"
-                      : "bg-white text-gray-500 hover:bg-gray-50"
-                  } text-sm font-medium`}
-                >
-                  <svg
-                    className="h-5 w-5"
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                    aria-hidden="true"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                </button>
-
-                <div className="inline-block">
-                  <select
-                    value={currentPage}
-                    onChange={(e) => paginate(Number(e.target.value))}
-                    className="rounded-md border border-gray-300 shadow-sm py-2 px-3 focus:outline-none focus:ring-yellow-500 focus:border-yellow-500"
-                  >
-                    {Array.from({
-                      length: Math.ceil(
-                        filteredProducts.length / productsPerPage
-                      ),
-                    }).map((_, index) => (
-                      <option key={index} value={index + 1}>
-                        Page {index + 1}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-
-                <button
-                  onClick={nextPage}
-                  disabled={
-                    currentPage ===
-                    Math.ceil(filteredProducts.length / productsPerPage)
-                  }
-                  className={`relative inline-flex items-center px-3 py-2 rounded border ${
-                    currentPage ===
-                    Math.ceil(filteredProducts.length / productsPerPage)
-                      ? "bg-gray-100 text-gray-400 cursor-not-allowed"
-                      : "bg-white text-gray-500 hover:bg-gray-50"
-                  } text-sm font-medium`}
-                >
-                  <svg
-                    className="h-5 w-5"
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                    aria-hidden="true"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                </button>
-              </div>
-            </div>
-          )}
-        </div>
-      </div>
-    </div>
-  );
-};
-
-export default ViewProductsPage;
