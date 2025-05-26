@@ -75,8 +75,9 @@ const CategoryShowcase = ({ navigateShop }) => {
       >
         {categories.map((category) => (
           <SwiperSlide key={category._id}>
-            <div
-              onClick={shopNavigationHandler}
+            <Link
+              // onClick={shopNavigationHandler}
+              to={`/shop/?category=${encodeURIComponent(category.title)}`}
               className=" relative group cursor-pointer overflow-hidden rounded-lg shadow-md"
             >
               <img
@@ -94,7 +95,7 @@ const CategoryShowcase = ({ navigateShop }) => {
                   <h3 className="text-xl font-garamond">{category.title}</h3>
                 </Link>
               </div>
-            </div>
+            </Link>
           </SwiperSlide>
         ))}
       </Swiper>
