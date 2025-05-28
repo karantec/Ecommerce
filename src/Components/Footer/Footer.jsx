@@ -105,7 +105,7 @@ const Footer = () => {
               </nav>
             </div>
 
-            <div className="w-full md:w-1/4 px-4">
+            {/* <div className="w-full md:w-1/4 px-4">
               <h2 className="title-font font-bold text-[#000000] text-sm mb-3">
                 CATALOG
               </h2>
@@ -153,7 +153,7 @@ const Footer = () => {
               </nav>
             </div>
           </div>
-        </div>
+        </div> */}
 
         <div className="bg-gray-100 py-4">
           <div className="container mx-auto sm:justify-center items-center px-5 flex flex-wrap items-center justify-between">
