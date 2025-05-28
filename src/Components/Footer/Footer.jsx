@@ -27,36 +27,36 @@ const Footer = () => {
               <nav className="list-none mb-10">
                 <li className="mb-3">
                   <a
-                    href="/blogs"
+                    href="/blog"
                     className="text-gray-600 hover:text-gray-800"
                   >
                     Our Blogs
                   </a>
                 </li>
-                <li className="mb-3">
+                {/* <li className="mb-3">
                   <a
                     href="/order-history"
                     className="text-gray-600 hover:text-gray-800"
                   >
                     Order History
                   </a>
-                </li>
-                <li className="mb-3">
+                </li> */}
+                {/* <li className="mb-3">
                   <a
                     href="/track-order"
                     className="text-gray-600 hover:text-gray-800"
                   >
                     Track Your Order
                   </a>
-                </li>
-                <li className="mb-3">
+                </li> */}
+                {/* <li className="mb-3">
                   <a
                     href="/shipping-return"
                     className="text-gray-600 hover:text-gray-800"
                   >
                     Shipping & Return
                   </a>
-                </li>
+                </li> */}
               </nav>
             </div>
 
@@ -65,14 +65,14 @@ const Footer = () => {
                 About Us
               </h2>
               <nav className="list-none mb-10">
-                <li className="mb-3">
+                {/* <li className="mb-3">
                   <a href="/faq" className="text-gray-600 hover:text-gray-800">
                     FAQ
                   </a>
-                </li>
+                </li> */}
                 <li className="mb-3">
                   <a
-                    href="/products"
+                    href="/shop"
                     className="text-gray-600 hover:text-gray-800"
                   >
                     Our Products
@@ -94,14 +94,14 @@ const Footer = () => {
                     Privacy Policy
                   </a>
                 </li>
-                <li className="mb-3">
+                {/* <li className="mb-3">
                   <a
                     href="/shipping-policy"
                     className="text-gray-600 hover:text-gray-800"
                   >
                     Shipping & Returns Policy
                   </a>
-                </li>
+                </li> */}
               </nav>
             </div>
 
@@ -112,7 +112,7 @@ const Footer = () => {
               <nav className="list-none mb-10">
                 <li className="mb-3">
                   <a
-                    href="/earrings"
+                    href="/shop"
                     className="text-gray-600 hover:text-gray-800"
                   >
                     Earrings
@@ -120,7 +120,7 @@ const Footer = () => {
                 </li>
                 <li className="mb-3">
                   <a
-                    href="/pendant"
+                    href="/shop"
                     className="text-gray-600 hover:text-gray-800"
                   >
                     Pendant
@@ -128,7 +128,7 @@ const Footer = () => {
                 </li>
                 <li className="mb-3">
                   <a
-                    href="/rings"
+                    href="/shop"
                     className="text-gray-600 hover:text-gray-800"
                   >
                     Rings
@@ -136,7 +136,7 @@ const Footer = () => {
                 </li>
                 <li className="mb-3">
                   <a
-                    href="/chain"
+                    href="/shop"
                     className="text-gray-600 hover:text-gray-800"
                   >
                     Chain
@@ -144,7 +144,7 @@ const Footer = () => {
                 </li>
                 <li className="mb-3">
                   <a
-                    href="/bangles"
+                    href="/shop"
                     className="text-gray-600 hover:text-gray-800"
                   >
                     Bangles
