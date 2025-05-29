@@ -21,9 +21,9 @@ const ContactSection = () => {
             </h3>
             <p className="text-sm text-gray-600 mb-2">
               Working Hours Monday to Saturday <br />
-              9:00am to 6:30pm
+              11:00 am to 8:00 pm
             </p>
-            <p className="text-sm text-gray-800 font-medium">+91-9999999999</p>
+            <p className="text-sm text-gray-800 font-medium">+91 9304907331</p>
           </div>
 
           {/* Signup Form */}
