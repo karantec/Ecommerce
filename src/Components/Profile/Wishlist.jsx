@@ -18,7 +18,7 @@ const Wishlist = () => {
     try {
       setLoading(true);
       const response = await fetch(
-        `http://localhost:8000/wishlist/wishlist/${userId}`
+        `https://backend.srilaxmialankar.com/wishlist/wishlist/${userId}`
       );
 
       if (!response.ok) {
@@ -44,7 +44,7 @@ const Wishlist = () => {
       );
 
       // Example API call (implement based on your backend):
-      // await fetch(`http://localhost:8000/wishlist/remove/${userId}/${productId}`, {
+      // await fetch(`https://backend.srilaxmialankar.com/wishlist/remove/${userId}/${productId}`, {
       //   method: 'DELETE'
       // });
     } catch (err) {
@@ -58,7 +58,7 @@ const Wishlist = () => {
       alert(`Moving ${productName} to bag...`);
 
       // Example API call (implement based on your backend):
-      // await fetch(`http://localhost:8000/cart/add`, {
+      // await fetch(`https://backend.srilaxmialankar.com/cart/add`, {
       //   method: 'POST',
       //   headers: { 'Content-Type': 'application/json' },
       //   body: JSON.stringify({ userId, productId, quantity: 1 })
