@@ -120,13 +120,25 @@ const Login = () => {
             </div>
 
             {/* Login with Phone Number */}
-            <div className="text-center mt-4">
+            <div className="flex justify-center gap-10 mt-4">
               <button
                 type="button"
                 onClick={() => navigate("/phone-login")}
                 className="text-indigo-600 hover:text-indigo-800 font-semibold"
               >
-                Login using Phone Number
+                <img src={"/phone.png"} width={30} height={30} alt="phoneImg" />
+              </button>
+              <button
+                type="button"
+                // onClick={() => navigate("/phone-login")}
+                className="text-indigo-600 hover:text-indigo-800 font-semibold"
+              >
+                <img
+                  src={"/google.png"}
+                  width={30}
+                  height={30}
+                  alt="phoneImg"
+                />
               </button>
             </div>
 
