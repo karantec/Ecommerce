@@ -411,15 +411,6 @@ const ProductDetailComplete = () => {
                         }
                       )}
                     </span>
-                    <button
-                      className="bg-yellow-500 hover:bg-yellow-600 text-white px-3 py-1 rounded text-sm transition-colors duration-300"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handleRelatedProductClick(relatedProduct);
-                      }}
-                    >
-                      View Details
-                    </button>
                   </div>
                 </div>
               </div>

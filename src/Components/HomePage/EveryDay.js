@@ -24,24 +24,24 @@ const JewelryShowcase = ({ navigateShop }) => {
     fetchProducts();
   }, []);
 
-  const handleShare = (product) => {
-    const shareData = {
-      title: product.name,
-      text: `Check out this elegant jewelry: ${product.name}`,
-      url: `https://yourdomain.com/product/${product._id}`, // Replace with your real product URL
-    };
+  const handleShare = (product, e) => {
+  e.stopPropagation(); // Prevent parent click
 
-    if (navigator.share) {
-      navigator
-        .share(shareData)
-        .then(() => console.log("Product shared successfully!"))
-        .catch((error) => console.error("Sharing failed", error));
-    } else {
-      alert(
-        "Sharing is not supported on your browser. Copy the link manually."
-      );
-    }
+  const shareData = {
+    title: product.name,
+    text: `Check out this elegant jewelry: ${product.name}`,
+    url: `https://srilaxmialankar.com/product/${product._id}`,
   };
+
+  if (navigator.share) {
+    navigator
+      .share(shareData)
+      .then(() => console.log("Product shared successfully!"))
+      .catch((error) => console.error("Sharing failed", error));
+  } else {
+    alert("Sharing is not supported on your browser. Copy the link manually.");
+  }
+};
 
   return (
     <div className="container mx-auto px-2">
@@ -85,10 +85,10 @@ const JewelryShowcase = ({ navigateShop }) => {
                 />
                 <div className="absolute top-2 right-2 space-y-2 opacity-0 group-hover:opacity-100 transition-opacity">
                   {/* Share Button */}
-                  <button
-                    onClick={() => handleShare(product)}
-                    className="bg-white p-2 rounded-full shadow-md hover:bg-gray-100"
-                  >
+                 <button
+  onClick={(e) => handleShare(product, e)}
+  className="bg-white p-2 rounded-full shadow-md hover:bg-gray-100"
+>
                     <svg
                       className="w-5 h-5"
                       fill="none"
@@ -107,6 +107,7 @@ const JewelryShowcase = ({ navigateShop }) => {
               </div>
               <div className="mt-2 mb-4 text-center">
                 <h3 className="text-sm font-medium">{product.name}</h3>
+                    <p className="text-sm font-medium">{product.description}</p>
               </div>
             </div>
           ))}

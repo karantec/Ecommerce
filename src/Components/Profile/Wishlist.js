@@ -6,13 +6,18 @@ const Wishlist = () => {
   const [wishlistItems, setWishlistItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  // const userId = userStore((state) => state._id);
-  // You'll need to get the actual userId from your auth context/state
-  const userId = "67f80c0de5b37dc266e25746"; // Replace with actual user ID
+  const userId = userStore((state) => state._id);
 
   useEffect(() => {
+    if (!userId) {
+      alert("Please log in to view your wishlist.");
+      // Optionally redirect to login
+      // window.location.href = "/login";
+      return;
+    }
+
     fetchWishlist();
-  }, []);
+  }, [userId]);
 
   const fetchWishlist = async () => {
     try {
@@ -22,7 +27,9 @@ const Wishlist = () => {
       );
 
       if (!response.ok) {
-        throw new Error(`Error: ${response.status}`);
+        throw new Error(
+          `User with ID ${userId} not found or no wishlist items.`
+        );
       }
 
       const data = await response.json();
