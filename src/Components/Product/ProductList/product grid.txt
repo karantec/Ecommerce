@@ -59,7 +59,7 @@ const ViewProductsPage = () => {
   const addToWishlist = async (productId) => {
     try {
       setWishlistLoading(true);
-      const response = await axios.post("http://localhost:8000/wishlist/wishlist", {
+      const response = await axios.post("https://backend.srilaxmialankar.com/wishlist/wishlist", {
         userId: userId,
         productId: productId,
         quantity: 1
@@ -91,7 +91,7 @@ const ViewProductsPage = () => {
       
       // If you have a DELETE endpoint, use it here
       // For now, I'll assume the same endpoint handles removal
-      const response = await axios.delete(`http://localhost:8000/wishlist/wishlist`, {
+      const response = await axios.delete(`https://backend.srilaxmialankar.com/wishlist/wishlist`, {
         data: {
           userId: userId,
           productId: productId
@@ -132,7 +132,7 @@ const ViewProductsPage = () => {
   const fetchUserWishlist = async () => {
     try {
       // Assuming there's a GET endpoint to fetch user's wishlist
-      const response = await axios.get(`http://localhost:8000/wishlist/wishlist/${userId}`);
+      const response = await axios.get(`https://backend.srilaxmialankar.com/wishlist/wishlist/${userId}`);
       
       if (response.data && response.data.items) {
         const wishlistProductIds = response.data.items.map(item => item.productId);

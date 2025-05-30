@@ -113,14 +113,14 @@ const Navbar = () => {
             <FaUser className="text-2xl" />
           </Link>
           <div className="relative">
-            <Link to="/wishlist" className="text-gray-700">
-              <FaHeart className="text-2xl" />
+            <Link
+              to="/wishlist"
+              className="flex items-center gap-2 px-4 py-2 rounded-lg text-gray-700 hover:bg-pink-100  transition-all duration-200"
+            >
+              <FaHeart className="text-pink-500" />
+              <span>Favorites</span>
             </Link>
-            <span className="absolute -top-1 -right-2 bg-[#A45B32] text-white text-sm rounded-full w-6 h-6 flex items-center justify-center">
-              3
-            </span>
           </div>
-
           {/* cart icon */}
           {/* <div className="relative">
             <Link to="/cart" className="text-gray-700">

@@ -487,7 +487,7 @@ const ViewProductsPage = () => {
     try {
       const userId = "67f80c0de5b37dc266e25746";
       const response = await axios.post(
-        "http://localhost:8000/wishlist/wishlist",
+        "https://backend.srilaxmialankar.com/wishlist/wishlist",
         { productId, userId },
         {
           headers: {
@@ -508,7 +508,7 @@ const ViewProductsPage = () => {
     try {
       // Assuming you have a DELETE endpoint
       const response = await axios.delete(
-        `http://localhost:8000/wishlist/wishlist/${productId}`,
+        `https://backend.srilaxmialankar.com/wishlist/wishlist/${productId}`,
         {
           headers: {
             // Add authorization header if needed
@@ -526,7 +526,7 @@ const ViewProductsPage = () => {
   const fetchUserWishlist = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:8000/wishlist/wishlist",
+        "https://backend.srilaxmialankar.com/wishlist/wishlist",
         {
           headers: {
             // Add authorization header if needed

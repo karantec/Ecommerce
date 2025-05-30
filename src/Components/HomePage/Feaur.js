@@ -59,24 +59,24 @@ const FeatureProducts = ({ navigateShop }) => {
                 <div
                   onClick={shopNavigationHandler}
                   key={product._id}
-                  className="rounded-xl shadow transition duration-300 overflow-hidden"
+                  className="rounded-xl shadow transition duration-300 overflow-hidden flex flex-col"
                 >
                   {/* Image */}
-                  <div className="aspect-square">
+                  <div className="flex-1 relative">
                     <img
                       src={product.image}
                       alt={product.name}
-                      className="w-full h-full object-contain p-4 transition-transform duration-300 hover:scale-105"
+                      className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
                     />
                   </div>
                   {/* Name & Optional Description */}
-                  <div className="text-center py-3 px-2">
+                  <div className="text-center py-3 px-2 flex-shrink-0">
                     <h3 className="font-Brown uppercase text-sm text-gray-800">
                       {product.name}
                     </h3>
-                    {/* <p className="text-xs text-gray-500 mt-1 line-clamp-2">
+                    <p className="text-xs text-gray-500 mt-1 line-clamp-2">
                       {product.description}
-                    </p> */}
+                    </p>
                   </div>
                 </div>
               ))}

@@ -1,7 +1,7 @@
 import { userStore } from "../store/userStore";
 
 // const BASE_URL = "https://jewelleryapp.onrender.com/order";
-// const BASE_URL = "http://localhost:8000/order";
+// const BASE_URL = "https://backend.srilaxmialankar.com/order";
 const BASE_URL = "https://backend.srilaxmialankar.com/order";
 
 const getAuthHeaders = () => {
