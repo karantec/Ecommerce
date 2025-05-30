@@ -12,7 +12,7 @@ const Wishlist = () => {
     if (!userId) {
       alert("Please log in to view your wishlist.");
       // Optionally redirect to login
-      // window.location.href = "/login";
+      window.location.href = "/login";
       return;
     }
 
@@ -51,9 +51,12 @@ const Wishlist = () => {
       );
 
       // Example API call (implement based on your backend):
-      // await fetch(`https://backend.srilaxmialankar.com/wishlist/remove/${userId}/${productId}`, {
-      //   method: 'DELETE'
-      // });
+      // await fetch(
+      //   `https://backend.srilaxmialankar.com/wishlist/remove/${userId}/${productId}`,
+      //   {
+      //     method: "DELETE",
+      //   }
+      // );
     } catch (err) {
       console.error("Failed to remove item:", err);
     }
