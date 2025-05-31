@@ -5,11 +5,17 @@ import { userStore } from "../../store/userStore";
 import { useCart } from "../../CartContext";
 import login from "../../assets/login.jpg";
 
+import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { app } from "../../config/firebase.config";
+
 const Login = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({ email: "", password: "" });
   const setUser = userStore((state) => state.setUserData);
   const { getCart } = useCart();
+
+  const firebaseAuth = getAuth(app);
+  const provider = new GoogleAuthProvider();
 
   const handleChange = (e) => {
     const { id, value } = e.target;
@@ -46,6 +52,18 @@ const Login = () => {
       console.error("Error:", error.message);
       alert("An error occurred. Please try again.");
     }
+  };
+
+  const loginWithGoogleHandler = async () => {
+    await signInWithPopup(firebaseAuth, provider).then((userCred) => {
+      firebaseAuth.onAuthStateChanged((cred) => {
+        if (cred) {
+          cred?.getIdToken().then((token) => {
+            console.log(token);
+          });
+        }
+      });
+    });
   };
 
   return (
@@ -130,7 +148,7 @@ const Login = () => {
               </button>
               <button
                 type="button"
-                // onClick={() => navigate("/phone-login")}
+                onClick={loginWithGoogleHandler}
                 className="text-indigo-600 hover:text-indigo-800 font-semibold"
               >
                 <img
