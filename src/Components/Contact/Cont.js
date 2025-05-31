@@ -142,7 +142,7 @@ const Cont = () => {
                         className="flex items-center mb-6"
                       >
                         <h5 className="text-black text-base sm:text-lg font-normal leading-6 ml-4 sm:ml-5">
-                          470-601-1911
+                          +919304907331
                         </h5>
                       </a>
                       <a
@@ -150,7 +150,7 @@ const Cont = () => {
                         className="flex items-center mb-6"
                       >
                         <h5 className="text-black text-base sm:text-lg font-normal leading-6 ml-4 sm:ml-5">
-                          Pagedone1234@gmail.com
+                          Laxmialankar74@gmail.com
                         </h5>
                       </a>
                       <a
@@ -160,7 +160,8 @@ const Cont = () => {
                         className="flex items-center"
                       >
                         <h5 className="text-black text-base sm:text-lg font-normal leading-6 ml-4 sm:ml-5">
-                          654 Sycamore Avenue, Meadowville, WA 76543
+                          Garib Asthan Rd, near Garib asthan temple, Musahri,
+                          Muzaffarpur, Bihar 842001
                         </h5>
                       </a>
                     </div>

@@ -11,7 +11,7 @@ const Footer = () => {
           <div className="md:w-1/2 flex items-center gap-4 text-center md:text-left">
             <img
               src="logone.png"
-              alt="Sri Laxmi Alankar"
+              alt="Sri Laxmi Alankar Logo"
               className="w-44 h-auto object-contain"
             />
             <p className="text-2xl font-garmond text-black max-w-md">
@@ -48,7 +48,10 @@ const Footer = () => {
                   </a>
                 </li>
                 <li>
-                  <a href="/terms" className="text-gray-600 hover:text-gray-800">
+                  <a
+                    href="/terms"
+                    className="text-gray-600 hover:text-gray-800"
+                  >
                     Terms & Conditions
                   </a>
                 </li>
@@ -60,15 +63,20 @@ const Footer = () => {
                     Privacy Policy
                   </a>
                 </li>
+                <li>
+                  <a
+                    href="/shipping-policy"
+                    className="text-gray-600 hover:text-gray-800"
+                  >
+                    Shipping and Return Policy
+                  </a>
+                </li>
               </ul>
             </div>
 
             {/* Catalog */}
             <div>
-              <h2 className="font-bold text-[#000000] text-sm mb-3 uppercase">
-                Catalog
-              </h2>
-              <ul className="list-none space-y-2">
+              {/* <ul className="list-none space-y-2">
                 <li>
                   <a
                     href="/earrings"
@@ -86,12 +94,18 @@ const Footer = () => {
                   </a>
                 </li>
                 <li>
-                  <a href="/rings" className="text-gray-600 hover:text-gray-800">
+                  <a
+                    href="/rings"
+                    className="text-gray-600 hover:text-gray-800"
+                  >
                     Rings
                   </a>
                 </li>
                 <li>
-                  <a href="/chain" className="text-gray-600 hover:text-gray-800">
+                  <a
+                    href="/chain"
+                    className="text-gray-600 hover:text-gray-800"
+                  >
                     Chain
                   </a>
                 </li>
@@ -103,7 +117,7 @@ const Footer = () => {
                     Bangles
                   </a>
                 </li>
-              </ul>
+              </ul> */}
             </div>
           </div>
         </div>
@@ -112,14 +126,14 @@ const Footer = () => {
         <div className="bg-gray-100 py-4">
           <div className="container mx-auto px-5 flex flex-col md:flex-row items-center justify-between">
             <p className="text-gray-500 text-sm text-center md:text-left mb-4 md:mb-0">
-              © 2025 Sri Laxmi Alankar Jewellery All rights reserved.
+              © 2025 Sri Laxmi Alankar Jewellery. All rights reserved.
             </p>
             <div className="flex space-x-4">
               {[
-                { src: "stripe.png", alt: "Stripe" },
+                { src: "stripe.png", alt: "Stripe Payment" },
                 { src: "american.png", alt: "American Express" },
                 { src: "paypal.jpg", alt: "PayPal" },
-                { src: "visa.png", alt: "Visa" },
+                { src: "visa.png", alt: "Visa Card" },
                 { src: "applepy.png", alt: "Apple Pay" },
               ].map(({ src, alt }) => (
                 <img
