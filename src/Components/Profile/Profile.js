@@ -26,7 +26,7 @@ const Profile = () => {
 
   const token = localStorage.getItem("token");
 
-  console.log("token from phon login " + token);
+  // console.log("token from phon login " + token);
 
   return (
     <section className="min-h-screen bg-white flex items-center justify-center p-6">

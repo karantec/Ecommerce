@@ -7,6 +7,7 @@ import login from "../../assets/login.jpg";
 
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { app } from "../../config/firebase.config";
+import { validateUserJWTToken } from "../../api/authService";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -59,7 +60,18 @@ const Login = () => {
       firebaseAuth.onAuthStateChanged((cred) => {
         if (cred) {
           cred?.getIdToken().then((token) => {
-            console.log(token);
+            validateUserJWTToken(token).then((data) => {
+              console.log(data);
+              if (data?.user_id) {
+                alert("Login successful!");
+                navigate("/profile");
+                setUser({ token: token, ...data });
+                getCart(data?.user_id);
+                localStorage.setItem("token", token);
+              } else {
+                alert("User Needs to register first");
+              }
+            });
           });
         }
       });
