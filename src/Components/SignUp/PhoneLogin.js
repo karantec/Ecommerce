@@ -5,7 +5,7 @@ import { userStore } from "../../store/userStore";
 import { X, Phone } from "lucide-react";
 import login from "../../assets/login.jpg";
 
-const BASE_URL = "https://backend.srilaxmialankar.com/auth";
+const BASE_URL = "https://jewelleryapp.onrender.com/auth";
 
 const PhoneLogin = () => {
   const [phone, setPhone] = useState("");
