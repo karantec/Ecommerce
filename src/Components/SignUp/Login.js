@@ -56,26 +56,27 @@ const Login = () => {
   };
 
   const loginWithGoogleHandler = async () => {
-    await signInWithPopup(firebaseAuth, provider).then((userCred) => {
-      firebaseAuth.onAuthStateChanged((cred) => {
-        if (cred) {
-          cred?.getIdToken().then((token) => {
-            validateUserJWTToken(token).then((data) => {
-              console.log(data);
-              if (data?.user_id) {
-                alert("Login successful!");
-                navigate("/profile");
-                setUser({ token: token, ...data });
-                getCart(data?.user_id);
-                localStorage.setItem("token", token);
-              } else {
-                alert("User Needs to register first");
-              }
-            });
-          });
-        }
-      });
-    });
+    try {
+      const userCred = await signInWithPopup(firebaseAuth, provider);
+      const token = await userCred.user.getIdToken();
+
+      const data = await validateUserJWTToken(token);
+      // const data = await validateUserJWTToken(token);
+      console.log("👉 Google Login Response:", data); //
+      if (data && data._id) {
+        alert("Login successful!");
+        navigate("/profile");
+        setUser({ token, ...data });
+        getCart(data._id);
+        localStorage.setItem("token", token);
+      } else {
+        alert("User Needs to register first");
+        navigate("/signup");
+      }
+    } catch (err) {
+      console.error("Google login failed:", err);
+      alert("Google sign-in failed. Please try again.");
+    }
   };
 
   return (
