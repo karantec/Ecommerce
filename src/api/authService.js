@@ -10,16 +10,13 @@
 
 import axios from "axios";
 // const BASE_URL = "https://jewelleryapp.onrender.com";
-const BASE_URL = "http://localhost:8000";
+const BASE_URL = "https://jewelleryapp-1.onrender.com";
 
 export const validateUserJWTToken = async (token) => {
   try {
-    const res = await axios.post(
-      `${BASE_URL}/auth/google-signin`,
-      {
-        idToken: token,
-      }
-    );
+    const res = await axios.post(`${BASE_URL}/auth/google-signin`, {
+      idToken: token,
+    });
 
     console.log("User data after google auth: ", res);
     return res.data.user; // returning the user object

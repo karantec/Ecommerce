@@ -49,7 +49,7 @@ const Signup = () => {
 
     try {
       const response = await fetch(
-        "http://localhost:8000/auth/signup",
+        "https://jewelleryapp-1.onrender.com/auth/signup",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

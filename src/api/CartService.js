@@ -1,4 +1,4 @@
-const BASE_URL = "http://localhost:8000";
+const BASE_URL = "https://jewelleryapp-1.onrender.com";
 // const BASE_URL = "https://jewelleryapp.onrender.com"
 
 // Product to add - {userId, productId, quantity}

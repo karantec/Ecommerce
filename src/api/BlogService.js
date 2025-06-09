@@ -1,7 +1,7 @@
 // const BASE_URL = 'https://jewelleryapp.onrender.com/blog';
 
 // const BASE_URL = "https://backend.srilaxmialankar.com/blog";
-const BASE_URL = "http://localhost:8000/blog";
+const BASE_URL = "https://jewelleryapp-1.onrender.com/blog";
 
 export const getAllBlogs = async () => {
   try {
