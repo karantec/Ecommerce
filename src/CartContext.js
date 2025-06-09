@@ -27,6 +27,13 @@ export const CartProvider = ({ children }) => {
     // console.log(JSON.stringify(productObj, null, 2));
     const data = await addToCart(productObj);
     console.log("data after add to cart " + JSON.stringify(data, null, 2));
+    localStorage.setItem("cartId", data?.cart.cartId);
+    if (!localStorage.getItem("cart")) {
+      localStorage.setItem("cart", JSON.stringify([]));
+    }
+    let cartData = JSON.parse(localStorage.getItem("cart"));
+    cartData.push(data?.cart);
+    localStorage.setItem("cart", JSON.stringify(cartData));
     getCartHandler(data?.cart.userId);
   };
 

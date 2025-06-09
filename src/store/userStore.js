@@ -1,50 +1,59 @@
 import { create } from "zustand";
+import { persist } from "zustand/middleware";
 
-export const userStore = create((set) => ({
-  cartId: null,
-  _id: null,
-  fullName: null,
-  email: null,
-  phone: null,
-  password: null,
-  profileImage: null,
-  addresses: [
-    {
-      type: null,
-      addressLine: null,
-      city: null,
-      state: null,
-      zipcode: null,
-      country: null,
-      primaryPhone: null,
-      isDefault: false,
+export const userStore = create(
+  persist(
+    (set) => ({
+      cartId: null,
       _id: null,
+      fullName: null,
+      email: null,
+      phone: null,
+      password: null,
+      profileImage: null,
+      addresses: [
+        {
+          type: null,
+          addressLine: null,
+          city: null,
+          state: null,
+          zipcode: null,
+          country: null,
+          primaryPhone: null,
+          isDefault: false,
+          _id: null,
+          createdAt: null,
+          updatedAt: null,
+        },
+      ],
       createdAt: null,
-      updatedAt: null,
-    },
-  ],
-  createdAt: null,
-  token: null,
+      token: null,
 
-  setUserToken: (token) => {
-    set({ token });
-  },
+      setUserToken: (token) => {
+        set({ token });
+      },
 
-  setClearToken: () => {
-    set({ token: null });
-  },
+      setClearToken: () => {
+        set({ token: null });
+      },
 
-  setUserData: (userObj) => {
-    // console.log("userObj " + JSON.stringify(userObj, null, 2));
-    set({ ...userObj });
-  },
-  setCartId: (cartObj) => {
-    console.log("cartObj " + JSON.stringify(cartObj, null, 2));
-    set((prev) => {
-      return { ...cartObj, ...prev };
-    });
-  },
-}));
+      setUserData: (userObj) => {
+        set({ ...userObj });
+      },
+
+      setCartId: (cartObj) => {
+        console.log("cartObj " + JSON.stringify(cartObj, null, 2));
+        set((prev) => {
+          return { ...cartObj, ...prev };
+        });
+      },
+    }),
+    {
+      name: "user-storage", // 👈 key in localStorage
+      getStorage: () => localStorage, // (optional, default)
+    }
+  )
+);
 
 // {
 //     "message": "Login successful",

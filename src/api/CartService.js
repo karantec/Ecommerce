@@ -1,4 +1,4 @@
-const BASE_URL = "https://backend.srilaxmialankar.com";
+const BASE_URL = "http://localhost:8000";
 // const BASE_URL = "https://jewelleryapp.onrender.com"
 
 // Product to add - {userId, productId, quantity}
@@ -10,9 +10,9 @@ export const addToCart = async (productToAdd) => {
       body: JSON.stringify(productToAdd),
     });
 
-    // console.log(
-    //   "response from add to cart " + JSON.stringify(response, null, 2)
-    // );
+    console.log(
+      "response from add to cart " + JSON.stringify(response, null, 2)
+    );
 
     if (!response.ok) throw new Error("Failed to add to the cart ");
     return await response.json();
@@ -33,6 +33,7 @@ export const getCart = async (userId) => {
       throw new Error("Failed to get items from cart");
     }
 
+    console.log("data getCart Cart Service: " + JSON.stringify(data, null, 2));
     return data;
   } catch (e) {
     console.log(e.message);

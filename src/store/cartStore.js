@@ -1,34 +1,43 @@
 import { create } from "zustand";
+import { persist } from "zustand/middleware";
 
-export const cartStore = create((set) => ({
-  cartId: null,
-  userId: null,
-  items: [
+export const cartStore = create(
+  persist(
+    (set) => ({
+      cartId: null,
+      userId: null,
+      items: [
+        {
+          product: {
+            _id: null,
+            name: null,
+            category: null,
+            netWeight: null,
+            grossWeight: null,
+            carat: null,
+            makingcharge: null,
+            description: null,
+            coverImage: null,
+            images: [],
+            createdAt: null,
+            updatedAt: null,
+            pricingId: null,
+            pricePerGram: null,
+            __v: null,
+          },
+        },
+      ],
+      quantity: null,
+      realTimeTotalPrice: null,
+
+      setCartData: (cartData) => set({ ...cartData }),
+    }),
     {
-      product: {
-        _id: null,
-        name: null,
-        category: null,
-        netWeight: null,
-        grossWeight: null,
-        carat: null,
-        makingcharge: null,
-        description: null,
-        coverImage: null,
-        images: [],
-        createdAt: null,
-        updatedAt: null,
-        pricingId: null,
-        pricePerGram: null,
-        __v: null,
-      },
-    },
-  ],
-  quantity: null,
-  realTimeTotalPrice: null,
-
-  setCartData: (cartData) => set({ ...cartData }),
-}));
+      name: "cart-storage", // 👈 localStorage key
+      getStorage: () => localStorage,
+    }
+  )
+);
 
 // {
 //     "cartId": "67f7d6c43ef3cddeee3b9224",

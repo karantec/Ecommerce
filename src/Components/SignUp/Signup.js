@@ -49,7 +49,7 @@ const Signup = () => {
 
     try {
       const response = await fetch(
-        "https://backend.srilaxmialankar.com/auth/signup",
+        "http://localhost:8000/auth/signup",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

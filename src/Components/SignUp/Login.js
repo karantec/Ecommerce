@@ -64,11 +64,11 @@ const Login = () => {
       // const data = await validateUserJWTToken(token);
       console.log("👉 Google Login Response:", data); //
       if (data && data._id) {
-        alert("Login successful!");
-        navigate("/profile");
         setUser({ token, ...data });
         getCart(data._id);
         localStorage.setItem("token", token);
+        alert("Login successful!");
+        navigate("/profile");
       } else {
         alert("User Needs to register first");
         navigate("/signup");

@@ -9,6 +9,8 @@ const ShoppingCart = () => {
   const { cart, getCart, removeFromCart, removeSingleItem } = useCart();
   const [cartItems, setCartItems] = useState([]);
   const userid = userStore((state) => state._id);
+  console.log("cart in cart page: " + JSON.stringify(cart, null, 2));
+  console.log("cart user id: " + userid);
 
   useEffect(() => {
     setCartItems(cart);

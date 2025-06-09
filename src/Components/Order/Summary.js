@@ -2,11 +2,16 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useCart } from "../../CartContext";
 import { userStore } from "../../store/userStore";
+import { createOrder } from "../../api/OrderService";
 
 const OrderSummary = () => {
   const [paymentMethod, setPaymentMethod] = useState("cash-on-delivery");
   const userDetails = userStore((state) => state);
   const { placeOrder, getCart } = useCart();
+  const cart = JSON.parse(localStorage.getItem("cart"));
+
+  console.log("userDetails " + JSON.stringify(userDetails, null, 2));
+  console.log("Cart on Checkout" + JSON.stringify(cart, null, 2));
 
   // Function to fetch cart data
   const getCartHandler = async (userObj) => {
@@ -38,17 +43,17 @@ const OrderSummary = () => {
     }
   };
   // Fetch cartId from userStore directly
-  const cartId = userStore((state) => state.cartId);
-  // const cartId = localStorage.getItem("cartId");
+  // const cartId = userStore((state) => state.cartId);
+  const cartId = localStorage.getItem("cartId");
 
   // Ensure cartId is fetched and set before rendering the component
   useEffect(() => {
     // If the cartId is missing, fetch it again
-    if (!cartId && userDetails?.userId) {
+    if (!cartId && userDetails?._id) {
       console.log("Cart ID is missing, fetching cart...");
-      getCartHandler({ userId: userDetails?.userId }); // Pass the userId to fetch the cart
+      getCartHandler({ userId: userDetails?._id }); // Pass the userId to fetch the cart
     }
-  }, [cartId, userDetails?.userId]); // Only run if cartId or userId changes
+  }, [cartId, userDetails?._id]); // Only run if cartId or userId changes
 
   console.log("cartId in summary: ", cartId);
 
@@ -61,10 +66,16 @@ const OrderSummary = () => {
 
     try {
       // Proceed with order placement
-      await placeOrder({
+      // await placeOrder({
+      //   cartId: { _id: cartId },
+      //   shippingAddress: { ...userDetails.addresses[0] },
+      //   paymentMode: "ONLINE",
+      // });
+
+      await createOrder({
         cartId: { _id: cartId },
         shippingAddress: { ...userDetails.addresses[0] },
-        paymentMode: "ONLINE",
+        paymentMethod: "ONLINE",
       });
     } catch (error) {
       console.error("Error placing order:", error.message);
@@ -86,8 +97,9 @@ const OrderSummary = () => {
     },
   ];
 
-  const subtotal = products.reduce(
-    (total, product) => total + product.price * product.quantity,
+  const subtotal = cart.reduce(
+    (total, cartItem) =>
+      total + cartItem.realTimeTotalPrice * cartItem.quantity,
     0
   );
   const gst = subtotal * 0.18;
@@ -96,29 +108,29 @@ const OrderSummary = () => {
   return (
     <div className="mx-auto mt-8 p-6 border rounded-lg w-full max-w-2xl">
       <h2 className="text-lg font-bold mb-6">Billing details</h2>
-      <div className="space-y-6">
-        {products.map((product, index) => (
+      {/* <div className="space-y-6">
+        {cart.map((cartItem, index) => (
           <div key={index} className="flex items-center justify-between">
             <div className="flex items-center">
               <img
-                src={product.image}
-                alt={product.title}
+                src={cartItem.coverImage}
+                alt={cartItem.name}
                 className="w-16 h-16 rounded-md"
               />
               <div className="ml-4">
-                <p className="font-medium text-sm">{product.title}</p>
-                <p className="text-xs text-gray-500">QTY {product.quantity}</p>
+                <p className="font-medium text-sm">{cartItem.name}</p>
+                <p className="text-xs text-gray-500">QTY {cartItem.quantity}</p>
               </div>
             </div>
             <p className="text-sm font-semibold">
-              ₹{product.price * product.quantity}
+              ₹{cartItem.realTimeTotalPrice * cartItem.quantity}
             </p>
           </div>
         ))}
-      </div>
+      </div> */}
 
       {/* Subtotal */}
-      <div className="mt-6 border-t pt-4 space-y-2">
+      {/* <div className="mt-6 border-t pt-4 space-y-2">
         <div className="flex justify-between pt-4">
           <p className="text-sm text-gray-500">SUBTOTAL</p>
           <p className="text-sm font-semibold">₹{subtotal}</p>
@@ -131,7 +143,7 @@ const OrderSummary = () => {
           <p>Total</p>
           <p>₹{total.toFixed(2)}</p>
         </div>
-      </div>
+      </div> */}
 
       {/* Payment Method */}
       <div className="mt-6">
@@ -190,15 +202,15 @@ const OrderSummary = () => {
       </div>
 
       {/* Place Order Button */}
-      <Link to="/confirm">
-        <button
-          onClick={placeOrderHandler}
-          type="button"
-          className="mt-6 w-full py-3 text-center bg-orange-600 text-white font-bold text-sm rounded-md hover:bg-orange-500 transition"
-        >
-          PLACE ORDER
-        </button>
-      </Link>
+      {/* <Link to="/confirm"> */}
+      <button
+        onClick={placeOrderHandler}
+        type="button"
+        className="mt-6 w-full py-3 text-center bg-orange-600 text-white font-bold text-sm rounded-md hover:bg-orange-500 transition"
+      >
+        PLACE ORDER
+      </button>
+      {/* </Link> */}
     </div>
   );
 };
