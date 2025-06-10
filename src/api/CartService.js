@@ -1,5 +1,5 @@
 const BASE_URL = "https://jewelleryapp-1.onrender.com";
-// const BASE_URL = "https://jewelleryapp.onrender.com"
+// const BASE_URL = "https://backend.srilaxmialankar.com"
 
 // Product to add - {userId, productId, quantity}
 export const addToCart = async (productToAdd) => {

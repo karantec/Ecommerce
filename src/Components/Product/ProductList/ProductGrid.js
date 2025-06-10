@@ -174,7 +174,7 @@ const ViewProductsPage = () => {
     try {
       setIsLoading(true);
       const response = await axios.get(
-        "https://jewelleryapp.onrender.com/gold"
+        "https://backend.srilaxmialankar.com/gold"
       );
       console.log("Fetched products:", response.data);
 
@@ -209,7 +209,7 @@ const ViewProductsPage = () => {
     try {
       setCategoriesLoading(true);
       const response = await axios.get(
-        "https://jewelleryapp.onrender.com/category/getAllCategory"
+        "https://backend.srilaxmialankar.com/category/getAllCategory"
       );
       console.log("Fetched categories:", response.data);
 
@@ -241,7 +241,7 @@ const ViewProductsPage = () => {
   const fetchGoldPrices = async () => {
     try {
       const response = await axios.get(
-        "https://jewelleryapp.onrender.com/today-price/PriceRouting"
+        "https://backend.srilaxmialankar.com/today-price/PriceRouting"
       );
       console.log("Fetched gold prices:", response.data);
 

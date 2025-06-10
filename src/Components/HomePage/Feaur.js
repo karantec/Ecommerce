@@ -9,7 +9,9 @@ const FeatureProducts = ({ navigateShop }) => {
 
   const fetchFeaturedProducts = async () => {
     try {
-      const response = await fetch("https://jewelleryapp.onrender.com/feature");
+      const response = await fetch(
+        "https://backend.srilaxmialankar.com/feature"
+      );
       const data = await response.json();
       setProducts(data);
     } catch (error) {
