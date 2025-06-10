@@ -1,4 +1,4 @@
-const BASE_URL = "https://jewelleryapp-1.onrender.com";
+const BASE_URL = "https://backend.srilaxmialankar.com";
 // const BASE_URL = "https://backend.srilaxmialankar.com"
 
 // Product to add - {userId, productId, quantity}

@@ -6,7 +6,7 @@ import { load } from "@cashfreepayments/cashfree-js";
 // const BASE_URL = "https://backend.srilaxmialankar.com/order";
 // const BASE_URL = "https://backend.srilaxmialankar.com/order";
 const BASE_URL = "https://backend.srilaxmialankar.com/order";
-// const BASE_URL = "https://jewelleryapp-1.onrender.com/order";
+// const BASE_URL = "https://backend.srilaxmialankar.com/order";
 // session_25GiIcZvoOd02yUSgNpoteTHTQJMBRi7qv4RI9P9km96o4sxC3113YEDXmyr88xUdhrxycls4C5TegCF9rN1w6qWl4sZkhxrCyhxdZ5iiY68BJks4sIlM5qmb98pQApaymentpayment
 const getAuthHeaders = () => {
   const token = localStorage.getItem("token");
