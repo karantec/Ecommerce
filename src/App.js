@@ -25,6 +25,7 @@ import Terms from "./Components/Order/Terms";
 import PrivacyPolicy from "./Components/Order/PrivacyPolicy";
 import PhoneLogin from "./Components/SignUp/PhoneLogin";
 import Shipping from "./Components/Order/Shipping";
+import SupportPage from "./Components/Support/Supp";
 
 function App() {
   const [cart, setCart] = useState([]);
@@ -65,6 +66,7 @@ function App() {
           <Route path="/terms" element={<Terms />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/shipping-policy" element={<Shipping />} />
+          <Route path="/Support" element={<SupportPage />} />
           <Route
             path="/product/:productId"
             element={<ProductDetailComplete addToCart={addToCart} />}

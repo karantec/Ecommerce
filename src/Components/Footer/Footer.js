@@ -71,6 +71,14 @@ const Footer = () => {
                     Shipping and Return Policy
                   </a>
                 </li>
+                <li>
+                  <a
+                    href="/Support"
+                    className="text-gray-600 hover:text-gray-800"
+                  >
+                    Support
+                  </a>
+                </li>
               </ul>
             </div>
 
