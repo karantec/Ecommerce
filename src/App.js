@@ -50,15 +50,16 @@ function App() {
       <div className="App">
         <Navbar />
         <Routes>
-          // <Route path="/" element={<Home />} />
+          {/* <Route path="/" element={<Home />} /> */}
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/about" element={<About />} />
+          <Route path="/" element={<About />} />
+          {/* <Route path="/about" element={<About />} /> */}
           <Route path="/contact" element={<Cont />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/blog/:id" element={<BlogDetail />} />
           <Route path="/checkout" element={<SecureCheckout />} />
-          <Route path="/confirm" element={<Final />} />
+          <Route ath="/confirm" element={<Final />} />
           <Route path="/shop" element={<ProductPage />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/wishlist" element={<Wishlist />} />
